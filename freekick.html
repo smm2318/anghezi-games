@@ -1,936 +1,390 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>ضربه آزاد انقزی ⚽</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>بازی‌های انقزی 🎮</title>
 
 <style>
+
 *{
     box-sizing:border-box;
-    user-select:none;
-    -webkit-user-select:none;
 }
 
 body{
     margin:0;
     min-height:100vh;
     font-family:Tahoma,Arial,sans-serif;
-    background:linear-gradient(#061b2d,#02060b);
     color:white;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #15558a,
+        #071522 45%,
+        #02060b
+    );
+
     display:flex;
     justify-content:center;
     align-items:center;
+
+    overflow-x:hidden;
 }
 
-.game{
-    width:95%;
-    max-width:920px;
-    padding:18px;
-    border-radius:25px;
-    background:rgba(0,0,0,.5);
-    box-shadow:0 20px 60px rgba(0,0,0,.65);
+.container{
+    width:94%;
+    max-width:1100px;
+    padding:30px 15px;
 }
 
-h1{
+.header{
     text-align:center;
-    margin:5px 0 15px;
+    margin-bottom:35px;
 }
 
-.scoreboard{
-    display:flex;
-    justify-content:space-around;
-    background:rgba(255,255,255,.08);
-    padding:12px;
-    border-radius:15px;
-    margin-bottom:15px;
+.header h1{
+    margin:0;
+    font-size:44px;
+    text-shadow:0 5px 20px rgba(0,0,0,.5);
 }
 
-#field{
-    position:relative;
-    width:100%;
-    height:520px;
+.header p{
+    margin-top:12px;
+    opacity:.75;
+    font-size:17px;
+}
+
+.games{
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(270px,1fr)
+    );
+
+    gap:25px;
+}
+
+.game-card{
     overflow:hidden;
-    border:4px solid white;
-    border-radius:20px;
+
+    border-radius:25px;
 
     background:
-    repeating-linear-gradient(
-        90deg,
-        #168d43 0 80px,
-        #127c3b 80px 160px
-    );
+    rgba(255,255,255,.08);
 
-    touch-action:none;
-}
-
-/* تماشاگرها */
-
-.crowd{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:75px;
-
-    background:
-    radial-gradient(circle,#ddd 2px,transparent 3px)
-    0 0/15px 15px,
-    #18222d;
-}
-
-/* دروازه */
-
-.goal{
-    position:absolute;
-    top:55px;
-    left:50%;
-    transform:translateX(-50%);
-
-    width:70%;
-    height:220px;
-
-    border:9px solid white;
-    border-bottom-width:13px;
-
-    background:
-    linear-gradient(
-        45deg,
-        transparent 48%,
-        rgba(255,255,255,.25) 49%,
-        transparent 51%
-    ),
-    linear-gradient(
-        -45deg,
-        transparent 48%,
-        rgba(255,255,255,.25) 49%,
-        transparent 51%
-    );
-
-    background-size:25px 25px;
-}
-
-/* دیوار دفاعی */
-
-.wall{
-    position:absolute;
-
-    top:225px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-    gap:5px;
-
-    z-index:6;
-}
-
-.player{
-    width:28px;
-    height:70px;
-
-    background:#263238;
-
-    border-radius:12px 12px 5px 5px;
-
-    position:relative;
+    border:
+    1px solid rgba(255,255,255,.18);
 
     box-shadow:
-    0 4px 5px rgba(0,0,0,.4);
-}
+    0 20px 50px rgba(0,0,0,.45);
 
-.player::before{
-    content:"";
-
-    position:absolute;
-
-    width:22px;
-    height:22px;
-
-    border-radius:50%;
-
-    background:#e6b28a;
-
-    top:-25px;
-    left:3px;
-}
-
-/* دروازه بان */
-
-#keeper{
-    position:absolute;
-
-    width:72px;
-    height:110px;
-
-    left:50%;
-    top:155px;
-
-    transform:translateX(-50%);
-
-    z-index:7;
+    cursor:pointer;
 
     transition:
-    .55s cubic-bezier(.2,.8,.2,1);
+    transform .25s ease,
+    box-shadow .25s ease;
 }
 
-.head{
-    width:31px;
-    height:31px;
-    margin:auto;
-    border-radius:50%;
-    background:#efc09a;
+.game-card:hover{
+    transform:
+    translateY(-9px)
+    scale(1.02);
+
+    box-shadow:
+    0 30px 70px rgba(0,0,0,.65);
 }
 
-.body{
-    width:54px;
-    height:61px;
-    margin:4px auto;
-    background:#e63946;
-    border-radius:15px 15px 8px 8px;
-}
+.game-image{
+    width:100%;
+    height:220px;
 
-.arm{
-    position:absolute;
-    top:46px;
-    width:50px;
-    height:13px;
-    background:#e63946;
-    border-radius:10px;
-}
+    object-fit:cover;
 
-.arm.left{
-    left:-14px;
-    transform:rotate(25deg);
-}
-
-.arm.right{
-    right:-14px;
-    transform:rotate(-25deg);
-}
-
-/* توپ */
-
-#ball{
-    position:absolute;
-
-    left:50%;
-    bottom:35px;
-
-    width:54px;
-    height:54px;
-
-    font-size:45px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    transform:translateX(-50%);
-
-    cursor:grab;
-
-    z-index:12;
-
-    touch-action:none;
-
-    filter:
-    drop-shadow(
-        0 7px 6px rgba(0,0,0,.5)
-    );
-}
-
-#ball.dragging{
-    cursor:grabbing;
-}
-
-/* خط هدف */
-
-#aim{
-    position:absolute;
-
-    height:4px;
-
-    background:rgba(255,255,255,.8);
-
-    transform-origin:left center;
-
-    display:none;
-
-    z-index:11;
-
-    border-radius:10px;
-}
-
-/* نقطه هدف */
-
-#target{
-    position:absolute;
-
-    width:25px;
-    height:25px;
-
-    border:3px solid white;
-
-    border-radius:50%;
-
-    display:none;
-
-    transform:translate(-50%,-50%);
-
-    z-index:11;
-}
-
-/* پیام */
-
-#message{
-    position:absolute;
-
-    inset:0;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    font-size:42px;
-    font-weight:bold;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    z-index:20;
-
-    text-shadow:0 4px 18px black;
-}
-
-.help{
-    text-align:center;
-    margin:14px 0 5px;
-}
-
-button{
     display:block;
+}
 
-    margin:15px auto 0;
+.card-info{
+    text-align:center;
+    padding:18px;
+}
 
-    padding:12px 25px;
+.card-info h2{
+    margin:0 0 8px;
+    font-size:24px;
+}
 
-    border:0;
+.card-info p{
+    margin:0;
+    opacity:.7;
+    font-size:15px;
+}
+
+.play-button{
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:11px 27px;
+
     border-radius:13px;
 
-    background:#2563eb;
+    background:#16a34a;
 
     color:white;
 
-    font-size:17px;
     font-weight:bold;
 
-    cursor:pointer;
+    box-shadow:
+    0 5px 15px rgba(22,163,74,.25);
 }
 
-#restart{
-    display:none;
+.locked{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+.locked:hover{
+    transform:none;
+}
+
+.future-icon{
+    height:220px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:80px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.02)
+    );
+}
+
+.footer{
+    text-align:center;
+
+    margin-top:35px;
+
+    opacity:.45;
+
+    font-size:13px;
 }
 
 @media(max-width:600px){
 
-    #field{
-        height:450px;
+    .header h1{
+        font-size:32px;
     }
 
-    .goal{
-        width:88%;
-        height:185px;
+    .header p{
+        font-size:15px;
     }
 
-    .wall{
-        top:205px;
+    .game-image,
+    .future-icon{
+        height:190px;
     }
 
-    #keeper{
-        top:135px;
+    .card-info h2{
+        font-size:21px;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<div class="game">
+<div class="container">
 
-<h1>🎯 ضربه آزاد انقزی</h1>
 
-<div class="scoreboard">
+<!-- عنوان -->
 
-<div>
-🎯 ضربه:
-<span id="shots">0</span>/5
-</div>
+<div class="header">
 
-<div>
-⚽ گل:
-<span id="goals">0</span>
-</div>
+<h1>
+🎮 بازی‌های انقزی
+</h1>
 
-<div>
-🏆 امتیاز:
-<span id="score">0</span>
-</div>
+<p>
+بازی‌های کوچک و سرگرم‌کننده انقزی ⚽🔥
+</p>
 
 </div>
 
-<div id="field">
 
-<div class="crowd"></div>
+<div class="games">
 
-<div class="goal"></div>
 
-<!-- دروازه بان -->
+<!-- ========================= -->
+<!-- پنالتی -->
+<!-- ========================= -->
 
-<div id="keeper">
+<div
+class="game-card"
+onclick="openPenalty()"
+>
 
-<div class="head"></div>
-<div class="body"></div>
-<div class="arm left"></div>
-<div class="arm right"></div>
+<img
+src="./penalty.jpg"
+class="game-image"
+alt="پنالتی انقزی"
+>
 
-</div>
+<div class="card-info">
 
-<!-- دیوار -->
+<h2>
+⚽ پنالتی انقزی
+</h2>
 
-<div class="wall">
+<p>
+توپ را بکش و شوت کن!
+</p>
 
-<div class="player"></div>
-<div class="player"></div>
-<div class="player"></div>
-<div class="player"></div>
-<div class="player"></div>
-
-</div>
-
-<div id="aim"></div>
-
-<div id="target"></div>
-
-<div id="ball">⚽</div>
-
-<div id="message"></div>
+<span class="play-button">
+▶ بازی کن
+</span>
 
 </div>
 
-<div class="help">
-⚽ توپ را بکش و رها کن؛ از روی دیوار عبور کن!
 </div>
 
-<button id="restart" onclick="restartGame()">
-🔄 دوباره بازی کن
-</button>
+
+<!-- ========================= -->
+<!-- ضربه آزاد -->
+<!-- ========================= -->
+
+<div
+class="game-card"
+onclick="openFreeKick()"
+>
+
+<img
+src="./freekick.jpg"
+class="game-image"
+alt="ضربه آزاد انقزی"
+>
+
+<div class="card-info">
+
+<h2>
+🎯 ضربه آزاد انقزی
+</h2>
+
+<p>
+از روی دیوار دفاعی گل بزن!
+</p>
+
+<span class="play-button">
+▶ بازی کن
+</span>
 
 </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- بازی آینده -->
+<!-- ========================= -->
+
+<div class="game-card locked">
+
+<div class="future-icon">
+🧠
+</div>
+
+<div class="card-info">
+
+<h2>
+حدس بازیکن
+</h2>
+
+<p>
+به‌زودی...
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- بازی آینده -->
+<!-- ========================= -->
+
+<div class="game-card locked">
+
+<div class="future-icon">
+🏎️
+</div>
+
+<div class="card-info">
+
+<h2>
+مسابقه فوتبال
+</h2>
+
+<p>
+به‌زودی...
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="footer">
+
+⚽ ساخته شده برای بازی‌های انقزی
+
+</div>
+
+
+</div>
+
 
 <script>
 
-const field=document.getElementById("field");
-const ball=document.getElementById("ball");
-const keeper=document.getElementById("keeper");
-const aim=document.getElementById("aim");
-const target=document.getElementById("target");
-const message=document.getElementById("message");
+/* ورود به پنالتی */
 
-const shotsText=document.getElementById("shots");
-const goalsText=document.getElementById("goals");
-const scoreText=document.getElementById("score");
-const restart=document.getElementById("restart");
+function openPenalty(){
 
-let dragging=false;
-let playing=true;
-
-let shots=0;
-let goals=0;
-let score=0;
-
-let startX=0;
-let startY=0;
-
-
-/* گرفتن توپ */
-
-ball.addEventListener("pointerdown",e=>{
-
-    if(!playing)return;
-
-    dragging=true;
-
-    startX=e.clientX;
-    startY=e.clientY;
-
-    ball.setPointerCapture(e.pointerId);
-
-    aim.style.display="block";
-    target.style.display="block";
-
-});
-
-
-/* نشانه گیری */
-
-ball.addEventListener("pointermove",e=>{
-
-    if(!dragging)return;
-
-    const dx=e.clientX-startX;
-    const dy=e.clientY-startY;
-
-    const distance=Math.sqrt(dx*dx+dy*dy);
-
-    const angle=Math.atan2(dy,dx);
-
-    aim.style.width=Math.min(distance,300)+"px";
-
-    aim.style.left=(ball.offsetLeft+27)+"px";
-    aim.style.top=(ball.offsetTop+27)+"px";
-
-    aim.style.transform=`rotate(${angle}rad)`;
-
-    let tx=
-    ball.offsetLeft+
-    27+
-    dx*1.5;
-
-    let ty=
-    ball.offsetTop+
-    27+
-    dy*1.5;
-
-    tx=Math.max(
-        20,
-        Math.min(field.clientWidth-20,tx)
-    );
-
-    ty=Math.max(
-        20,
-        Math.min(field.clientHeight-20,ty)
-    );
-
-    target.style.left=tx+"px";
-    target.style.top=ty+"px";
-
-});
-
-
-/* شوت */
-
-ball.addEventListener("pointerup",e=>{
-
-    if(!dragging)return;
-
-    dragging=false;
-
-    aim.style.display="none";
-    target.style.display="none";
-
-    const dx=e.clientX-startX;
-    const dy=e.clientY-startY;
-
-    const power=Math.sqrt(dx*dx+dy*dy);
-
-    if(power<40)return;
-
-    shoot(dx,dy,power);
-
-});
-
-
-function shoot(dx,dy,power){
-
-    playing=false;
-
-    shots++;
-
-    update();
-
-    /*
-    اگر ضربه خیلی کم باشد
-    توپ به دیوار می خورد
-    */
-
-    const weak=power<100;
-
-    /*
-    جهت
-    */
-
-    let direction;
-
-    if(dx<-70)
-        direction="left";
-
-    else if(dx>70)
-        direction="right";
-
-    else
-        direction="center";
-
-    /*
-    شیرجه تصادفی
-    */
-
-    const keeperDirections=[
-        "left",
-        "center",
-        "right"
-    ];
-
-    const keeperDirection=
-    keeperDirections[
-        Math.floor(
-            Math.random()*3
-        )
-    ];
-
-    dive(keeperDirection);
-
-    /*
-    انحنا
-    */
-
-    let curve;
-
-    if(dx<0)
-        curve=-70;
-    else if(dx>0)
-        curve=70;
-    else
-        curve=0;
-
-    /*
-    اگر هدف وسط باشد
-    */
-
-    let targetX=0;
-
-    if(direction==="left")
-        targetX=-170;
-
-    if(direction==="right")
-        targetX=170;
-
-    const targetY=-300;
-
-    animateBall(
-        targetX,
-        targetY,
-        curve,
-        direction,
-        keeperDirection,
-        weak
-    );
+    window.location.href =
+    "./penalty.html";
 
 }
 
 
-/* حرکت توپ */
+/* ورود به ضربه آزاد */
 
-function animateBall(
-targetX,
-targetY,
-curve,
-direction,
-keeperDirection,
-weak
-){
+function openFreeKick(){
 
-    const duration=850;
-
-    const startTime=performance.now();
-
-    function frame(now){
-
-        const progress=
-        Math.min(
-            (now-startTime)/duration,
-            1
-        );
-
-        const ease=
-        1-Math.pow(
-            1-progress,
-            3
-        );
-
-        /*
-        مسیر منحنی
-        */
-
-        const bend=
-        Math.sin(
-            progress*Math.PI
-        )*curve;
-
-        const x=
-        targetX*ease+
-        bend;
-
-        const y=
-        targetY*ease;
-
-        ball.style.transform=
-        `
-        translateX(
-            calc(-50% + ${x}px)
-        )
-        translateY(${y}px)
-        scale(
-            ${1-progress*.5}
-        )
-        `;
-
-        if(progress<1){
-
-            requestAnimationFrame(frame);
-
-        }else{
-
-            finishShot(
-                direction,
-                keeperDirection,
-                weak
-            );
-
-        }
-
-    }
-
-    requestAnimationFrame(frame);
-
-}
-
-
-/* شیرجه */
-
-function dive(direction){
-
-    if(direction==="left"){
-
-        keeper.style.transform=
-        "translateX(-130px) rotate(-30deg)";
-
-    }
-
-    else if(direction==="right"){
-
-        keeper.style.transform=
-        "translateX(75px) rotate(30deg)";
-
-    }
-
-    else{
-
-        keeper.style.transform=
-        "translateX(-50%) scale(1.1)";
-
-    }
-
-}
-
-
-/* نتیجه */
-
-function finishShot(
-direction,
-keeperDirection,
-weak
-){
-
-    /*
-    اگر ضربه ضعیف باشد
-    */
-
-    if(weak){
-
-        show(
-            "🧱 توپ به دیوار خورد!",
-            "#f59e0b"
-        );
-
-    }
-
-    /*
-    اگر دروازه بان جهت توپ را گرفته
-    */
-
-    else if(
-        direction==="left" &&
-        keeperDirection==="left"
-    ){
-
-        show(
-            "🧤 سیــــو!",
-            "#ef4444"
-        );
-
-    }
-
-    else if(
-        direction==="right" &&
-        keeperDirection==="right"
-    ){
-
-        show(
-            "🧤 سیــــو!",
-            "#ef4444"
-        );
-
-    }
-
-    else if(
-        direction==="center" &&
-        keeperDirection==="center"
-    ){
-
-        show(
-            "🧤 سیــــو!",
-            "#ef4444"
-        );
-
-    }
-
-    else{
-
-        goals++;
-
-        const points=
-        150+
-        Math.floor(
-            Math.random()*100
-        );
-
-        score+=points;
-
-        show(
-            "⚽ گــــل!<br>"+
-            "<span style='font-size:22px'>+"+
-            points+
-            " امتیاز</span>",
-            "#22c55e"
-        );
-
-    }
-
-    update();
-
-    setTimeout(nextShot,1400);
-
-}
-
-
-/* پیام */
-
-function show(text,color){
-
-    message.innerHTML=text;
-
-    message.style.color=color;
-
-    message.style.opacity="1";
-
-}
-
-
-/* ضربه بعدی */
-
-function nextShot(){
-
-    if(shots>=5){
-
-        endGame();
-
-        return;
-
-    }
-
-    reset();
-
-    playing=true;
-
-}
-
-
-/* ریست */
-
-function reset(){
-
-    ball.style.transform=
-    "translateX(-50%)";
-
-    keeper.style.transform=
-    "translateX(-50%)";
-
-    message.style.opacity="0";
-
-}
-
-
-/* آپدیت */
-
-function update(){
-
-    shotsText.textContent=shots;
-    goalsText.textContent=goals;
-    scoreText.textContent=score;
-
-}
-
-
-/* پایان */
-
-function endGame(){
-
-    playing=false;
-
-    message.innerHTML=
-    "🏆 پایان بازی<br>"+
-    "<span style='font-size:25px'>"+
-    goals+
-    " گل از 5 ضربه<br>"+
-    "امتیاز: "+
-    score+
-    "</span>";
-
-    message.style.opacity="1";
-
-    restart.style.display="block";
-
-}
-
-
-/* دوباره */
-
-function restartGame(){
-
-    shots=0;
-    goals=0;
-    score=0;
-
-    update();
-
-    restart.style.display="none";
-
-    message.style.opacity="0";
-
-    reset();
-
-    playing=true;
+    window.location.href =
+    "./freekick.html";
 
 }
 
 </script>
 
+
 </body>
+
 </html>
