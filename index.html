@@ -5,7 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>بازی‌های انقزی 🎮</title>
 
@@ -16,9 +17,16 @@
 }
 
 body{
+
     margin:0;
+
     min-height:100vh;
-    font-family:Tahoma,Arial,sans-serif;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
     color:white;
 
     background:
@@ -30,36 +38,58 @@ body{
     );
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     overflow-x:hidden;
 }
 
 .container{
+
     width:94%;
+
     max-width:1100px;
+
     padding:30px 15px;
 }
 
+
+/* عنوان */
+
 .header{
+
     text-align:center;
+
     margin-bottom:35px;
 }
 
 .header h1{
+
     margin:0;
+
     font-size:44px;
-    text-shadow:0 5px 20px rgba(0,0,0,.5);
+
+    text-shadow:
+    0 5px 20px
+    rgba(0,0,0,.5);
 }
 
 .header p{
+
     margin-top:12px;
+
     opacity:.75;
+
     font-size:17px;
 }
 
+
+/* بازی ها */
+
 .games{
+
     display:grid;
 
     grid-template-columns:
@@ -71,7 +101,11 @@ body{
     gap:25px;
 }
 
+
+/* کارت */
+
 .game-card{
+
     overflow:hidden;
 
     border-radius:25px;
@@ -80,10 +114,12 @@ body{
     rgba(255,255,255,.08);
 
     border:
-    1px solid rgba(255,255,255,.18);
+    1px solid
+    rgba(255,255,255,.18);
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,.45);
+    0 20px 50px
+    rgba(0,0,0,.45);
 
     cursor:pointer;
 
@@ -93,16 +129,23 @@ body{
 }
 
 .game-card:hover{
+
     transform:
     translateY(-9px)
     scale(1.02);
 
     box-shadow:
-    0 30px 70px rgba(0,0,0,.65);
+    0 30px 70px
+    rgba(0,0,0,.65);
 }
 
+
+/* عکس */
+
 .game-image{
+
     width:100%;
+
     height:220px;
 
     object-fit:cover;
@@ -110,28 +153,44 @@ body{
     display:block;
 }
 
+
+/* بخش اطلاعات */
+
 .card-info{
+
     text-align:center;
+
     padding:18px;
 }
 
 .card-info h2{
-    margin:0 0 8px;
+
+    margin:
+    0 0 8px;
+
     font-size:24px;
 }
 
 .card-info p{
+
     margin:0;
+
     opacity:.7;
+
     font-size:15px;
 }
 
+
+/* دکمه */
+
 .play-button{
+
     display:inline-block;
 
     margin-top:15px;
 
-    padding:11px 27px;
+    padding:
+    11px 27px;
 
     border-radius:13px;
 
@@ -142,23 +201,33 @@ body{
     font-weight:bold;
 
     box-shadow:
-    0 5px 15px rgba(22,163,74,.25);
+    0 5px 15px
+    rgba(22,163,74,.25);
 }
 
+
+/* بازی های آینده */
+
 .locked{
+
     opacity:.45;
+
     cursor:not-allowed;
 }
 
 .locked:hover{
+
     transform:none;
 }
 
 .future-icon{
+
     height:220px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     font-size:80px;
@@ -171,7 +240,84 @@ body{
     );
 }
 
+
+/* کارت حدس بازیکن */
+
+.quiz-cover{
+
+    height:220px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        145deg,
+        #172554,
+        #075985,
+        #0f172a
+    );
+}
+
+.quiz-cover svg{
+
+    width:100%;
+
+    height:100%;
+}
+
+
+/* نوشته روی کارت */
+
+.quiz-title{
+
+    position:absolute;
+
+    top:15px;
+
+    right:18px;
+
+    left:18px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    text-shadow:
+    0 3px 8px
+    rgba(0,0,0,.7);
+}
+
+
+/* توپ */
+
+.quiz-ball{
+
+    position:absolute;
+
+    left:18px;
+
+    bottom:15px;
+
+    font-size:45px;
+
+    transform:rotate(-15deg);
+}
+
+
+/* فوتر */
+
 .footer{
+
     text-align:center;
 
     margin-top:35px;
@@ -181,22 +327,28 @@ body{
     font-size:13px;
 }
 
+
 @media(max-width:600px){
 
     .header h1{
+
         font-size:32px;
     }
 
     .header p{
+
         font-size:15px;
     }
 
     .game-image,
+    .quiz-cover,
     .future-icon{
+
         height:190px;
     }
 
     .card-info h2{
+
         font-size:21px;
     }
 
@@ -208,6 +360,7 @@ body{
 
 
 <body>
+
 
 <div class="container">
 
@@ -230,9 +383,9 @@ body{
 <div class="games">
 
 
-<!-- ========================= -->
+<!-- ================================= -->
 <!-- پنالتی -->
-<!-- ========================= -->
+<!-- ================================= -->
 
 <div
 class="game-card"
@@ -264,9 +417,9 @@ alt="پنالتی انقزی"
 </div>
 
 
-<!-- ========================= -->
+<!-- ================================= -->
 <!-- ضربه آزاد -->
-<!-- ========================= -->
+<!-- ================================= -->
 
 <div
 class="game-card"
@@ -298,34 +451,284 @@ alt="ضربه آزاد انقزی"
 </div>
 
 
-<!-- ========================= -->
-<!-- بازی آینده -->
-<!-- ========================= -->
+<!-- ================================= -->
+<!-- حدس بازیکن -->
+<!-- ================================= -->
 
-<div class="game-card locked">
+<div
+class="game-card"
+onclick="openPlayerQuiz()"
+>
 
-<div class="future-icon">
-🧠
+<div class="quiz-cover">
+
+
+<!-- عنوان روی عکس -->
+
+<div class="quiz-title">
+
+🧠 حدس بازیکن
+
 </div>
+
+
+<!-- SVG بازیکن -->
+
+<svg
+viewBox="0 0 500 300"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="حدس بازیکن">
+
+
+<!-- نور پشت بازیکن -->
+
+<circle
+cx="250"
+cy="150"
+r="130"
+fill="#38bdf8"
+opacity=".12"
+/>
+
+
+<circle
+cx="250"
+cy="150"
+r="95"
+fill="#ffffff"
+opacity=".05"
+/>
+
+
+<!-- سر -->
+
+<circle
+cx="250"
+cy="125"
+r="48"
+fill="#a96f48"
+/>
+
+
+<!-- مو -->
+
+<path
+d="
+M205 125
+Q205 70 250 70
+Q295 70 295 125
+Q278 96 250 98
+Q222 96 205 125
+Z
+"
+fill="#111111"
+/>
+
+
+<!-- گوش -->
+
+<circle
+cx="202"
+cy="128"
+r="10"
+fill="#a96f48"
+/>
+
+<circle
+cx="298"
+cy="128"
+r="10"
+fill="#a96f48"
+/>
+
+
+<!-- چشم ها -->
+
+<circle
+cx="233"
+cy="128"
+r="5"
+fill="#111"
+/>
+
+<circle
+cx="267"
+cy="128"
+r="5"
+fill="#111"
+/>
+
+
+<!-- بینی -->
+
+<path
+d="
+M250 130
+L243 149
+L254 149
+"
+fill="none"
+stroke="#75472f"
+stroke-width="3"
+/>
+
+
+<!-- لب -->
+
+<path
+d="
+M237 160
+Q250 168 263 160
+"
+fill="none"
+stroke="#672e2e"
+stroke-width="4"
+/>
+
+
+<!-- گردن -->
+
+<rect
+x="232"
+y="165"
+width="36"
+height="35"
+rx="8"
+fill="#a96f48"
+/>
+
+
+<!-- پیراهن -->
+
+<path
+d="
+M232 190
+L180 215
+L160 300
+L340 300
+L320 215
+L268 190
+Z
+"
+fill="#1685d8"
+/>
+
+
+<!-- یقه -->
+
+<path
+d="
+M232 190
+Q250 215 268 190
+"
+fill="none"
+stroke="white"
+stroke-width="8"
+/>
+
+
+<!-- شماره -->
+
+<text
+x="250"
+y="270"
+text-anchor="middle"
+font-size="48"
+font-weight="bold"
+font-family="Arial"
+fill="white">
+
+10
+
+</text>
+
+
+<!-- دست چپ -->
+
+<path
+d="
+M185 215
+L135 275
+"
+stroke="#a96f48"
+stroke-width="25"
+stroke-linecap="round"
+/>
+
+
+<!-- دست راست -->
+
+<path
+d="
+M315 215
+L365 275
+"
+stroke="#a96f48"
+stroke-width="25"
+stroke-linecap="round"
+/>
+
+
+<!-- توپ -->
+
+<circle
+cx="380"
+cy="270"
+r="28"
+fill="white"
+stroke="#222"
+stroke-width="4"
+/>
+
+
+<path
+d="
+M366 259
+L380 253
+L393 262
+L389 278
+L374 281
+Z
+"
+fill="#222"
+/>
+
+
+</svg>
+
+
+<!-- توپ کوچک -->
+
+<div class="quiz-ball">
+⚽
+</div>
+
+
+</div>
+
 
 <div class="card-info">
 
 <h2>
-حدس بازیکن
+🧠 حدس بازیکن
 </h2>
 
 <p>
-به‌زودی...
+۱۰۰ بازیکن، ۵ گزینه!
 </p>
 
-</div>
+<span class="play-button">
+▶ بازی کن
+</span>
 
 </div>
 
+</div>
 
-<!-- ========================= -->
+
+<!-- ================================= -->
 <!-- بازی آینده -->
-<!-- ========================= -->
+<!-- ================================= -->
 
 <div class="game-card locked">
 
@@ -337,6 +740,31 @@ alt="ضربه آزاد انقزی"
 
 <h2>
 مسابقه فوتبال
+</h2>
+
+<p>
+به‌زودی...
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ================================= -->
+<!-- بازی آینده -->
+<!-- ================================= -->
+
+<div class="game-card locked">
+
+<div class="future-icon">
+🏆
+</div>
+
+<div class="card-info">
+
+<h2>
+چالش قهرمانی
 </h2>
 
 <p>
@@ -363,7 +791,8 @@ alt="ضربه آزاد انقزی"
 
 <script>
 
-/* ورود به پنالتی */
+
+/* پنالتی */
 
 function openPenalty(){
 
@@ -373,12 +802,22 @@ function openPenalty(){
 }
 
 
-/* ورود به ضربه آزاد */
+/* ضربه آزاد */
 
 function openFreeKick(){
 
     window.location.href =
     "./freekick.html";
+
+}
+
+
+/* حدس بازیکن */
+
+function openPlayerQuiz(){
+
+    window.location.href =
+    "./playerquiz.html";
 
 }
 
