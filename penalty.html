@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>پنالتی انقزی ⚽</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        #061b2d,
+        #02060b
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow-x:hidden;
+}
+
+body.shake{
+    animation:shake .35s;
+}
+
+@keyframes shake{
+
+    0%{
+        transform:translate(0);
+    }
+
+    20%{
+        transform:translate(-8px,4px);
+    }
+
+    40%{
+        transform:translate(7px,-5px);
+    }
+
+    60%{
+        transform:translate(-5px,3px);
+    }
+
+    80%{
+        transform:translate(4px,-2px);
+    }
+
+    100%{
+        transform:translate(0);
+    }
+
+}
+
+.game{
+
+    width:95%;
+    max-width:920px;
+
+    padding:18px;
+
+    border-radius:25px;
+
+    background:
+    rgba(0,0,0,.48);
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.65);
+}
+
+h1{
+
+    text-align:center;
+
+    margin:
+    4px 0 15px;
+
+    font-size:32px;
+}
+
+.scoreboard{
+
+    display:flex;
+
+    justify-content:space-around;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border-radius:15px;
+
+    padding:12px;
+
+    margin-bottom:15px;
+}
+
+#field{
+
+    position:relative;
+
+    width:100%;
+    height:510px;
+
+    overflow:hidden;
+
+    border:
+    4px solid white;
+
+    border-radius:20px;
+
+    background:
+
+    repeating-linear-gradient(
+        90deg,
+        #168d43 0 80px,
+        #127c3b 80px 160px
+    );
+
+    touch-action:none;
+}
+
+.crowd{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:85px;
+
+    background:
+
+    radial-gradient(
+        circle,
+        #ddd 2px,
+        transparent 3px
+    )
+    0 0/15px 15px,
+
+    #18222d;
+}
+
+.goal{
+
+    position:absolute;
+
+    top:65px;
+    left:50%;
+
+    transform:
+    translateX(-50%);
+
+    width:72%;
+    height:220px;
+
+    border:
+    9px solid white;
+
+    border-bottom-width:13px;
+
+    background:
+
+    linear-gradient(
+        45deg,
+        transparent 48%,
+        rgba(255,255,255,.28) 49%,
+        transparent 51%
+    ),
+
+    linear-gradient(
+        -45deg,
+        transparent 48%,
+        rgba(255,255,255,.28) 49%,
+        transparent 51%
+    );
+
+    background-size:25px 25px;
+}
+
+
+/* دروازه بان قبلی */
+
+#keeper{
+
+    position:absolute;
+
+    width:72px;
+    height:110px;
+
+    left:50%;
+    top:165px;
+
+    transform:
+    translateX(-50%);
+
+    z-index:6;
+
+    transition:
+    .55s cubic-bezier(.2,.8,.2,1);
+}
+
+.head{
+
+    width:31px;
+    height:31px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#efc09a;
+}
+
+.body{
+
+    width:54px;
+    height:61px;
+
+    margin:4px auto;
+
+    background:#e63946;
+
+    border-radius:
+    15px 15px 8px 8px;
+}
+
+.arm{
+
+    position:absolute;
+
+    top:46px;
+
+    width:50px;
+    height:13px;
+
+    background:#e63946;
+
+    border-radius:10px;
+}
+
+.arm.left{
+
+    left:-14px;
+
+    transform:
+    rotate(25deg);
+}
+
+.arm.right{
+
+    right:-14px;
+
+    transform:
+    rotate(-25deg);
+}
+
+#target{
+
+    position:absolute;
+
+    width:28px;
+    height:28px;
+
+    border:
+    3px solid white;
+
+    border-radius:50%;
+
+    display:none;
+
+    z-index:4;
+
+    transform:
+    translate(-50%,-50%);
+
+    box-shadow:
+    0 0 15px white;
+}
+
+#aimLine{
+
+    position:absolute;
+
+    height:4px;
+
+    background:
+    rgba(255,255,255,.75);
+
+    transform-origin:
+    left center;
+
+    border-radius:10px;
+
+    display:none;
+
+    z-index:3;
+}
+
+#ball{
+
+    position:absolute;
+
+    left:50%;
+    bottom:42px;
+
+    width:52px;
+    height:52px;
+
+    transform:
+    translateX(-50%);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:45px;
+
+    cursor:grab;
+
+    z-index:10;
+
+    touch-action:none;
+
+    filter:
+    drop-shadow(
+        0 7px 6px
+        rgba(0,0,0,.5)
+    );
+}
+
+#ball.dragging{
+    cursor:grabbing;
+}
+
+.trail{
+
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:white;
+
+    pointer-events:none;
+
+    z-index:2;
+
+    opacity:.65;
+}
+
+#message{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    font-size:43px;
+
+    font-weight:bold;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:30;
+
+    text-shadow:
+    0 4px 18px black;
+
+    transition:.2s;
+}
+
+.help{
+
+    text-align:center;
+
+    margin:
+    14px 0 5px;
+
+    opacity:.9;
+}
+
+button{
+
+    display:block;
+
+    margin:
+    15px auto 0;
+
+    padding:
+    13px 25px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+#restart{
+    display:none;
+}
+
+@media(max-width:600px){
+
+    h1{
+        font-size:25px;
+    }
+
+    #field{
+        height:440px;
+    }
+
+    .goal{
+        width:88%;
+        height:180px;
+    }
+
+    #keeper{
+        top:140px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="game">
+
+<h1>
+⚽ پنالتی انقزی
+</h1>
+
+<div class="scoreboard">
+
+<div>
+🎯 ضربه:
+<span id="shots">0</span>/5
+</div>
+
+<div>
+⚽ گل:
+<span id="goals">0</span>
+</div>
+
+<div>
+🏆 امتیاز:
+<span id="score">0</span>
+</div>
+
+</div>
+
+<div id="field">
+
+<div class="crowd"></div>
+
+<div class="goal"></div>
+
+
+<!-- دروازه بان -->
+
+<div id="keeper">
+
+<div class="head"></div>
+
+<div class="body"></div>
+
+<div class="arm left"></div>
+
+<div class="arm right"></div>
+
+</div>
+
+
+<div id="target"></div>
+
+<div id="aimLine"></div>
+
+<div id="ball">
+⚽
+</div>
+
+<div id="message"></div>
+
+</div>
+
+<div class="help">
+
+⚽ توپ را بگیر، به سمت دروازه بکش و رها کن!
+
+</div>
+
+<button
+id="restart"
+onclick="restartGame()"
+>
+
+🔄 دوباره بازی کن
+
+</button>
+
+</div>
+
+
+<script>
+
+const field =
+document.getElementById("field");
+
+const ball =
+document.getElementById("ball");
+
+const keeper =
+document.getElementById("keeper");
+
+const target =
+document.getElementById("target");
+
+const aimLine =
+document.getElementById("aimLine");
+
+const message =
+document.getElementById("message");
+
+const shotsText =
+document.getElementById("shots");
+
+const goalsText =
+document.getElementById("goals");
+
+const scoreText =
+document.getElementById("score");
+
+const restart =
+document.getElementById("restart");
+
+
+let dragging=false;
+let playing=true;
+
+let shots=0;
+let goals=0;
+let score=0;
+
+let startX=0;
+let startY=0;
+
+let audioContext;
+
+
+/* صدا */
+
+function sound(type){
+
+    try{
+
+        if(!audioContext){
+
+            audioContext =
+            new(
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+        }
+
+        const osc =
+        audioContext.createOscillator();
+
+        const gain =
+        audioContext.createGain();
+
+        osc.connect(gain);
+
+        gain.connect(
+        audioContext.destination
+        );
+
+        if(type==="kick"){
+
+            osc.frequency.value=120;
+            gain.gain.value=.08;
+
+        }
+
+        if(type==="goal"){
+
+            osc.frequency.value=700;
+            gain.gain.value=.12;
+
+        }
+
+        if(type==="save"){
+
+            osc.frequency.value=180;
+            gain.gain.value=.1;
+
+        }
+
+        osc.start();
+
+        osc.frequency.exponentialRampToValueAtTime(
+            type==="goal"?1000:70,
+            audioContext.currentTime+.25
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            audioContext.currentTime+.3
+        );
+
+        osc.stop(
+            audioContext.currentTime+.3
+        );
+
+    }catch(e){}
+
+}
+
+
+/* گرفتن توپ */
+
+ball.addEventListener(
+"pointerdown",
+e=>{
+
+    if(!playing)return;
+
+    dragging=true;
+
+    ball.classList.add("dragging");
+
+    startX=e.clientX;
+    startY=e.clientY;
+
+    ball.setPointerCapture(
+    e.pointerId
+    );
+
+    aimLine.style.display="block";
+
+    target.style.display="block";
+
+});
+
+
+/* کشیدن */
+
+ball.addEventListener(
+"pointermove",
+e=>{
+
+    if(!dragging)return;
+
+    const dx=e.clientX-startX;
+    const dy=e.clientY-startY;
+
+    const distance=
+    Math.sqrt(
+        dx*dx+dy*dy
+    );
+
+    const angle=
+    Math.atan2(dy,dx);
+
+    aimLine.style.width=
+    Math.min(distance,260)+"px";
+
+    aimLine.style.left=
+    ball.offsetLeft+26+"px";
+
+    aimLine.style.top=
+    ball.offsetTop+26+"px";
+
+    aimLine.style.transform=
+    `rotate(${angle}rad)`;
+
+
+    let tx=
+    ball.offsetLeft+
+    26+
+    dx*1.4;
+
+    let ty=
+    ball.offsetTop+
+    26+
+    dy*1.4;
+
+    tx=Math.max(
+        20,
+        Math.min(
+            field.clientWidth-20,
+            tx
+        )
+    );
+
+    ty=Math.max(
+        20,
+        Math.min(
+            field.clientHeight-20,
+            ty
+        )
+    );
+
+    target.style.left=tx+"px";
+    target.style.top=ty+"px";
+
+});
+
+
+/* شوت */
+
+ball.addEventListener(
+"pointerup",
+e=>{
+
+    if(!dragging)return;
+
+    dragging=false;
+
+    ball.classList.remove(
+    "dragging"
+    );
+
+    aimLine.style.display="none";
+    target.style.display="none";
+
+    const dx=e.clientX-startX;
+    const dy=e.clientY-startY;
+
+    const distance=
+    Math.sqrt(
+        dx*dx+dy*dy
+    );
+
+    if(distance<35)return;
+
+    shoot(
+        dx,
+        dy,
+        distance
+    );
+
+});
+
+
+function shoot(dx,dy,distance){
+
+    if(!playing)return;
+
+    playing=false;
+
+    shots++;
+
+    update();
+
+    sound("kick");
+
+    const power=
+    Math.min(distance,260);
+
+    let direction;
+
+    if(dx<-90)
+        direction="left";
+
+    else if(dx<-30)
+        direction="left-center";
+
+    else if(dx>90)
+        direction="right";
+
+    else if(dx>30)
+        direction="right-center";
+
+    else
+        direction="center";
+
+
+    const keeperDirections=[
+        "left",
+        "left-center",
+        "center",
+        "right-center",
+        "right"
+    ];
+
+    const keeperDirection=
+    keeperDirections[
+        Math.floor(
+            Math.random()*
+            keeperDirections.length
+        )
+    ];
+
+
+    dive(keeperDirection);
+
+
+    let targetX=0;
+
+    if(direction==="left")
+        targetX=-190;
+
+    if(direction==="left-center")
+        targetX=-90;
+
+    if(direction==="center")
+        targetX=0;
+
+    if(direction==="right-center")
+        targetX=90;
+
+    if(direction==="right")
+        targetX=190;
+
+
+    const targetY=
+    -150-
+    Math.min(power,120);
+
+
+    animateBall(
+        targetX,
+        targetY,
+        direction,
+        keeperDirection,
+        power
+    );
+
+}
+
+
+/* حرکت توپ */
+
+function animateBall(
+targetX,
+targetY,
+direction,
+keeperDirection,
+power
+){
+
+    const duration=
+    Math.max(
+        450,
+        850-power
+    );
+
+    const startTime=
+    performance.now();
+
+
+    function frame(now){
+
+        const progress=
+        Math.min(
+            (now-startTime)/duration,
+            1
+        );
+
+        const ease=
+        1-Math.pow(
+            1-progress,
+            3
+        );
+
+        const curve=
+        Math.sin(
+            progress*Math.PI
+        )*
+        (
+            direction==="center"
+            ?0
+            :45
+        );
+
+        const x=
+        targetX*ease+
+        curve*
+        (
+            direction.includes("left")
+            ?-1
+            :1
+        );
+
+        const y=
+        targetY*ease;
+
+
+        ball.style.transform=
+        `translateX(
+            calc(-50% + ${x}px)
+        )
+        translateY(${y}px)
+        scale(
+            ${1-progress*.42}
+        )`;
+
+
+        if(Math.random()<.45){
+
+            createTrail(
+                ball.offsetLeft+26,
+                ball.offsetTop+26
+            );
+
+        }
+
+
+        if(progress<1){
+
+            requestAnimationFrame(frame);
+
+        }else{
+
+            finishShot(
+                direction,
+                keeperDirection,
+                power
+            );
+
+        }
+
+    }
+
+    requestAnimationFrame(frame);
+
+}
+
+
+/* رد توپ */
+
+function createTrail(x,y){
+
+    const dot=
+    document.createElement("div");
+
+    dot.className="trail";
+
+    dot.style.left=x+"px";
+    dot.style.top=y+"px";
+
+    field.appendChild(dot);
+
+    setTimeout(()=>{
+
+        dot.style.transition=".4s";
+        dot.style.opacity="0";
+
+        setTimeout(()=>{
+            dot.remove();
+        },400);
+
+    },20);
+
+}
+
+
+/* شیرجه */
+
+function dive(direction){
+
+    if(direction==="left"){
+
+        keeper.style.transform=
+        "translateX(-145px) rotate(-32deg)";
+
+    }
+
+    else if(direction==="left-center"){
+
+        keeper.style.transform=
+        "translateX(-75px) rotate(-18deg)";
+
+    }
+
+    else if(direction==="center"){
+
+        keeper.style.transform=
+        "translateX(-50%)";
+
+    }
+
+    else if(direction==="right-center"){
+
+        keeper.style.transform=
+        "translateX(20px) rotate(18deg)";
+
+    }
+
+    else{
+
+        keeper.style.transform=
+        "translateX(95px) rotate(32deg)";
+
+    }
+
+}
+
+
+/* نتیجه */
+
+function finishShot(
+direction,
+keeperDirection,
+power
+){
+
+    if(direction===keeperDirection){
+
+        sound("save");
+
+        show(
+        "🧤 سیــــو!",
+        "#ff4040"
+        );
+
+        shakeScreen();
+
+    }else{
+
+        goals++;
+
+        const points=
+        100+
+        Math.floor(power/2);
+
+        score+=points;
+
+        sound("goal");
+
+        show(
+        "⚽ گــــل!<br>"+
+        "<span style='font-size:22px'>+"+
+        points+
+        " امتیاز</span>",
+        "#22c55e"
+        );
+
+        shakeScreen();
+
+    }
+
+    update();
+
+    setTimeout(
+        nextShot,
+        1300
+    );
+
+}
+
+
+/* لرزش */
+
+function shakeScreen(){
+
+    document.body.classList.add(
+    "shake"
+    );
+
+    setTimeout(()=>{
+        document.body.classList.remove(
+        "shake"
+        );
+    },350);
+
+}
+
+
+/* ضربه بعدی */
+
+function nextShot(){
+
+    if(shots>=5){
+
+        endGame();
+
+        return;
+
+    }
+
+    resetBall();
+    resetKeeper();
+
+    playing=true;
+
+}
+
+
+/* توپ */
+
+function resetBall(){
+
+    ball.style.transform=
+    "translateX(-50%) scale(1)";
+
+    message.style.opacity="0";
+
+}
+
+
+/* دروازه بان */
+
+function resetKeeper(){
+
+    keeper.style.left="50%";
+
+    keeper.style.top="165px";
+
+    keeper.style.transform=
+    "translateX(-50%)";
+
+}
+
+
+/* پیام */
+
+function show(text,color){
+
+    message.innerHTML=text;
+
+    message.style.color=color;
+
+    message.style.opacity="1";
+
+}
+
+
+/* امتیاز */
+
+function update(){
+
+    shotsText.textContent=shots;
+
+    goalsText.textContent=goals;
+
+    scoreText.textContent=score;
+
+}
+
+
+/* پایان */
+
+function endGame(){
+
+    playing=false;
+
+    message.innerHTML=
+    "🏆 پایان بازی<br>"+
+    "<span style='font-size:25px'>"+
+    goals+
+    " گل از 5 ضربه<br>"+
+    "امتیاز نهایی: "+
+    score+
+    "</span>";
+
+    message.style.opacity="1";
+
+    restart.style.display="block";
+
+}
+
+
+/* شروع دوباره */
+
+function restartGame(){
+
+    shots=0;
+    goals=0;
+    score=0;
+
+    update();
+
+    restart.style.display="none";
+
+    message.style.opacity="0";
+
+    resetBall();
+    resetKeeper();
+
+    playing=true;
+
+}
+
+</script>
+
+</body>
+</html>
