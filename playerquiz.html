@@ -1,0 +1,2223 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>حدس بازیکن انقزی 🧠⚽</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    color:white;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #174b7a,
+        #071522 48%,
+        #02060b
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.game{
+
+    width:95%;
+
+    max-width:900px;
+
+    padding:20px;
+
+    border-radius:28px;
+
+    background:
+    rgba(0,0,0,.48);
+
+    box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.65);
+}
+
+
+/* HEADER */
+
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:15px;
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:29px;
+}
+
+.stats{
+
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+}
+
+.stat{
+
+    padding:
+    9px 13px;
+
+    border-radius:12px;
+
+    background:
+    rgba(255,255,255,.09);
+
+    font-size:14px;
+}
+
+
+/* PROGRESS */
+
+.progress{
+
+    height:8px;
+
+    background:
+    rgba(255,255,255,.1);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-bottom:18px;
+}
+
+.progress-bar{
+
+    height:100%;
+
+    width:0%;
+
+    background:
+    linear-gradient(
+        90deg,
+        #22c55e,
+        #38bdf8
+    );
+
+    transition:.35s;
+}
+
+
+/* PLAYER CARD */
+
+.player-card{
+
+    position:relative;
+
+    min-height:410px;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #172554,
+        #0f172a
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.15);
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    padding:20px;
+
+    margin-bottom:20px;
+}
+
+.player-card::before{
+
+    content:"⚽";
+
+    position:absolute;
+
+    font-size:190px;
+
+    opacity:.035;
+
+    top:20px;
+
+    left:25px;
+
+    transform:rotate(-20deg);
+}
+
+.question{
+
+    position:absolute;
+
+    top:20px;
+
+    left:10px;
+
+    right:10px;
+
+    text-align:center;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    z-index:5;
+}
+
+
+/* SVG */
+
+#playerSVG{
+
+    width:270px;
+
+    height:320px;
+
+    z-index:2;
+
+    filter:
+    drop-shadow(
+        0 15px 15px
+        rgba(0,0,0,.35)
+    );
+}
+
+
+/* OPTIONS */
+
+.options{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:12px;
+}
+
+.option{
+
+    border:0;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    background:
+    rgba(255,255,255,.09);
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    border:
+    1px solid
+    rgba(255,255,255,.1);
+
+    transition:.2s;
+}
+
+.option:hover{
+
+    background:
+    rgba(255,255,255,.17);
+
+    transform:
+    translateY(-2px);
+}
+
+.option.correct{
+
+    background:#15803d;
+
+    border-color:#4ade80;
+}
+
+.option.wrong{
+
+    background:#991b1b;
+
+    border-color:#f87171;
+}
+
+.option:disabled{
+
+    cursor:default;
+}
+
+
+/* MESSAGE */
+
+#message{
+
+    min-height:35px;
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:19px;
+
+    font-weight:bold;
+}
+
+
+/* NEXT */
+
+#next{
+
+    display:none;
+
+    margin:
+    12px auto 0;
+
+    padding:
+    12px 30px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+
+/* RESULT */
+
+#result{
+
+    display:none;
+
+    text-align:center;
+
+    padding:30px 10px;
+}
+
+#result h2{
+
+    font-size:35px;
+}
+
+.restart{
+
+    border:0;
+
+    padding:
+    14px 30px;
+
+    border-radius:14px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.back{
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:18px;
+
+    color:#93c5fd;
+
+    text-decoration:none;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .header{
+
+        flex-direction:column;
+
+        align-items:stretch;
+    }
+
+    .header h1{
+
+        text-align:center;
+
+        font-size:24px;
+    }
+
+    .stats{
+
+        justify-content:center;
+    }
+
+    .options{
+
+        grid-template-columns:1fr;
+    }
+
+    .player-card{
+
+        min-height:360px;
+    }
+
+    #playerSVG{
+
+        width:230px;
+
+        height:280px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game">
+
+
+<div class="header">
+
+<h1>
+🧠 حدس بازیکن انقزی
+</h1>
+
+<div class="stats">
+
+<div class="stat">
+🏆 امتیاز:
+<span id="score">0</span>
+</div>
+
+<div class="stat">
+❓ سؤال:
+<span id="questionNumber">1</span>/20
+</div>
+
+</div>
+
+</div>
+
+
+<div class="progress">
+
+<div
+id="progressBar"
+class="progress-bar">
+</div>
+
+</div>
+
+
+<div id="quiz">
+
+
+<div class="player-card">
+
+<div class="question">
+🤔 این بازیکن کیست؟
+</div>
+
+<svg
+id="playerSVG"
+viewBox="0 0 260 330"
+xmlns="http://www.w3.org/2000/svg">
+</svg>
+
+</div>
+
+
+<div
+id="options"
+class="options">
+</div>
+
+
+<div id="message"></div>
+
+
+<button
+id="next"
+onclick="nextQuestion()">
+
+سؤال بعدی ➜
+
+</button>
+
+
+</div>
+
+
+<div id="result">
+
+<h2>
+🏆 بازی تمام شد!
+</h2>
+
+<p id="finalText"></p>
+
+<button
+class="restart"
+onclick="restartGame()">
+
+🔄 دوباره بازی کن
+
+</button>
+
+</div>
+
+
+<a
+href="index.html"
+class="back">
+
+← برگشت به بازی‌های انقزی
+
+</a>
+
+
+</div>
+
+
+<script>
+
+
+/*
+========================================
+لیست 100 بازیکن
+========================================
+*/
+
+const players = [
+
+{
+name:"لیونل مسی",
+skin:"#d9a06c",
+hair:"#3b2415",
+shirt:"#1685d8",
+number:"10",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"کریستیانو رونالدو",
+skin:"#c68642",
+hair:"#111111",
+shirt:"#e51d2a",
+number:"7",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"کیلیان امباپه",
+skin:"#7a4426",
+hair:"#17120e",
+shirt:"#173b8f",
+number:"10",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"ارلینگ هالند",
+skin:"#f1c27d",
+hair:"#d5a45a",
+shirt:"#5b79b5",
+number:"9",
+hairStyle:"long",
+beard:false
+},
+
+{
+name:"روبرت لواندوفسکی",
+skin:"#e0ac69",
+hair:"#3b2415",
+shirt:"#b51f35",
+number:"9",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"لامین یامال",
+skin:"#8d5524",
+hair:"#111111",
+shirt:"#1685d8",
+number:"27",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"پدری",
+skin:"#d9a06c",
+hair:"#24170f",
+shirt:"#1685d8",
+number:"8",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"رافینیا",
+skin:"#8d5524",
+hair:"#111111",
+shirt:"#1685d8",
+number:"11",
+hairStyle:"curly",
+beard:true
+},
+
+{
+name:"نیکو ویلیامز",
+skin:"#6f3d24",
+hair:"#111111",
+shirt:"#e8e8e8",
+number:"10",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"وینیسیوس جونیور",
+skin:"#713d25",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"7",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"جود بلینگام",
+skin:"#744125",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"5",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"لوکا مودریچ",
+skin:"#e2b079",
+hair:"#c9a45b",
+shirt:"#173b8f",
+number:"10",
+hairStyle:"long",
+beard:true
+},
+
+{
+name:"محمد صلاح",
+skin:"#704126",
+hair:"#17100b",
+shirt:"#d51f2f",
+number:"11",
+hairStyle:"curly",
+beard:true
+},
+
+{
+name:"سون هیونگ مین",
+skin:"#e0ad82",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"7",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"کوین دی‌بروینه",
+skin:"#f1c27d",
+hair:"#b97836",
+shirt:"#67a8dd",
+number:"17",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"هری کین",
+skin:"#efbd87",
+hair:"#6b4226",
+shirt:"#eeeeee",
+number:"9",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"بوکایو ساکا",
+skin:"#704027",
+hair:"#111111",
+shirt:"#e51d2a",
+number:"7",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"مارتین اودگارد",
+skin:"#e6b582",
+hair:"#b87c42",
+shirt:"#e51d2a",
+number:"8",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"دکلان رایس",
+skin:"#e4b17d",
+hair:"#5c351d",
+shirt:"#e51d2a",
+number:"41",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"ویلیام سالیبا",
+skin:"#704026",
+hair:"#111111",
+shirt:"#e51d2a",
+number:"2",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"گابریل مارتینلی",
+skin:"#9a5d38",
+hair:"#17100c",
+shirt:"#e51d2a",
+number:"11",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"کای هاورتز",
+skin:"#efc08d",
+hair:"#7b4a2b",
+shirt:"#e51d2a",
+number:"29",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"رودری",
+skin:"#d9a06c",
+hair:"#20140d",
+shirt:"#78b9e8",
+number:"16",
+hairStyle:"long",
+beard:true
+},
+
+{
+name:"فِرانکی دی‌یونگ",
+skin:"#e6b17b",
+hair:"#6b4325",
+shirt:"#1685d8",
+number:"21",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"ژائو فلیکس",
+skin:"#d9a06c",
+hair:"#24170f",
+shirt:"#e51d2a",
+number:"14",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"ژائو کانسلو",
+skin:"#b97852",
+hair:"#17100c",
+shirt:"#1685d8",
+number:"20",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"آلیسون بکر",
+skin:"#9a5d38",
+hair:"#17100b",
+shirt:"#d51f2f",
+number:"1",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"تیبو کورتوا",
+skin:"#efbd86",
+hair:"#5d3b22",
+shirt:"#eeeeee",
+number:"1",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"مانوئل نویر",
+skin:"#efbd86",
+hair:"#5a3822",
+shirt:"#d32f2f",
+number:"1",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"جان‌لوئیجی دوناروما",
+skin:"#dca878",
+hair:"#281910",
+shirt:"#204f96",
+number:"99",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"مارک آندره تراشتگن",
+skin:"#edbd89",
+hair:"#6a4125",
+shirt:"#1685d8",
+number:"1",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"ویکتور اوسیمن",
+skin:"#6d3a23",
+hair:"#111111",
+shirt:"#1685d8",
+number:"9",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"آلوارو موراتا",
+skin:"#d9a06c",
+hair:"#351f13",
+shirt:"#eeeeee",
+number:"7",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"روملو لوکاکو",
+skin:"#5d321f",
+hair:"#111111",
+shirt:"#1685d8",
+number:"9",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"دوشان ولاهوویچ",
+skin:"#d8a77b",
+hair:"#20140e",
+shirt:"#111111",
+number:"9",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"لائوتارو مارتینز",
+skin:"#b97952",
+hair:"#17100d",
+shirt:"#1685d8",
+number:"10",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"پائولو دیبالا",
+skin:"#d9a06c",
+hair:"#2c1a10",
+shirt:"#eeeeee",
+number:"21",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"فدریکو کیه‌زا",
+skin:"#e1ad7b",
+hair:"#5c371e",
+shirt:"#111111",
+number:"7",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"خویچا کواراتسخلیا",
+skin:"#e8b77f",
+hair:"#25170e",
+shirt:"#1685d8",
+number:"77",
+hairStyle:"long",
+beard:false
+},
+
+{
+name:"عثمان دمبله",
+skin:"#693923",
+hair:"#111111",
+shirt:"#173b8f",
+number:"10",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"کینگزلی کومان",
+skin:"#6b3923",
+hair:"#111111",
+shirt:"#d51f2f",
+number:"11",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"مایکل اولیسه",
+skin:"#7b4328",
+hair:"#111111",
+shirt:"#d51f2f",
+number:"17",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"جمال موسیالا",
+skin:"#6c3924",
+hair:"#111111",
+shirt:"#d51f2f",
+number:"42",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"فلوریان ویرتز",
+skin:"#e5b27d",
+hair:"#5b361e",
+shirt:"#d51f2f",
+number:"10",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"لروی سانه",
+skin:"#714027",
+hair:"#111111",
+shirt:"#d51f2f",
+number:"10",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"توماس مولر",
+skin:"#efbf8d",
+hair:"#694326",
+shirt:"#d51f2f",
+number:"25",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"سرژ گنبری",
+skin:"#6c3923",
+hair:"#111111",
+shirt:"#d51f2f",
+number:"10",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"ایلکای گوندوغان",
+skin:"#b87751",
+hair:"#1c120c",
+shirt:"#1685d8",
+number:"8",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"ویرجیل فن‌دایک",
+skin:"#673720",
+hair:"#111111",
+shirt:"#d51f2f",
+number:"4",
+hairStyle:"long",
+beard:true
+},
+
+{
+name:"ترنت الکساندر آرنولد",
+skin:"#9b603b",
+hair:"#17100d",
+shirt:"#d51f2f",
+number:"66",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"اندرو رابرتسون",
+skin:"#e4b17d",
+hair:"#5c361e",
+shirt:"#d51f2f",
+number:"26",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"اشرف حکیمی",
+skin:"#a96643",
+hair:"#17100d",
+shirt:"#173b8f",
+number:"2",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"آنتونیو رودیگر",
+skin:"#62341f",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"22",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"مارکینیوش",
+skin:"#a96743",
+hair:"#17100d",
+shirt:"#173b8f",
+number:"5",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"امیلیانو مارتینز",
+skin:"#d8a16d",
+hair:"#2c1a10",
+shirt:"#5b79b5",
+number:"23",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"کاسمیرو",
+skin:"#9a5c39",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"18",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"فدریکو والورده",
+skin:"#e0aa77",
+hair:"#2b1a10",
+shirt:"#eeeeee",
+number:"15",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"اورلین شوامنی",
+skin:"#6d3b25",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"18",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"ادواردو کاماوینگا",
+skin:"#6d3b25",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"6",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"کول پالمر",
+skin:"#efbd87",
+hair:"#8b5a32",
+shirt:"#1685d8",
+number:"20",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"برونو فرناندز",
+skin:"#d9a06c",
+hair:"#25170e",
+shirt:"#e51d2a",
+number:"8",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"رافائل لیائو",
+skin:"#713c24",
+hair:"#111111",
+shirt:"#e51d2a",
+number:"10",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"مهدی طارمی",
+skin:"#b87851",
+hair:"#24170e",
+shirt:"#1685d8",
+number:"9",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"سردار آزمون",
+skin:"#d2a06f",
+hair:"#24170f",
+shirt:"#1685d8",
+number:"20",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"علیرضا جهانبخش",
+skin:"#b97952",
+hair:"#25170e",
+shirt:"#1685d8",
+number:"7",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"نیکلاس فولکروگ",
+skin:"#efbd87",
+hair:"#7b4c2d",
+shirt:"#eeeeee",
+number:"9",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"دنی اولمو",
+skin:"#dba976",
+hair:"#3a2416",
+shirt:"#1685d8",
+number:"10",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"رودریگو",
+skin:"#b97851",
+hair:"#17100c",
+shirt:"#eeeeee",
+number:"11",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"گابریل ژسوس",
+skin:"#8b502f",
+hair:"#111111",
+shirt:"#e51d2a",
+number:"9",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"مارکوس تورام",
+skin:"#633520",
+hair:"#111111",
+shirt:"#1685d8",
+number:"9",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"کریم بنزما",
+skin:"#9a603d",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"9",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"زلاتان ابراهیموویچ",
+skin:"#c58b62",
+hair:"#24170e",
+shirt:"#111111",
+number:"9",
+hairStyle:"long",
+beard:true
+},
+
+{
+name:"لوئیس سوارز",
+skin:"#c58d65",
+hair:"#24170f",
+shirt:"#1685d8",
+number:"9",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"آندرس اینیستا",
+skin:"#e0ad7b",
+hair:"#6b4325",
+shirt:"#1685d8",
+number:"8",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"ژاوی",
+skin:"#d9a06c",
+hair:"#5c361e",
+shirt:"#1685d8",
+number:"6",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"سرخیو راموس",
+skin:"#d6a06f",
+hair:"#4b2c18",
+shirt:"#eeeeee",
+number:"4",
+hairStyle:"long",
+beard:true
+},
+
+{
+name:"جرارد پیکه",
+skin:"#e2b17d",
+hair:"#5b361e",
+shirt:"#1685d8",
+number:"3",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"کارلوس پویول",
+skin:"#e2ad79",
+hair:"#7a4b2a",
+shirt:"#1685d8",
+number:"5",
+hairStyle:"long",
+beard:true
+},
+
+{
+name:"رونالدینیو",
+skin:"#7b4328",
+hair:"#111111",
+shirt:"#1685d8",
+number:"10",
+hairStyle:"long",
+beard:false
+},
+
+{
+name:"نیمار",
+skin:"#a96643",
+hair:"#17100d",
+shirt:"#173b8f",
+number:"10",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"آنتوان گریزمان",
+skin:"#e5b27f",
+hair:"#6c452a",
+shirt:"#173b8f",
+number:"7",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"برناردو سیلوا",
+skin:"#dca878",
+hair:"#5c371e",
+shirt:"#67a8dd",
+number:"20",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"فیل فودن",
+skin:"#e7b681",
+hair:"#6b4226",
+shirt:"#67a8dd",
+number:"47",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"مارتینز",
+skin:"#c48a60",
+hair:"#24170f",
+shirt:"#1685d8",
+number:"9",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"لیائو",
+skin:"#754126",
+hair:"#111111",
+shirt:"#e51d2a",
+number:"10",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"کولر",
+skin:"#e3ae7c",
+hair:"#2b1a10",
+shirt:"#eeeeee",
+number:"8",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"آلابا",
+skin:"#714027",
+hair:"#111111",
+shirt:"#eeeeee",
+number:"4",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"موسیالا",
+skin:"#6a3822",
+hair:"#111111",
+shirt:"#d51f2f",
+number:"42",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"گورتسکا",
+skin:"#e8b57f",
+hair:"#5a351e",
+shirt:"#d51f2f",
+number:"8",
+hairStyle:"short",
+beard:true
+},
+
+{
+name:"هالند",
+skin:"#f1c27d",
+hair:"#d5a45a",
+shirt:"#5b79b5",
+number:"9",
+hairStyle:"long",
+beard:false
+},
+
+{
+name:"امباپه",
+skin:"#7a4426",
+hair:"#17120e",
+shirt:"#173b8f",
+number:"10",
+hairStyle:"curly",
+beard:false
+},
+
+{
+name:"صلاح",
+skin:"#704126",
+hair:"#17100b",
+shirt:"#d51f2f",
+number:"11",
+hairStyle:"curly",
+beard:true
+},
+
+{
+name:"رونالدو",
+skin:"#c68642",
+hair:"#111111",
+shirt:"#e51d2a",
+number:"7",
+hairStyle:"short",
+beard:false
+},
+
+{
+name:"مسی",
+skin:"#d9a06c",
+hair:"#3b2415",
+shirt:"#1685d8",
+number:"10",
+hairStyle:"short",
+beard:true
+
+}
+
+];
+
+
+/*
+========================================
+تنظیمات بازی
+========================================
+*/
+
+const TOTAL_QUESTIONS=20;
+
+let currentPlayer;
+
+let score=0;
+
+let question=0;
+
+let answered=false;
+
+
+/*
+========================================
+تصادفی
+========================================
+*/
+
+function randomItem(array){
+
+    return array[
+        Math.floor(
+            Math.random()*array.length
+        )
+    ];
+
+}
+
+
+/*
+========================================
+ساخت مو
+========================================
+*/
+
+function hairShape(style,color){
+
+    if(style==="curly"){
+
+        return `
+        <circle cx="78" cy="82" r="18"
+        fill="${color}"/>
+
+        <circle cx="96" cy="65" r="18"
+        fill="${color}"/>
+
+        <circle cx="120" cy="60" r="20"
+        fill="${color}"/>
+
+        <circle cx="145" cy="65" r="18"
+        fill="${color}"/>
+
+        <circle cx="164" cy="82" r="18"
+        fill="${color}"/>
+        `;
+
+    }
+
+    if(style==="long"){
+
+        return `
+        <path
+        d="
+        M72 105
+        Q65 45 120 45
+        Q175 45 168 105
+        L160 175
+        L80 175
+        Z"
+        fill="${color}"
+        />
+        `;
+
+    }
+
+    return `
+    <path
+    d="
+    M76 105
+    Q76 48 120 50
+    Q164 48 164 105
+    Q145 78 120 82
+    Q95 78 76 105
+    Z"
+    fill="${color}"
+    />
+    `;
+
+}
+
+
+/*
+========================================
+ساخت چهره
+========================================
+*/
+
+function createPlayerImage(player){
+
+    const svg=
+    document.getElementById("playerSVG");
+
+    const hair=
+    hairShape(
+        player.hairStyle,
+        player.hair
+    );
+
+
+    const beard=
+    player.beard
+    ?
+
+    `
+    <path
+    d="
+    M94 137
+    Q120 165 146 137
+    L140 160
+    Q120 180 100 160
+    Z"
+    fill="${player.hair}"
+    />
+    `
+
+    :
+
+    "";
+
+
+    svg.innerHTML=`
+
+    <!-- background -->
+
+    <rect
+    x="0"
+    y="0"
+    width="260"
+    height="330"
+    rx="30"
+    fill="${player.shirt}"
+    opacity=".13"
+    />
+
+
+    <!-- گردن -->
+
+    <rect
+    x="108"
+    y="145"
+    width="34"
+    height="38"
+    rx="10"
+    fill="${player.skin}"
+    />
+
+
+    <!-- گوش -->
+
+    <circle
+    cx="75"
+    cy="108"
+    r="11"
+    fill="${player.skin}"
+    />
+
+    <circle
+    cx="165"
+    cy="108"
+    r="11"
+    fill="${player.skin}"
+    />
+
+
+    <!-- صورت -->
+
+    <ellipse
+    cx="120"
+    cy="108"
+    rx="48"
+    ry="57"
+    fill="${player.skin}"
+    />
+
+
+    <!-- مو -->
+
+    ${hair}
+
+
+    <!-- ابرو -->
+
+    <path
+    d="M91 101 Q103 94 112 101"
+    stroke="${player.hair}"
+    stroke-width="5"
+    fill="none"
+    stroke-linecap="round"
+    />
+
+    <path
+    d="M128 101 Q139 94 149 101"
+    stroke="${player.hair}"
+    stroke-width="5"
+    fill="none"
+    stroke-linecap="round"
+    />
+
+
+    <!-- چشم -->
+
+    <ellipse
+    cx="103"
+    cy="111"
+    rx="5"
+    ry="4"
+    fill="#111"
+    />
+
+    <ellipse
+    cx="137"
+    cy="111"
+    rx="5"
+    ry="4"
+    fill="#111"
+    />
+
+
+    <!-- بینی -->
+
+    <path
+    d="
+    M120 110
+    L113 132
+    L125 132
+    "
+    fill="none"
+    stroke="#8b5a3c"
+    stroke-width="3"
+    stroke-linecap="round"
+    />
+
+
+    <!-- لب -->
+
+    <path
+    d="
+    M107 143
+    Q120 150
+    133 143
+    "
+    fill="none"
+    stroke="#7a3030"
+    stroke-width="4"
+    stroke-linecap="round"
+    />
+
+
+    ${beard}
+
+
+    <!-- بدن -->
+
+    <path
+    d="
+    M108 170
+    L72 190
+    L50 290
+    L190 290
+    L168 190
+    L134 170
+    Z
+    "
+    fill="${player.shirt}"
+    />
+
+
+    <!-- یقه -->
+
+    <path
+    d="
+    M105 170
+    Q120 190
+    135 170
+    "
+    fill="none"
+    stroke="white"
+    stroke-width="7"
+    opacity=".8"
+    />
+
+
+    <!-- شماره -->
+
+    <text
+    x="120"
+    y="255"
+    text-anchor="middle"
+    font-size="43"
+    font-weight="bold"
+    font-family="Arial"
+    fill="white">
+
+    ${player.number}
+
+    </text>
+
+
+    <!-- دست چپ -->
+
+    <path
+    d="
+    M75 190
+    L35 260
+    "
+    stroke="${player.skin}"
+    stroke-width="25"
+    stroke-linecap="round"
+    />
+
+
+    <!-- دست راست -->
+
+    <path
+    d="
+    M165 190
+    L205 260
+    "
+    stroke="${player.skin}"
+    stroke-width="25"
+    stroke-linecap="round"
+    />
+
+
+    <!-- توپ -->
+
+    <circle
+    cx="205"
+    cy="263"
+    r="24"
+    fill="white"
+    stroke="#222"
+    stroke-width="3"
+    />
+
+    <path
+    d="
+    M193 252
+    L205 246
+    L216 253
+    L212 267
+    L198 270
+    Z
+    "
+    fill="#222"
+    />
+
+    `;
+
+}
+
+
+/*
+========================================
+گزینه ها
+========================================
+*/
+
+function getOptions(correct){
+
+    const options=[correct];
+
+    while(options.length<5){
+
+        const player=
+        randomItem(players);
+
+        if(
+            !options.some(
+                p=>p.name===player.name
+            )
+        ){
+
+            options.push(player);
+
+        }
+
+    }
+
+
+    return options.sort(
+        ()=>Math.random()-.5
+    );
+
+}
+
+
+/*
+========================================
+سؤال
+========================================
+*/
+
+function loadQuestion(){
+
+    answered=false;
+
+    document.getElementById(
+        "message"
+    ).textContent="";
+
+    document.getElementById(
+        "next"
+    ).style.display="none";
+
+
+    question++;
+
+
+    document.getElementById(
+        "questionNumber"
+    ).textContent=question;
+
+
+    document.getElementById(
+        "progressBar"
+    ).style.width=
+    (
+        question/TOTAL_QUESTIONS*100
+    )+"%";
+
+
+    currentPlayer=
+    randomItem(players);
+
+
+    createPlayerImage(
+        currentPlayer
+    );
+
+
+    const options=
+    getOptions(
+        currentPlayer
+    );
+
+
+    const box=
+    document.getElementById(
+        "options"
+    );
+
+    box.innerHTML="";
+
+
+    options.forEach(player=>{
+
+        const button=
+        document.createElement(
+            "button"
+        );
+
+        button.className="option";
+
+        button.textContent=
+        player.name;
+
+
+        button.onclick=()=>{
+
+            checkAnswer(
+                button,
+                player
+            );
+
+        };
+
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/*
+========================================
+بررسی جواب
+========================================
+*/
+
+function checkAnswer(button,player){
+
+    if(answered)return;
+
+    answered=true;
+
+
+    const buttons=
+    document.querySelectorAll(
+        ".option"
+    );
+
+
+    buttons.forEach(btn=>{
+
+        btn.disabled=true;
+
+
+        if(
+            btn.textContent===
+            currentPlayer.name
+        ){
+
+            btn.classList.add(
+                "correct"
+            );
+
+        }
+
+    });
+
+
+    if(
+        player.name===
+        currentPlayer.name
+    ){
+
+        score+=100;
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        document.getElementById(
+            "message"
+        ).innerHTML=
+        "✅ درست گفتی! +100 🏆";
+
+
+    }else{
+
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        document.getElementById(
+            "message"
+        ).innerHTML=
+        "❌ اشتباه! جواب: "+
+        currentPlayer.name;
+
+    }
+
+
+    document.getElementById(
+        "score"
+    ).textContent=score;
+
+
+    document.getElementById(
+        "next"
+    ).style.display="block";
+
+}
+
+
+/*
+========================================
+بعدی
+========================================
+*/
+
+function nextQuestion(){
+
+    if(
+        question>=TOTAL_QUESTIONS
+    ){
+
+        finishGame();
+
+    }else{
+
+        loadQuestion();
+
+    }
+
+}
+
+
+/*
+========================================
+پایان
+========================================
+*/
+
+function finishGame(){
+
+    document.getElementById(
+        "quiz"
+    ).style.display="none";
+
+
+    document.getElementById(
+        "result"
+    ).style.display="block";
+
+
+    let text;
+
+
+    if(score>=1800){
+
+        text=
+        "🔥 فوق‌العاده! استاد فوتبال هستی!";
+
+    }else if(score>=1300){
+
+        text=
+        "👏 عالی بود!";
+
+    }else if(score>=800){
+
+        text=
+        "👍 عملکرد خوب بود!";
+
+    }else{
+
+        text=
+        "⚽ باید بیشتر فوتبال ببینی!";
+
+    }
+
+
+    document.getElementById(
+        "finalText"
+    ).innerHTML=
+
+    `
+    ${text}
+    <br><br>
+
+    امتیاز نهایی:
+    <strong>
+    ${score}
+    </strong>
+
+    از
+    ${TOTAL_QUESTIONS*100}
+    `;
+
+}
+
+
+/*
+========================================
+شروع دوباره
+========================================
+*/
+
+function restartGame(){
+
+    score=0;
+
+    question=0;
+
+
+    document.getElementById(
+        "score"
+    ).textContent="0";
+
+
+    document.getElementById(
+        "quiz"
+    ).style.display="block";
+
+
+    document.getElementById(
+        "result"
+    ).style.display="none";
+
+
+    loadQuestion();
+
+}
+
+
+/*
+========================================
+شروع بازی
+========================================
+*/
+
+loadQuestion();
+
+</script>
+
+</body>
+
+</html>
