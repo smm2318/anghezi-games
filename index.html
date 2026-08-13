@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>بازی‌های انقزی 🎮</title>
@@ -13,9 +16,16 @@
 }
 
 body{
+
     margin:0;
+
     min-height:100vh;
-    font-family:Tahoma,Arial,sans-serif;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
     color:white;
 
     background:
@@ -27,97 +37,167 @@ body{
     );
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
+    overflow-x:hidden;
 }
 
+
+/* کانتینر اصلی */
+
 .container{
+
     width:94%;
-    max-width:1050px;
+
+    max-width:1100px;
+
     padding:30px 15px;
 }
 
+
+/* عنوان */
+
 .header{
+
     text-align:center;
+
     margin-bottom:35px;
 }
 
 .header h1{
+
     margin:0;
+
     font-size:44px;
-    text-shadow:0 5px 20px rgba(0,0,0,.5);
+
+    text-shadow:
+    0 5px 20px
+    rgba(0,0,0,.5);
 }
 
 .header p{
-    opacity:.7;
+
+    margin-top:12px;
+
+    opacity:.75;
+
     font-size:17px;
 }
 
+
+/* شبکه بازی ها */
+
 .games{
+
     display:grid;
+
     grid-template-columns:
-    repeat(auto-fit,minmax(270px,1fr));
+    repeat(
+        auto-fit,
+        minmax(270px,1fr)
+    );
 
     gap:25px;
 }
 
+
+/* کارت بازی */
+
 .game-card{
+
     overflow:hidden;
+
     border-radius:25px;
 
     background:
     rgba(255,255,255,.08);
 
     border:
-    1px solid rgba(255,255,255,.18);
+    1px solid
+    rgba(255,255,255,.18);
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,.45);
+    0 20px 50px
+    rgba(0,0,0,.45);
 
     cursor:pointer;
 
     transition:
-    transform .25s,
-    box-shadow .25s;
+    transform .25s ease,
+    box-shadow .25s ease;
 }
 
+
+/* هاور */
+
 .game-card:hover{
+
     transform:
     translateY(-9px)
     scale(1.02);
 
     box-shadow:
-    0 30px 70px rgba(0,0,0,.65);
+    0 30px 70px
+    rgba(0,0,0,.65);
 }
 
+
+/* عکس بازی */
+
 .game-image{
+
     width:100%;
+
     height:220px;
+
     object-fit:cover;
+
     display:block;
 }
 
+
+/* اطلاعات کارت */
+
 .card-info{
+
     text-align:center;
+
     padding:18px;
 }
 
+
 .card-info h2{
-    margin:0 0 8px;
+
+    margin:
+    0 0 8px;
+
     font-size:24px;
 }
 
+
 .card-info p{
+
     margin:0;
+
     opacity:.7;
+
+    font-size:15px;
 }
 
+
+/* دکمه بازی */
+
 .play-button{
+
     display:inline-block;
 
     margin-top:15px;
 
-    padding:11px 27px;
+    padding:
+    11px 27px;
 
     border-radius:13px;
 
@@ -126,48 +206,134 @@ body{
     color:white;
 
     font-weight:bold;
+
+    box-shadow:
+    0 5px 15px
+    rgba(22,163,74,.25);
+
+    transition:
+    transform .2s,
+    background .2s;
 }
 
+
+.game-card:hover .play-button{
+
+    background:#22c55e;
+
+    transform:
+    scale(1.05);
+}
+
+
+/* بازی های آینده */
+
 .locked{
-    opacity:.4;
+
+    opacity:.45;
+
     cursor:not-allowed;
 }
 
+
 .locked:hover{
+
     transform:none;
+
+    box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.45);
 }
 
+
 .future-icon{
+
     height:220px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     font-size:80px;
 
     background:
-    rgba(255,255,255,.05);
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.02)
+    );
 }
+
+
+/* پایین صفحه */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:35px;
+
+    opacity:.45;
+
+    font-size:13px;
+}
+
+
+/* موبایل */
 
 @media(max-width:600px){
 
+    .container{
+
+        padding:
+        25px 10px;
+    }
+
     .header h1{
+
         font-size:32px;
+    }
+
+    .header p{
+
+        font-size:15px;
+    }
+
+    .game-image,
+    .future-icon{
+
+        height:190px;
+    }
+
+    .card-info h2{
+
+        font-size:21px;
     }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
+
+<!-- ======================= -->
+<!-- عنوان -->
+<!-- ======================= -->
 
 <div class="header">
 
-<h1>🎮 بازی‌های انقزی</h1>
+<h1>
+🎮 بازی‌های انقزی
+</h1>
 
 <p>
 بازی‌های کوچک و سرگرم‌کننده انقزی ⚽🔥
@@ -176,10 +342,13 @@ body{
 </div>
 
 
+
 <div class="games">
 
 
-<!-- بازی پنالتی -->
+<!-- ======================= -->
+<!-- بازی اول: پنالتی -->
+<!-- ======================= -->
 
 <div
 class="game-card"
@@ -211,12 +380,52 @@ alt="پنالتی انقزی"
 </div>
 
 
-<!-- بازی آینده -->
+
+<!-- ======================= -->
+<!-- بازی دوم: ضربه آزاد -->
+<!-- ======================= -->
+
+<div
+class="game-card"
+onclick="openFreeKick()"
+>
+
+<img
+src="freekick.jpg"
+class="game-image"
+alt="ضربه آزاد انقزی"
+>
+
+<div class="card-info">
+
+<h2>
+🎯 ضربه آزاد انقزی
+</h2>
+
+<p>
+از روی دیوار دفاعی گل بزن!
+</p>
+
+<span class="play-button">
+▶ بازی کن
+</span>
+
+</div>
+
+</div>
+
+
+
+<!-- ======================= -->
+<!-- بازی سوم: آینده -->
+<!-- ======================= -->
 
 <div class="game-card locked">
 
 <div class="future-icon">
+
 🧠
+
 </div>
 
 <div class="card-info">
@@ -234,18 +443,23 @@ alt="پنالتی انقزی"
 </div>
 
 
-<!-- بازی آینده -->
+
+<!-- ======================= -->
+<!-- بازی چهارم: آینده -->
+<!-- ======================= -->
 
 <div class="game-card locked">
 
 <div class="future-icon">
-🎯
+
+🏎️
+
 </div>
 
 <div class="card-info">
 
 <h2>
-ضربه آزاد
+مسابقه فوتبال
 </h2>
 
 <p>
@@ -259,18 +473,50 @@ alt="پنالتی انقزی"
 
 </div>
 
+
+<!-- پایین -->
+
+<div class="footer">
+
+⚽ ساخته شده برای بازی‌های انقزی
+
 </div>
+
+
+</div>
+
 
 
 <script>
 
+
+/* ========================= */
+/* پنالتی */
+/* ========================= */
+
 function openPenalty(){
 
-    window.location.href="penalty.html";
+    window.location.href =
+    "penalty.html";
 
 }
 
+
+/* ========================= */
+/* ضربه آزاد */
+/* ========================= */
+
+function openFreeKick(){
+
+    window.location.href =
+    "freekick.html";
+
+}
+
+
 </script>
 
+
 </body>
+
 </html>
