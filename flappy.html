@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Flappy انقزی 🐦⚽</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+html,
+body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    background:#020617;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+.game{
+
+    position:relative;
+
+    width:100%;
+    max-width:520px;
+
+    height:100vh;
+    max-height:850px;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        #38bdf8 0%,
+        #7dd3fc 52%,
+        #d9f99d 52%,
+        #65a30d 100%
+    );
+
+    box-shadow:
+    0 0 60px
+    rgba(0,0,0,.6);
+}
+
+
+/* =========================
+   SKY
+========================= */
+
+.sky-glow{
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.15);
+
+    top:70px;
+    right:-80px;
+
+    filter:blur(15px);
+}
+
+
+.cloud{
+
+    position:absolute;
+
+    width:100px;
+    height:30px;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,.65);
+
+    opacity:.75;
+
+    animation:
+    cloudMove
+    linear
+    infinite;
+}
+
+.cloud::before,
+.cloud::after{
+
+    content:"";
+
+    position:absolute;
+
+    background:
+    rgba(255,255,255,.65);
+
+    border-radius:50%;
+}
+
+.cloud::before{
+
+    width:45px;
+    height:45px;
+
+    left:18px;
+    bottom:5px;
+}
+
+.cloud::after{
+
+    width:55px;
+    height:55px;
+
+    right:15px;
+    bottom:0;
+}
+
+.cloud1{
+
+    top:130px;
+    left:-120px;
+
+    animation-duration:18s;
+}
+
+.cloud2{
+
+    top:250px;
+    left:-180px;
+
+    transform:scale(.7);
+
+    animation-duration:25s;
+
+    animation-delay:5s;
+}
+
+@keyframes cloudMove{
+
+    from{
+        left:-180px;
+    }
+
+    to{
+        left:110%;
+    }
+
+}
+
+
+/* =========================
+   HUD
+========================= */
+
+.hud{
+
+    position:absolute;
+
+    top:15px;
+    left:15px;
+    right:15px;
+
+    z-index:50;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.logo{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    text-shadow:
+    0 3px 8px
+    rgba(0,0,0,.35);
+}
+
+.scoreBox{
+
+    min-width:90px;
+
+    padding:
+    7px 13px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    background:
+    rgba(0,0,0,.25);
+
+    border:
+    1px solid
+    rgba(255,255,255,.25);
+
+    backdrop-filter:
+    blur(8px);
+}
+
+.scoreLabel{
+
+    font-size:11px;
+
+    opacity:.8;
+}
+
+#score{
+
+    display:block;
+
+    font-size:25px;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   GAME AREA
+========================= */
+
+#gameArea{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    touch-action:manipulation;
+}
+
+
+/* =========================
+   PIPES
+========================= */
+
+.pipe{
+
+    position:absolute;
+
+    width:70px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #15803d,
+        #22c55e,
+        #15803d
+    );
+
+    border:
+    3px solid
+    #166534;
+
+    box-shadow:
+    inset
+    5px 0
+    rgba(255,255,255,.15),
+
+    inset
+    -6px 0
+    rgba(0,0,0,.15);
+}
+
+.pipe::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-7px;
+    right:-7px;
+
+    height:30px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #166534,
+        #22c55e,
+        #166534
+    );
+
+    border:
+    3px solid
+    #14532d;
+
+    border-radius:6px;
+}
+
+.pipe.top::after{
+
+    bottom:-3px;
+}
+
+.pipe.bottom::after{
+
+    top:-3px;
+}
+
+
+/* =========================
+   BIRD
+========================= */
+
+#bird{
+
+    position:absolute;
+
+    width:48px;
+    height:38px;
+
+    left:100px;
+    top:45%;
+
+    z-index:20;
+
+    transition:
+    transform .05s linear;
+}
+
+
+/* بدن */
+
+.bird-body{
+
+    position:absolute;
+
+    width:42px;
+    height:35px;
+
+    left:0;
+    top:0;
+
+    border-radius:
+    55% 48% 48% 55%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #facc15,
+        #eab308
+    );
+
+    border:
+    2px solid
+    #a16207;
+
+    box-shadow:
+    0 4px 7px
+    rgba(0,0,0,.25);
+}
+
+
+/* بال */
+
+.bird-wing{
+
+    position:absolute;
+
+    width:23px;
+    height:14px;
+
+    left:7px;
+    top:20px;
+
+    border-radius:
+    70% 20% 60% 30%;
+
+    background:#fde047;
+
+    border:
+    2px solid
+    #a16207;
+
+    transform:
+    rotate(-10deg);
+}
+
+
+/* چشم */
+
+.bird-eye{
+
+    position:absolute;
+
+    width:11px;
+    height:11px;
+
+    right:8px;
+    top:6px;
+
+    border-radius:50%;
+
+    background:white;
+
+    border:
+    2px solid
+    #713f12;
+}
+
+.bird-eye::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    right:1px;
+    top:1px;
+
+    border-radius:50%;
+
+    background:#111;
+}
+
+
+/* منقار */
+
+.bird-beak{
+
+    position:absolute;
+
+    right:-13px;
+    top:15px;
+
+    width:18px;
+    height:12px;
+
+    background:#f97316;
+
+    clip-path:
+    polygon(
+        0 0,
+        100% 50%,
+        0 100%
+    );
+
+    border-left:
+    2px solid
+    #c2410c;
+}
+
+
+/* =========================
+   GROUND
+========================= */
+
+.ground{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+    right:0;
+
+    height:65px;
+
+    z-index:30;
+
+    background:
+    linear-gradient(
+        #84cc16,
+        #4d7c0f
+    );
+
+    border-top:
+    5px solid
+    #365314;
+
+    box-shadow:
+    inset
+    0 7px
+    rgba(255,255,255,.18);
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particle{
+
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    pointer-events:none;
+
+    z-index:40;
+
+    animation:
+    particleFly
+    .5s
+    ease-out
+    forwards;
+}
+
+@keyframes particleFly{
+
+    to{
+
+        opacity:0;
+
+        transform:
+        translate(
+            var(--x),
+            var(--y)
+        )
+        scale(.2);
+    }
+}
+
+
+/* =========================
+   START SCREEN
+========================= */
+
+.overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    background:
+    rgba(2,6,23,.3);
+
+    backdrop-filter:
+    blur(3px);
+}
+
+.overlay h1{
+
+    margin:0;
+
+    font-size:52px;
+
+    text-shadow:
+    0 5px 15px
+    rgba(0,0,0,.4);
+}
+
+.overlay p{
+
+    margin:
+    12px 0 25px;
+
+    font-size:16px;
+
+    opacity:.9;
+}
+
+.playButton{
+
+    border:0;
+
+    padding:
+    14px 38px;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #16a34a,
+        #15803d
+    );
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,.3);
+
+    transition:.2s;
+}
+
+.playButton:hover{
+
+    transform:
+    translateY(-3px)
+    scale(1.03);
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+#gameOver{
+
+    display:none;
+}
+
+.result{
+
+    padding:
+    20px 30px;
+
+    border-radius:22px;
+
+    background:
+    rgba(0,0,0,.45);
+
+    border:
+    1px solid
+    rgba(255,255,255,.2);
+
+    backdrop-filter:
+    blur(10px);
+}
+
+.result h2{
+
+    margin:0 0 10px;
+
+    font-size:36px;
+}
+
+.finalScore{
+
+    font-size:19px;
+
+    line-height:2;
+
+    margin-bottom:15px;
+}
+
+.restart{
+
+    border:0;
+
+    padding:
+    12px 27px;
+
+    border-radius:13px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.back{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#dbeafe;
+
+    text-decoration:none;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .game{
+        max-width:none;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .pipe{
+        width:62px;
+    }
+
+    #bird{
+        left:75px;
+    }
+
+    .overlay h1{
+        font-size:44px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game">
+
+
+<div id="gameArea">
+
+
+<!-- آسمان -->
+
+<div class="sky-glow"></div>
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+
+
+<!-- HUD -->
+
+<div class="hud">
+
+<div class="logo">
+🐦 Flappy انقزی
+</div>
+
+<div class="scoreBox">
+
+<div class="scoreLabel">
+امتیاز
+</div>
+
+<span id="score">
+0
+</span>
+
+</div>
+
+</div>
+
+
+<!-- پرنده -->
+
+<div id="bird">
+
+<div class="bird-body"></div>
+
+<div class="bird-wing"></div>
+
+<div class="bird-eye"></div>
+
+<div class="bird-beak"></div>
+
+</div>
+
+
+<!-- زمین -->
+
+<div class="ground"></div>
+
+
+<!-- شروع -->
+
+<div
+id="startScreen"
+class="overlay"
+>
+
+<h1>
+🐦 Flappy
+</h1>
+
+<p>
+روی صفحه کلیک یا لمس کن تا پرنده پرواز کند!
+</p>
+
+<button
+class="playButton"
+onclick="startGame(event)"
+>
+▶ شروع بازی
+</button>
+
+</div>
+
+
+<!-- پایان -->
+
+<div
+id="gameOver"
+class="overlay"
+>
+
+<div class="result">
+
+<h2>
+💥 باختی!
+</h2>
+
+<div
+class="finalScore"
+id="finalScore">
+</div>
+
+<button
+class="restart"
+onclick="restartGame(event)"
+>
+🔄 دوباره بازی کن
+</button>
+
+<a
+href="index.html"
+class="back"
+>
+← بازی‌های انقزی
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   عناصر
+========================= */
+
+const gameArea =
+document.getElementById(
+    "gameArea"
+);
+
+const bird =
+document.getElementById(
+    "bird"
+);
+
+const scoreText =
+document.getElementById(
+    "score"
+);
+
+const startScreen =
+document.getElementById(
+    "startScreen"
+);
+
+const gameOverScreen =
+document.getElementById(
+    "gameOver"
+);
+
+const finalScore =
+document.getElementById(
+    "finalScore"
+);
+
+
+/* =========================
+   متغیرها
+========================= */
+
+let birdX=100;
+
+let birdY=300;
+
+let velocity=0;
+
+let gravity=.42;
+
+let jumpPower=-7.2;
+
+let pipes=[];
+
+let score=0;
+
+let best=
+Number(
+    localStorage.getItem(
+        "angheziFlappyBest"
+    )
+)||0;
+
+let playing=false;
+
+let lastTime=0;
+
+let pipeTimer=0;
+
+let pipeInterval=1500;
+
+let speed=2.8;
+
+let animation;
+
+
+/* =========================
+   شروع
+========================= */
+
+function startGame(event){
+
+    if(event){
+        event.stopPropagation();
+    }
+
+    startScreen.style.display=
+    "none";
+
+    gameOverScreen.style.display=
+    "none";
+
+    score=0;
+
+    velocity=0;
+
+    birdY=
+    gameArea.clientHeight*.45;
+
+    speed=2.8;
+
+    pipeTimer=0;
+
+    pipeInterval=1500;
+
+    scoreText.textContent="0";
+
+    clearPipes();
+
+    playing=true;
+
+    lastTime=
+    performance.now();
+
+    animation=
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+/* =========================
+   پرش
+========================= */
+
+function flap(){
+
+    if(!playing)return;
+
+    velocity=
+    jumpPower;
+
+    bird.style.transform=
+    "rotate(-18deg)";
+
+    createParticles(
+        birdX+20,
+        birdY+20
+    );
+
+}
+
+
+/* =========================
+   کنترل
+========================= */
+
+gameArea.addEventListener(
+    "pointerdown",
+    function(e){
+
+        if(
+            e.target.closest(
+                "button"
+            )
+        ){
+            return;
+        }
+
+        flap();
+
+    }
+);
+
+
+/* =========================
+   کیبورد
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.code==="Space" ||
+            e.code==="ArrowUp"
+        ){
+
+            e.preventDefault();
+
+            flap();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   ساخت لوله
+========================= */
+
+function createPipe(){
+
+    const height=
+    gameArea.clientHeight;
+
+    const groundHeight=65;
+
+    const gap=
+    Math.max(
+        125,
+        180-score*1.5
+    );
+
+    const minTop=90;
+
+    const maxTop=
+    height-
+    groundHeight-
+    gap-
+    90;
+
+
+    const topHeight=
+    Math.random()*
+    (
+        maxTop-minTop
+    )+
+    minTop;
+
+
+    const bottomHeight=
+    height-
+    groundHeight-
+    topHeight-
+    gap;
+
+
+    const x=
+    gameArea.clientWidth+20;
+
+
+    const top=
+    document.createElement(
+        "div"
+    );
+
+    top.className=
+    "pipe top";
+
+    top.style.left=
+    x+"px";
+
+    top.style.top="0";
+
+    top.style.height=
+    topHeight+"px";
+
+
+    const bottom=
+    document.createElement(
+        "div"
+    );
+
+    bottom.className=
+    "pipe bottom";
+
+    bottom.style.left=
+    x+"px";
+
+    bottom.style.bottom=
+    "65px";
+
+    bottom.style.height=
+    bottomHeight+"px";
+
+
+    gameArea.appendChild(top);
+
+    gameArea.appendChild(bottom);
+
+
+    pipes.push({
+
+        top:top,
+
+        bottom:bottom,
+
+        x:x,
+
+        width:70,
+
+        passed:false,
+
+        topHeight:topHeight,
+
+        bottomHeight:bottomHeight,
+
+        gap:gap
+
+    });
+
+}
+
+
+/* =========================
+   حرکت
+========================= */
+
+function updatePipes(delta){
+
+    pipeTimer+=delta;
+
+
+    if(
+        pipeTimer>=pipeInterval
+    ){
+
+        pipeTimer=0;
+
+        createPipe();
+
+    }
+
+
+    pipes.forEach(
+        pipe=>{
+
+            pipe.x-=
+            speed*
+            (delta/16.67);
+
+
+            pipe.top.style.left=
+            pipe.x+"px";
+
+            pipe.bottom.style.left=
+            pipe.x+"px";
+
+
+            /*
+            امتیاز
+            */
+
+            if(
+                !pipe.passed &&
+                pipe.x+pipe.width<
+                birdX
+            ){
+
+                pipe.passed=true;
+
+                score++;
+
+                scoreText.textContent=
+                score;
+
+                /*
+                افزایش سرعت
+                */
+
+                speed=
+                Math.min(
+                    5.5,
+                    2.8+
+                    score*.045
+                );
+
+                createParticles(
+                    birdX,
+                    birdY
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+    حذف لوله های قدیمی
+    */
+
+    pipes=
+    pipes.filter(
+        pipe=>{
+
+            if(
+                pipe.x+
+                pipe.width<
+                -100
+            ){
+
+                pipe.top.remove();
+
+                pipe.bottom.remove();
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+    );
+
+}
+
+
+/* =========================
+   پرنده
+========================= */
+
+function updateBird(delta){
+
+    velocity+=
+    gravity*
+    (delta/16.67);
+
+
+    birdY+=
+    velocity*
+    (delta/16.67);
+
+
+    /*
+    چرخش
+    */
+
+    const rotation=
+    Math.min(
+        90,
+        Math.max(
+            -20,
+            velocity*5
+        )
+    );
+
+
+    bird.style.transform=
+    `rotate(${rotation}deg)`;
+
+
+    bird.style.top=
+    birdY+"px";
+
+
+    /*
+    سقف
+    */
+
+    if(birdY<0){
+
+        birdY=0;
+
+        velocity=0;
+
+    }
+
+
+    /*
+    زمین
+    */
+
+    if(
+        birdY+
+        bird.offsetHeight>=
+        gameArea.clientHeight-65
+    ){
+
+        gameOver();
+
+    }
+
+}
+
+
+/* =========================
+   برخورد
+========================= */
+
+function checkCollision(){
+
+    const birdLeft=
+    birdX+5;
+
+    const birdRight=
+    birdX+
+    bird.offsetWidth-5;
+
+    const birdTop=
+    birdY+5;
+
+    const birdBottom=
+    birdY+
+    bird.offsetHeight-5;
+
+
+    for(
+        const pipe of pipes
+    ){
+
+        const pipeLeft=
+        pipe.x;
+
+        const pipeRight=
+        pipe.x+
+        pipe.width;
+
+
+        /*
+        برخورد افقی
+        */
+
+        if(
+            birdRight>pipeLeft &&
+            birdLeft<pipeRight
+        ){
+
+            /*
+            برخورد با لوله بالا
+            */
+
+            if(
+                birdTop<
+                pipe.topHeight
+            ){
+
+                return true;
+
+            }
+
+
+            /*
+            برخورد با لوله پایین
+            */
+
+            const bottomTop=
+            gameArea.clientHeight-
+            65-
+            pipe.bottomHeight;
+
+
+            if(
+                birdBottom>
+                bottomTop
+            ){
+
+                return true;
+
+            }
+
+        }
+
+    }
+
+    return false;
+
+}
+
+
+/* =========================
+   حلقه بازی
+========================= */
+
+function gameLoop(time){
+
+    if(!playing)return;
+
+
+    const delta=
+    Math.min(
+        40,
+        time-lastTime
+    );
+
+    lastTime=time;
+
+
+    updateBird(delta);
+
+    updatePipes(delta);
+
+
+    if(
+        checkCollision()
+    ){
+
+        gameOver();
+
+        return;
+
+    }
+
+
+    animation=
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+/* =========================
+   پایان
+========================= */
+
+function gameOver(){
+
+    if(!playing)return;
+
+    playing=false;
+
+    cancelAnimationFrame(
+        animation
+    );
+
+
+    if(score>best){
+
+        best=score;
+
+        localStorage.setItem(
+            "angheziFlappyBest",
+            best
+        );
+
+    }
+
+
+    finalScore.innerHTML=
+    `
+    امتیاز:
+    <strong>${score}</strong>
+
+    <br>
+
+    رکورد:
+    <strong>${best}</strong>
+    `;
+
+
+    gameOverScreen.style.display=
+    "flex";
+
+}
+
+
+/* =========================
+   پاک کردن لوله ها
+========================= */
+
+function clearPipes(){
+
+    pipes.forEach(
+        pipe=>{
+
+            pipe.top.remove();
+
+            pipe.bottom.remove();
+
+        }
+    );
+
+    pipes=[];
+
+}
+
+
+/* =========================
+   ریست
+========================= */
+
+function restartGame(event){
+
+    if(event){
+        event.stopPropagation();
+    }
+
+    gameOverScreen.style.display=
+    "none";
+
+    startGame();
+
+}
+
+
+/* =========================
+   ذرات
+========================= */
+
+function createParticles(
+    x,
+    y
+){
+
+    for(
+        let i=0;
+        i<7;
+        i++
+    ){
+
+        const particle=
+        document.createElement(
+            "div"
+        );
+
+        particle.className=
+        "particle";
+
+        particle.style.left=
+        x+"px";
+
+        particle.style.top=
+        y+"px";
+
+        particle.style.setProperty(
+            "--x",
+            (
+                Math.random()*70-35
+            )+"px"
+        );
+
+        particle.style.setProperty(
+            "--y",
+            (
+                Math.random()*70-35
+            )+"px"
+        );
+
+
+        gameArea.appendChild(
+            particle
+        );
+
+
+        setTimeout(
+            ()=>particle.remove(),
+            500
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
