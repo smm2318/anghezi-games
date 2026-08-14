@@ -225,8 +225,6 @@ body{
 
 <div class="container">
 
-<!-- عنوان -->
-
 <div class="header">
 
 <h1>
@@ -243,13 +241,13 @@ body{
 <div class="games">
 
 
-<!-- ========================= -->
-<!-- پنالتی -->
-<!-- ========================= -->
+<!-- =========================
+     پنالتی
+========================= -->
 
 <div
 class="game-card"
-onclick="openPenalty()"
+onclick="location.href='penalty.html'"
 >
 
 <img
@@ -277,13 +275,13 @@ alt="پنالتی انقزی"
 </div>
 
 
-<!-- ========================= -->
-<!-- ضربه آزاد -->
-<!-- ========================= -->
+<!-- =========================
+     ضربه آزاد
+========================= -->
 
 <div
 class="game-card"
-onclick="openFreeKick()"
+onclick="location.href='freekick.html'"
 >
 
 <img
@@ -311,19 +309,19 @@ alt="ضربه آزاد انقزی"
 </div>
 
 
-<!-- ========================= -->
-<!-- حدس بازیکن -->
-<!-- ========================= -->
+<!-- =========================
+     حدس بازیکن
+========================= -->
 
 <div
 class="game-card"
-onclick="openPlayerQuiz()"
+onclick="location.href='playerquiz.html'"
 >
 
 <img
-    src="./playerquiz.png?v=2"
-    class="game-image"
-    alt="حدس بازیکن انقزی"
+src="./playerquiz.png?v=2"
+class="game-image"
+alt="حدس بازیکن انقزی"
 >
 
 <div class="card-info">
@@ -345,9 +343,43 @@ onclick="openPlayerQuiz()"
 </div>
 
 
-<!-- ========================= -->
-<!-- بازی آینده -->
-<!-- ========================= -->
+<!-- =========================
+     FLAPPY
+========================= -->
+
+<div
+class="game-card"
+onclick="location.href='flappy.html'"
+>
+
+<img
+src="./flappy.png?v=1"
+class="game-image"
+alt="Flappy انقزی"
+>
+
+<div class="card-info">
+
+<h2>
+🐦 Flappy انقزی
+</h2>
+
+<p>
+پرواز کن و رکورد بزن!
+</p>
+
+<span class="play-button">
+▶ بازی کن
+</span>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     بازی آینده
+========================= -->
 
 <div class="game-card locked">
 
@@ -370,9 +402,9 @@ onclick="openPlayerQuiz()"
 </div>
 
 
-<!-- ========================= -->
-<!-- بازی آینده -->
-<!-- ========================= -->
+<!-- =========================
+     بازی آینده
+========================= -->
 
 <div class="game-card locked">
 
@@ -405,32 +437,6 @@ onclick="openPlayerQuiz()"
 </div>
 
 </div>
-
-
-<script>
-
-function openPenalty(){
-
-    window.location.href =
-    "./penalty.html";
-
-}
-
-function openFreeKick(){
-
-    window.location.href =
-    "./freekick.html";
-
-}
-
-function openPlayerQuiz(){
-
-    window.location.href =
-    "./playerquiz.html";
-
-}
-
-</script>
 
 </body>
 
