@@ -5,439 +5,663 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>بازی‌های انقزی 🎮</title>
+<title>انقزی Games 🎮</title>
 
 <style>
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#171a21;
+    color:#fff;
     min-height:100vh;
+}
 
-    font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    height:70px;
+    background:#171a21;
+    border-bottom:1px solid #2a2e38;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 5%;
+
+    gap:35px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#1a9fff;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+}
+
+.menu a{
+    color:#c7d5e0;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.menu a:hover{
+    color:#fff;
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        height:auto;
+        padding:18px;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .menu{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    width:90%;
+    max-width:1200px;
+
+    margin:35px auto;
+
+    min-height:300px;
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(12,15,20,.98),
+            rgba(12,15,20,.65),
+            rgba(12,15,20,.1)
+        ),
+        url("breakout.png")
+        center/cover;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.45);
+}
+
+.hero-content{
+    position:absolute;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:55%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    padding:40px;
+}
+
+.hero small{
+    color:#66c0f4;
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.hero h1{
+    font-size:
+        clamp(28px,5vw,48px);
+
+    margin-bottom:12px;
+}
+
+.hero p{
+    color:#c7d5e0;
+    line-height:1.9;
+    font-size:13px;
+}
+
+.hero-button{
+    margin-top:20px;
+
+    width:max-content;
+
+    padding:11px 22px;
+
+    background:#1a9fff;
 
     color:white;
 
-    background:
-    radial-gradient(
-        circle at top,
-        #15558a,
-        #071522 45%,
-        #02060b
-    );
+    text-decoration:none;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    border-radius:3px;
 
-    overflow-x:hidden;
+    font-size:13px;
+
+    font-weight:bold;
+
+    transition:.2s;
 }
 
-.container{
-    width:94%;
-    max-width:1100px;
-    padding:30px 15px;
+.hero-button:hover{
+    background:#35aaff;
 }
 
-.header{
-    text-align:center;
-    margin-bottom:35px;
+@media(max-width:650px){
+
+    .hero{
+        min-height:350px;
+    }
+
+    .hero-content{
+        width:100%;
+
+        justify-content:flex-end;
+
+        padding:25px;
+
+        background:
+            linear-gradient(
+                transparent,
+                rgba(12,15,20,.95)
+            );
+    }
+
 }
 
-.header h1{
-    margin:0;
-    font-size:44px;
 
-    text-shadow:
-    0 5px 20px
-    rgba(0,0,0,.5);
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    width:90%;
+    max-width:1200px;
+
+    margin:
+        0 auto 60px;
 }
 
-.header p{
-    margin-top:12px;
-    opacity:.75;
-    font-size:17px;
+.section-title{
+    font-size:22px;
+
+    margin-bottom:18px;
+
+    color:#fff;
 }
+
+.section-subtitle{
+    color:#8f98a0;
+    font-size:12px;
+    margin-top:-10px;
+    margin-bottom:25px;
+}
+
+
+/* =========================
+   GAME GRID
+========================= */
 
 .games{
     display:grid;
 
     grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(270px,1fr)
-    );
+        repeat(3,1fr);
 
-    gap:25px;
+    gap:15px;
 }
 
-.game-card{
-    overflow:hidden;
+@media(max-width:900px){
 
-    border-radius:25px;
+    .games{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
 
-    background:
-    rgba(255,255,255,.08);
-
-    border:
-    1px solid
-    rgba(255,255,255,.18);
-
-    box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.45);
-
-    cursor:pointer;
-
-    transition:
-    transform .25s ease,
-    box-shadow .25s ease;
 }
 
-.game-card:hover{
-    transform:
-    translateY(-9px)
-    scale(1.02);
+@media(max-width:550px){
 
-    box-shadow:
-    0 30px 70px
-    rgba(0,0,0,.65);
+    .games{
+        grid-template-columns:1fr;
+    }
+
 }
 
-.game-image{
-    width:100%;
-    height:220px;
 
-    object-fit:cover;
+/* =========================
+   GAME CARD
+========================= */
 
+.game{
     display:block;
-}
 
-.card-info{
-    text-align:center;
-    padding:18px;
-}
-
-.card-info h2{
-    margin:
-    0 0 8px;
-
-    font-size:24px;
-}
-
-.card-info p{
-    margin:0;
-
-    opacity:.7;
-
-    font-size:15px;
-}
-
-.play-button{
-    display:inline-block;
-
-    margin-top:15px;
-
-    padding:
-    11px 27px;
-
-    border-radius:13px;
-
-    background:#16a34a;
+    text-decoration:none;
 
     color:white;
 
-    font-weight:bold;
+    background:#1b2838;
+
+    border-radius:4px;
+
+    overflow:hidden;
+
+    border:1px solid transparent;
+
+    transition:
+        transform .2s,
+        background .2s,
+        border-color .2s;
 
     box-shadow:
-    0 5px 15px
-    rgba(22,163,74,.25);
+        0 5px 15px
+        rgba(0,0,0,.25);
 }
 
-.locked{
-    opacity:.45;
-    cursor:not-allowed;
+.game:hover{
+
+    transform:
+        translateY(-5px);
+
+    background:#223449;
+
+    border-color:#66c0f4;
+
 }
 
-.locked:hover{
-    transform:none;
+
+/* IMAGE */
+
+.game-image{
+
+    width:100%;
+
+    height:190px;
+
+    display:block;
+
+    object-fit:cover;
+
+    background:#101822;
 }
 
-.future-icon{
-    height:220px;
+@media(max-width:550px){
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    .game-image{
+        height:210px;
+    }
 
-    font-size:80px;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,.08),
-        rgba(255,255,255,.02)
-    );
 }
 
-.footer{
+
+/* INFO */
+
+.game-info{
+    padding:15px;
+}
+
+.game-info h3{
+
+    font-size:17px;
+
+    margin-bottom:8px;
+}
+
+.game-info p{
+
+    color:#8f98a0;
+
+    font-size:11px;
+
+    line-height:1.8;
+
+    min-height:40px;
+}
+
+
+/* BUTTON */
+
+.play{
+
+    display:inline-block;
+
+    margin-top:12px;
+
+    padding:
+        7px 13px;
+
+    background:#1a9fff;
+
+    color:white;
+
+    border-radius:3px;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    border-top:
+        1px solid #2a2e38;
+
+    padding:
+        25px;
+
     text-align:center;
 
-    margin-top:35px;
+    color:#66707a;
 
-    opacity:.45;
+    font-size:11px;
 
-    font-size:13px;
 }
 
-@media(max-width:600px){
-
-    .header h1{
-        font-size:32px;
-    }
-
-    .header p{
-        font-size:15px;
-    }
-
-    .game-image,
-    .future-icon{
-        height:190px;
-    }
-
-    .card-info h2{
-        font-size:21px;
-    }
-
+footer b{
+    color:#66c0f4;
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-<div class="container">
 
-<div class="header">
+<!-- TOP BAR -->
 
-<h1>
-🎮 بازی‌های انقزی
-</h1>
+<header class="topbar">
 
-<p>
-بازی‌های کوچک و سرگرم‌کننده انقزی ⚽🔥
-</p>
+    <div class="logo">
+        🎮 انقزی <span>Games</span>
+    </div>
 
-</div>
+    <nav class="menu">
 
+        <a href="https://anghezi.blogfa.com/">
+            🏠 انقزی
+        </a>
 
-<div class="games">
+        <a href="#">
+            🎮 بازی‌ها
+        </a>
 
+    </nav>
 
-<!-- =========================
-     پنالتی
-========================= -->
+</header>
 
-<div
-class="game-card"
-onclick="location.href='penalty.html'"
->
 
-<img
-src="./penalty.jpg"
-class="game-image"
-alt="پنالتی انقزی"
->
 
-<div class="card-info">
+<!-- HERO -->
 
-<h2>
-⚽ پنالتی انقزی
-</h2>
+<section class="hero">
 
-<p>
-توپ را بکش و شوت کن!
-</p>
+    <div class="hero-content">
 
-<span class="play-button">
-▶ بازی کن
-</span>
+        <small>
+            ⭐ بازی جدید انقزی
+        </small>
 
-</div>
+        <h1>
+            Football Breakout
+        </h1>
 
-</div>
+        <p>
+            توپ فوتبال را کنترل کن،
+            بلوک‌ها را بشکن و رکورد خودت
+            را در بازی‌های انقزی ثبت کن!
+        </p>
 
+        <a
+            href="breakout.html"
+            class="hero-button"
+        >
+            ▶ بازی کردن
+        </a>
 
-<!-- =========================
-     ضربه آزاد
-========================= -->
+    </div>
 
-<div
-class="game-card"
-onclick="location.href='freekick.html'"
->
+</section>
 
-<img
-src="./freekick.jpg"
-class="game-image"
-alt="ضربه آزاد انقزی"
->
 
-<div class="card-info">
 
-<h2>
-🎯 ضربه آزاد انقزی
-</h2>
+<!-- GAMES -->
 
-<p>
-از روی دیوار دفاعی گل بزن!
-</p>
+<main class="content">
 
-<span class="play-button">
-▶ بازی کن
-</span>
+    <h2 class="section-title">
+        🎮 بازی‌های انقزی
+    </h2>
 
-</div>
+    <p class="section-subtitle">
+        مجموعه بازی‌های کوچک انقزی
+    </p>
 
-</div>
 
+    <section class="games">
 
-<!-- =========================
-     حدس بازیکن
-========================= -->
 
-<div
-class="game-card"
-onclick="location.href='playerquiz.html'"
->
+        <!-- FLAPPY -->
 
-<img
-src="./playerquiz.png?v=2"
-class="game-image"
-alt="حدس بازیکن انقزی"
->
+        <a
+            href="flappy.html"
+            class="game"
+        >
 
-<div class="card-info">
+            <img
+                src="flappy.png"
+                alt="Flappy Football"
+                class="game-image"
+            >
 
-<h2>
-🧠 حدس بازیکن
-</h2>
+            <div class="game-info">
 
-<p>
-۱۰۰ بازیکن، ۵ گزینه!
-</p>
+                <h3>
+                    🪽 Flappy Football
+                </h3>
 
-<span class="play-button">
-▶ بازی کن
-</span>
+                <p>
+                    توپ را کنترل کن و
+                    از موانع عبور کن.
+                </p>
 
-</div>
+                <span class="play">
+                    ▶ بازی کردن
+                </span>
 
-</div>
+            </div>
 
+        </a>
 
-<!-- =========================
-     FLAPPY
-========================= -->
 
-<div
-class="game-card"
-onclick="location.href='flappy.html'"
->
 
-<img
-src="./flappy.png?v=1"
-class="game-image"
-alt="Flappy انقزی"
->
+        <!-- PLAYER QUIZ -->
 
-<div class="card-info">
+        <a
+            href="playerquiz.html"
+            class="game"
+        >
 
-<h2>
-🐦 Flappy انقزی
-</h2>
+            <img
+                src="playerquiz.png"
+                alt="حدس بازیکن"
+                class="game-image"
+            >
 
-<p>
-پرواز کن و رکورد بزن!
-</p>
+            <div class="game-info">
 
-<span class="play-button">
-▶ بازی کن
-</span>
+                <h3>
+                    🧠 حدس بازیکن
+                </h3>
 
-</div>
+                <p>
+                    بازیکن فوتبال را
+                    از بین گزینه‌ها پیدا کن.
+                </p>
 
-</div>
+                <span class="play">
+                    ▶ بازی کردن
+                </span>
 
+            </div>
 
-<!-- =========================
-     بازی آینده
-========================= -->
+        </a>
 
-<div class="game-card locked">
 
-<div class="future-icon">
-🏎️
-</div>
 
-<div class="card-info">
+        <!-- PENALTY -->
 
-<h2>
-مسابقه فوتبال
-</h2>
+        <a
+            href="penalty.html"
+            class="game"
+        >
 
-<p>
-به‌زودی...
-</p>
+            <img
+                src="penalty.png"
+                alt="پنالتی انقزی"
+                class="game-image"
+            >
 
-</div>
+            <div class="game-info">
 
-</div>
+                <h3>
+                    🥅 پنالتی انقزی
+                </h3>
 
+                <p>
+                    ضربه بزن و
+                    دروازه‌بان را شکست بده!
+                </p>
 
-<!-- =========================
-     بازی آینده
-========================= -->
+                <span class="play">
+                    ▶ بازی کردن
+                </span>
 
-<div class="game-card locked">
+            </div>
 
-<div class="future-icon">
-🏆
-</div>
+        </a>
 
-<div class="card-info">
 
-<h2>
-چالش قهرمانی
-</h2>
 
-<p>
-به‌زودی...
-</p>
+        <!-- FREE KICK -->
 
-</div>
+        <a
+            href="freekick.html"
+            class="game"
+        >
 
-</div>
+            <img
+                src="freekick.png"
+                alt="ضربه آزاد انقزی"
+                class="game-image"
+            >
 
+            <div class="game-info">
 
-</div>
+                <h3>
+                    🎯 ضربه آزاد انقزی
+                </h3>
 
+                <p>
+                    از روی دیوار دفاعی
+                    توپ را وارد دروازه کن.
+                </p>
 
-<div class="footer">
+                <span class="play">
+                    ▶ بازی کردن
+                </span>
 
-⚽ ساخته شده برای بازی‌های انقزی
+            </div>
 
-</div>
+        </a>
 
-</div>
+
+
+        <!-- BREAKOUT -->
+
+        <a
+            href="breakout.html"
+            class="game"
+        >
+
+            <img
+                src="breakout.png"
+                alt="Football Breakout"
+                class="game-image"
+            >
+
+            <div class="game-info">
+
+                <h3>
+                    ⚽ Football Breakout
+                </h3>
+
+                <p>
+                    با توپ فوتبال
+                    بلوک‌ها را بشکن!
+                </p>
+
+                <span class="play">
+                    ▶ بازی کردن
+                </span>
+
+            </div>
+
+        </a>
+
+
+    </section>
+
+</main>
+
+
+
+<footer>
+
+    🎮 بازی‌های
+    <b>انقزی</b>
+
+    <br><br>
+
+    © Anghezi Games
+
+</footer>
+
 
 </body>
-
 </html>
