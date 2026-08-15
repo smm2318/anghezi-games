@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Football Breakout انقزی ⚽</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:Tahoma,Arial,sans-serif;
+    background:#020617;
+    color:white;
+}
+
+#game{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 20%,#14532d,#020617 70%);
+}
+
+/* =====================
+   HUD
+===================== */
+
+.hud{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    z-index:20;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:bold;
+    text-shadow:0 3px 12px #000;
+}
+
+.stats{
+    display:flex;
+    gap:8px;
+}
+
+.stat{
+    min-width:75px;
+    padding:7px 10px;
+
+    text-align:center;
+
+    border-radius:12px;
+
+    background:rgba(0,0,0,.4);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+}
+
+.stat small{
+    display:block;
+    opacity:.6;
+    font-size:10px;
+}
+
+.stat b{
+    font-size:17px;
+}
+
+/* =====================
+   FIELD
+===================== */
+
+#field{
+    position:absolute;
+
+    left:50%;
+    top:70px;
+    bottom:0;
+
+    width:min(700px,100vw);
+
+    transform:translateX(-50%);
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #064e3b,
+            #15803d 50%,
+            #064e3b
+        );
+
+    border-left:
+        5px solid
+        rgba(255,255,255,.3);
+
+    border-right:
+        5px solid
+        rgba(255,255,255,.3);
+}
+
+/* خطوط زمین */
+
+.fieldLine{
+    position:absolute;
+
+    background:
+        rgba(255,255,255,.15);
+}
+
+.centerLine{
+    left:0;
+    right:0;
+    top:50%;
+
+    height:3px;
+}
+
+.centerCircle{
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.15);
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+/* =====================
+   BRICKS
+===================== */
+
+.brick{
+    position:absolute;
+
+    height:34px;
+
+    border-radius:8px;
+
+    border:
+        2px solid
+        rgba(255,255,255,.55);
+
+    box-shadow:
+        0 5px 10px
+        rgba(0,0,0,.25);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+
+    font-size:13px;
+}
+
+.brick.gold{
+    background:
+        linear-gradient(
+            #facc15,
+            #ca8a04
+        );
+}
+
+.brick.red{
+    background:
+        linear-gradient(
+            #ef4444,
+            #991b1b
+        );
+}
+
+.brick.blue{
+    background:
+        linear-gradient(
+            #60a5fa,
+            #1d4ed8
+        );
+}
+
+.brick.green{
+    background:
+        linear-gradient(
+            #4ade80,
+            #15803d
+        );
+}
+
+/* =====================
+   PADDLE
+===================== */
+
+#paddle{
+
+    position:absolute;
+
+    width:130px;
+    height:18px;
+
+    bottom:25px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            #f8fafc,
+            #94a3b8
+        );
+
+    border:
+        3px solid
+        #e2e8f0;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.45);
+
+    z-index:10;
+
+    cursor:pointer;
+}
+
+/* =====================
+   BALL
+===================== */
+
+#ball{
+
+    position:absolute;
+
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#111;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:22px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,.5);
+
+    z-index:12;
+}
+
+/* =====================
+   SCREEN
+===================== */
+
+.screen{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:20px;
+
+    background:
+        rgba(2,6,23,.85);
+
+    backdrop-filter:
+        blur(8px);
+}
+
+.screen h1{
+    font-size:43px;
+    margin:8px 0;
+}
+
+.screen p{
+    opacity:.7;
+    line-height:1.8;
+}
+
+.startBtn{
+
+    border:0;
+
+    padding:15px 35px;
+
+    border-radius:15px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.startBtn:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:16px;
+    }
+
+    .stat{
+        min-width:60px;
+    }
+
+    #paddle{
+        width:110px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+<!-- HUD -->
+
+<div class="hud">
+
+    <div class="logo">
+        ⚽ Football Breakout انقزی
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <small>امتیاز</small>
+            <b id="score">0</b>
+        </div>
+
+        <div class="stat">
+            <small>❤️ جان</small>
+            <b id="lives">3</b>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- زمین -->
+
+<div id="field">
+
+    <div class="fieldLine centerLine"></div>
+    <div class="centerCircle"></div>
+
+    <div id="paddle"></div>
+
+    <div id="ball">
+        ⚽
+    </div>
+
+</div>
+
+
+<!-- صفحه شروع -->
+
+<div
+id="startScreen"
+class="screen"
+>
+
+    <div style="font-size:85px">
+        ⚽
+    </div>
+
+    <h1>
+        Football Breakout
+    </h1>
+
+    <p>
+        با توپ فوتبال تمام بلوک‌ها را بشکن!
+        <br>
+        توپ را از دست نده و رکورد بزن.
+    </p>
+
+    <button
+        class="startBtn"
+        onclick="startGame()"
+    >
+        🏁 شروع بازی
+    </button>
+
+    <a
+        href="index.html"
+        style="
+        color:#93c5fd;
+        text-decoration:none;
+        margin-top:18px;
+        "
+    >
+        ← بازی‌های انقزی
+    </a>
+
+</div>
+
+
+<!-- Game Over -->
+
+<div
+id="gameOver"
+class="screen"
+style="display:none"
+>
+
+    <div style="font-size:80px">
+        💥
+    </div>
+
+    <h1>
+        بازی تمام شد!
+    </h1>
+
+    <p id="result"></p>
+
+    <button
+        class="startBtn"
+        onclick="startGame()"
+    >
+        🔄 دوباره بازی
+    </button>
+
+    <a
+        href="index.html"
+        style="
+        color:#93c5fd;
+        text-decoration:none;
+        margin-top:18px;
+        "
+    >
+        ← بازی‌های انقزی
+    </a>
+
+</div>
+
+
+<!-- برد -->
+
+<div
+id="winScreen"
+class="screen"
+style="display:none"
+>
+
+    <div style="font-size:90px">
+        🏆
+    </div>
+
+    <h1>
+        قهرمان شدی!
+    </h1>
+
+    <p id="winText"></p>
+
+    <button
+        class="startBtn"
+        onclick="startGame()"
+    >
+        🔄 مرحله دوباره
+    </button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================
+   ELEMENTS
+===================== */
+
+const field =
+document.getElementById("field");
+
+const paddle =
+document.getElementById("paddle");
+
+const ball =
+document.getElementById("ball");
+
+const scoreText =
+document.getElementById("score");
+
+const livesText =
+document.getElementById("lives");
+
+const startScreen =
+document.getElementById("startScreen");
+
+const gameOver =
+document.getElementById("gameOver");
+
+const winScreen =
+document.getElementById("winScreen");
+
+const result =
+document.getElementById("result");
+
+const winText =
+document.getElementById("winText");
+
+
+/* =====================
+   VARIABLES
+===================== */
+
+let playing=false;
+
+let score=0;
+
+let lives=3;
+
+let ballX=0;
+
+let ballY=0;
+
+let ballVX=4;
+
+let ballVY=-5;
+
+let paddleX=0;
+
+let bricks=[];
+
+let animation;
+
+
+/* =====================
+   CREATE BRICKS
+===================== */
+
+function createBricks(){
+
+    bricks=[];
+
+    document
+        .querySelectorAll(".brick")
+        .forEach(
+            b=>b.remove()
+        );
+
+
+    const rows=5;
+    const cols=7;
+
+    const gap=7;
+
+    const fieldWidth=
+        field.clientWidth;
+
+    const brickWidth=
+        (
+            fieldWidth-
+            30-
+            (cols-1)*gap
+        )/cols;
+
+
+    const colors=[
+        "gold",
+        "red",
+        "blue",
+        "green",
+        "gold"
+    ];
+
+
+    for(
+        let row=0;
+        row<rows;
+        row++
+    ){
+
+        for(
+            let col=0;
+            col<cols;
+            col++
+        ){
+
+            const brick=
+                document.createElement(
+                    "div"
+                );
+
+            brick.className=
+                "brick "+
+                colors[row];
+
+            brick.style.width=
+                brickWidth+"px";
+
+            brick.style.left=
+                (
+                    15+
+                    col*
+                    (brickWidth+gap)
+                )+"px";
+
+            brick.style.top=
+                (
+                    35+
+                    row*42
+                )+"px";
+
+
+            brick.textContent=
+                row===0 ? "⭐" : "";
+
+
+            field.appendChild(brick);
+
+            bricks.push({
+
+                el:brick,
+
+                x:
+                    15+
+                    col*
+                    (brickWidth+gap),
+
+                y:
+                    35+
+                    row*42,
+
+                w:brickWidth,
+
+                h:34
+
+            });
+
+        }
+
+    }
+
+}
+
+
+/* =====================
+   RESET
+===================== */
+
+function resetBall(){
+
+    ballX=
+        field.clientWidth/2-
+        17;
+
+    ballY=
+        field.clientHeight-
+        90;
+
+    ballVX=
+        Math.random()>0.5
+        ? 4
+        : -4;
+
+    ballVY=-5;
+
+    paddleX=
+        field.clientWidth/2-
+        65;
+
+    updatePositions();
+
+}
+
+
+/* =====================
+   POSITION
+===================== */
+
+function updatePositions(){
+
+    ball.style.left=
+        ballX+"px";
+
+    ball.style.top=
+        ballY+"px";
+
+    paddle.style.left=
+        paddleX+"px";
+
+}
+
+
+/* =====================
+   START
+===================== */
+
+function startGame(){
+
+    startScreen.style.display=
+        "none";
+
+    gameOver.style.display=
+        "none";
+
+    winScreen.style.display=
+        "none";
+
+
+    score=0;
+
+    lives=3;
+
+    scoreText.textContent=0;
+
+    livesText.textContent=3;
+
+
+    createBricks();
+
+    resetBall();
+
+
+    playing=true;
+
+    animation=
+        requestAnimationFrame(
+            loop
+        );
+
+}
+
+
+/* =====================
+   LOOP
+===================== */
+
+function loop(){
+
+    if(!playing)return;
+
+
+    ballX+=ballVX;
+    ballY+=ballVY;
+
+
+    const w=
+        field.clientWidth;
+
+    const h=
+        field.clientHeight;
+
+
+    /* دیوار چپ */
+
+    if(ballX<=0){
+
+        ballX=0;
+
+        ballVX=
+            Math.abs(ballVX);
+
+    }
+
+
+    /* دیوار راست */
+
+    if(
+        ballX+34>=w
+    ){
+
+        ballX=w-34;
+
+        ballVX=
+            -Math.abs(ballVX);
+
+    }
+
+
+    /* سقف */
+
+    if(ballY<=0){
+
+        ballY=0;
+
+        ballVY=
+            Math.abs(ballVY);
+
+    }
+
+
+    /* برخورد با پدل */
+
+    const paddleY=
+        h-25-18;
+
+
+    if(
+        ballY+34>=paddleY &&
+        ballY+34<=paddleY+25 &&
+        ballX+34>=paddleX &&
+        ballX<=paddleX+130 &&
+        ballVY>0
+    ){
+
+        ballY=
+            paddleY-34;
+
+        ballVY=
+            -Math.abs(ballVY);
+
+
+        /* زاویه بر اساس محل برخورد */
+
+        const center=
+            paddleX+65;
+
+        const hit=
+            (ballX+17)-center;
+
+        ballVX=
+            hit*.09;
+
+        if(
+            Math.abs(ballVX)<2
+        ){
+
+            ballVX=
+                ballVX<0 ? -2 : 2;
+
+        }
+
+    }
+
+
+    /* بلوک‌ها */
+
+    checkBricks();
+
+
+    /* افتادن توپ */
+
+    if(
+        ballY>h
+    ){
+
+        loseLife();
+
+        return;
+
+    }
+
+
+    updatePositions();
+
+    animation=
+        requestAnimationFrame(
+            loop
+        );
+
+}
+
+
+/* =====================
+   BRICKS COLLISION
+===================== */
+
+function checkBricks(){
+
+    for(
+        let i=0;
+        i<bricks.length;
+        i++
+    ){
+
+        const b=
+            bricks[i];
+
+
+        if(
+            ballX+34>b.x &&
+            ballX<b.x+b.w &&
+            ballY+34>b.y &&
+            ballY<b.y+b.h
+        ){
+
+            b.el.remove();
+
+            bricks.splice(i,1);
+
+            score+=10;
+
+            scoreText.textContent=
+                score;
+
+
+            ballVY=
+                -ballVY;
+
+
+            /* کمی افزایش سرعت */
+
+            ballVX*=1.015;
+            ballVY*=1.015;
+
+
+            if(
+                bricks.length===0
+            ){
+
+                winGame();
+
+            }
+
+            break;
+
+        }
+
+    }
+
+}
+
+
+/* =====================
+   LIFE
+===================== */
+
+function loseLife(){
+
+    lives--;
+
+    livesText.textContent=
+        lives;
+
+
+    if(lives<=0){
+
+        endGame();
+
+    }
+    else{
+
+        resetBall();
+
+    }
+
+}
+
+
+/* =====================
+   GAME OVER
+===================== */
+
+function endGame(){
+
+    playing=false;
+
+    cancelAnimationFrame(
+        animation
+    );
+
+
+    const best=
+        Number(
+            localStorage.getItem(
+                "angheziBreakoutBest"
+            )
+        )||0;
+
+
+    if(score>best){
+
+        localStorage.setItem(
+            "angheziBreakoutBest",
+            score
+        );
+
+    }
+
+
+    result.innerHTML=
+        `
+        امتیاز:
+        <strong>${score}</strong>
+        <br>
+        🏆 رکورد:
+        <strong>
+        ${Math.max(best,score)}
+        </strong>
+        `;
+
+
+    gameOver.style.display=
+        "flex";
+
+}
+
+
+/* =====================
+   WIN
+===================== */
+
+function winGame(){
+
+    playing=false;
+
+    cancelAnimationFrame(
+        animation
+    );
+
+
+    const best=
+        Number(
+            localStorage.getItem(
+                "angheziBreakoutBest"
+            )
+        )||0;
+
+
+    if(score>best){
+
+        localStorage.setItem(
+            "angheziBreakoutBest",
+            score
+        );
+
+    }
+
+
+    winText.innerHTML=
+        `
+        همه بلوک‌ها را شکستی! 🔥
+        <br>
+        امتیاز:
+        <strong>${score}</strong>
+        `;
+
+
+    winScreen.style.display=
+        "flex";
+
+}
+
+
+/* =====================
+   MOUSE
+===================== */
+
+field.addEventListener(
+    "mousemove",
+    e=>{
+
+        if(!playing)return;
+
+        const rect=
+            field.getBoundingClientRect();
+
+        paddleX=
+            e.clientX-
+            rect.left-
+            65;
+
+
+        keepPaddleInside();
+
+        updatePositions();
+
+    }
+);
+
+
+/* =====================
+   TOUCH
+===================== */
+
+field.addEventListener(
+    "touchmove",
+    e=>{
+
+        if(!playing)return;
+
+        const rect=
+            field.getBoundingClientRect();
+
+        paddleX=
+            e.touches[0].clientX-
+            rect.left-
+            65;
+
+        keepPaddleInside();
+
+        updatePositions();
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =====================
+   KEYBOARD
+===================== */
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(!playing)return;
+
+        if(
+            e.key==="ArrowLeft"
+        ){
+
+            paddleX-=35;
+
+        }
+
+        if(
+            e.key==="ArrowRight"
+        ){
+
+            paddleX+=35;
+
+        }
+
+        keepPaddleInside();
+
+        updatePositions();
+
+    }
+);
+
+
+/* =====================
+   PADDLE LIMIT
+===================== */
+
+function keepPaddleInside(){
+
+    if(paddleX<0){
+
+        paddleX=0;
+
+    }
+
+    if(
+        paddleX>
+        field.clientWidth-130
+    ){
+
+        paddleX=
+            field.clientWidth-130;
+
+    }
+
+}
+
+
+/* =====================
+   RESIZE
+===================== */
+
+window.addEventListener(
+    "resize",
+    ()=>{
+
+        if(!playing){
+
+            createBricks();
+
+            resetBall();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
