@@ -9,25 +9,23 @@
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-    font-family:"Vazirmatn",Tahoma;
-    background:#070b12;
+    font-family:Tahoma,"Vazirmatn",sans-serif;
     color:#fff;
-    min-height:100vh;
+    background:#05070b;
+    overflow:hidden;
 }
 
 
@@ -35,439 +33,242 @@ body{
    BACKGROUND
 ========================= */
 
-body::before{
-    content:"";
+.background{
     position:fixed;
     inset:0;
-    pointer-events:none;
-    z-index:-1;
+    z-index:-10;
 
-    background:
-        radial-gradient(
-            circle at 50% -15%,
-            rgba(0,145,255,.20),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 100% 70%,
-            rgba(0,80,255,.08),
-            transparent 30%
-        );
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-    position:sticky;
-    top:0;
-    z-index:100;
-
-    height:74px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 5%;
-
-    background:rgba(7,11,18,.82);
-
-    backdrop-filter:blur(18px);
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.07);
-}
-
-
-/* LOGO */
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    color:#fff;
-    text-decoration:none;
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:25px;
-    font-weight:900;
-}
-
-.logo-icon{
-    width:43px;
-    height:43px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
-    background:
+    background-image:
         linear-gradient(
-            135deg,
-            #00a8ff,
-            #2563eb
-        );
+            180deg,
+            rgba(0,0,0,.10),
+            rgba(0,0,0,.48)
+        ),
+        url("https://s6.uupload.ir/files/wp6802946-4k-ps5-wallpapers_fbjw.jpg");
 
-    box-shadow:
-        0 8px 25px
-        rgba(0,150,255,.25);
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
 
-    font-size:21px;
+    transform:scale(1.025);
 }
 
-.logo span{
-    color:#35bdf5;
-}
-
-
-/* NAV */
-
-.nav{
-    display:flex;
-    gap:8px;
-}
-
-.nav a{
-    color:#91a0b2;
-    text-decoration:none;
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:12px;
-    font-weight:600;
-
-    padding:9px 13px;
-
-    border-radius:9px;
-
-    transition:.2s;
-}
-
-.nav a:hover{
-    color:#fff;
-    background:rgba(255,255,255,.06);
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-.container{
-    width:min(1180px,92%);
-    margin:32px auto 70px;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    position:relative;
-
-    min-height:400px;
-
-    overflow:hidden;
-
-    border-radius:25px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.09);
-
-    background:
-        url("breakout.png")
-        center/cover
-        no-repeat;
-
-    box-shadow:
-        0 25px 80px
-        rgba(0,0,0,.5);
-}
-
-.hero::after{
+.background::after{
     content:"";
-
     position:absolute;
     inset:0;
 
     background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(0,130,255,.12),
+            transparent 42%
+        ),
         linear-gradient(
             90deg,
-            rgba(3,7,13,.98),
-            rgba(3,7,13,.80) 35%,
-            rgba(3,7,13,.35) 70%,
-            rgba(3,7,13,.05)
+            rgba(0,0,0,.20),
+            transparent 45%,
+            rgba(0,0,0,.30)
         );
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-
-    width:60%;
-    min-height:400px;
-
-    padding:50px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-start;
-}
-
-
-/* LABEL */
-
-.hero-label{
-    padding:7px 12px;
-
-    border-radius:8px;
-
-    color:#38bdf8;
-
-    background:
-        rgba(14,165,233,.12);
-
-    border:
-        1px solid
-        rgba(56,189,248,.18);
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:10px;
-    font-weight:800;
-
-    margin-bottom:17px;
-}
-
-
-/* HERO TITLE */
-
-.hero h1{
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:
-        clamp(34px,5vw,60px);
-
-    font-weight:900;
-
-    letter-spacing:-2px;
-
-    line-height:1.1;
-
-    background:
-        linear-gradient(
-            90deg,
-            #fff,
-            #d9efff,
-            #38bdf8
-        );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    margin-bottom:15px;
-}
-
-
-/* DESCRIPTION */
-
-.hero p{
-    max-width:520px;
-
-    color:#c0ccd8;
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:12px;
-    font-weight:500;
-
-    line-height:2;
-
-    margin-bottom:23px;
-}
-
-
-/* BUTTON */
-
-.hero-button{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-
-    padding:12px 20px;
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #00a8ff,
-            #2563eb
-        );
-
-    color:#fff;
-
-    text-decoration:none;
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:11px;
-    font-weight:800;
-
-    box-shadow:
-        0 10px 30px
-        rgba(37,99,235,.3);
-
-    transition:.25s;
-}
-
-.hero-button:hover{
-    transform:translateY(-3px);
-    box-shadow:
-        0 15px 35px
-        rgba(37,99,235,.4);
 }
 
 
 /* =========================
-   SECTION
+   TOP BAR
 ========================= */
 
-.section-head{
+.top{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    height:82px;
+    padding:0 4%;
+
     display:flex;
-    align-items:end;
+    align-items:center;
     justify-content:space-between;
 
-    margin:45px 0 22px;
-}
-
-.section-title{
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:25px;
-    font-weight:900;
-
-    letter-spacing:-1px;
-}
-
-.section-desc{
-    margin-top:5px;
-
-    color:#66758a;
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:11px;
-}
-
-.count{
-    color:#718096;
-
-    padding:7px 11px;
-
-    border-radius:8px;
-
-    background:rgba(255,255,255,.04);
-
-    border:
-        1px solid
-        rgba(255,255,255,.06);
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:10px;
-}
-
-
-/* =========================
-   GAMES
-========================= */
-
-.games{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.game{
-    position:relative;
-
-    display:block;
-
-    color:#fff;
-    text-decoration:none;
-
-    overflow:hidden;
-
-    border-radius:18px;
+    z-index:100;
 
     background:
         linear-gradient(
-            145deg,
-            #111b29,
-            #0b111b
+            180deg,
+            rgba(0,0,0,.26),
+            transparent
         );
+}
 
-    border:
-        1px solid
-        rgba(255,255,255,.08);
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:42px;
+}
 
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.25);
+.brand{
+    font-family:Tahoma,"Vazirmatn",sans-serif;
+
+    font-size:27px;
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 3px 15px rgba(0,0,0,.7);
+}
+
+.brand .blue{
+    color:#55b5ff;
+}
+
+.tabs{
+    display:flex;
+    gap:30px;
+}
+
+.tabs button{
+    border:0;
+    outline:none;
+    background:none;
+
+    color:rgba(255,255,255,.58);
+
+    font-family:Tahoma,"Vazirmatn",sans-serif;
+    font-size:17px;
+
+    cursor:pointer;
 
     transition:.25s;
 }
 
-.game:hover{
-    transform:translateY(-7px);
-
-    border-color:
-        rgba(56,189,248,.45);
-
-    box-shadow:
-        0 22px 45px
-        rgba(0,0,0,.45),
-        0 0 30px
-        rgba(14,165,233,.08);
+.tabs button.active{
+    color:#fff;
+    font-weight:bold;
 }
 
 
-/* IMAGE */
+/* =========================
+   TOP RIGHT
+========================= */
 
-.image-box{
-    position:relative;
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
 
-    width:100%;
-    height:190px;
+.icon-btn,
+.lang-btn{
+    border:0;
+    outline:none;
+
+    color:#fff;
+
+    background:
+        rgba(0,0,0,.30);
+
+    backdrop-filter:blur(10px);
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.icon-btn{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    font-size:20px;
+}
+
+.lang-btn{
+    height:36px;
+    padding:0 14px;
+
+    border-radius:20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    font-family:Tahoma,"Vazirmatn",sans-serif;
+
+    font-size:11px;
+    font-weight:bold;
+}
+
+.icon-btn:hover,
+.lang-btn:hover{
+    background:
+        rgba(25,135,255,.45);
+
+    transform:translateY(-2px);
+}
+
+.clock{
+    min-width:58px;
+
+    direction:ltr;
+
+    font-family:Tahoma,sans-serif;
+    font-size:20px;
+}
+
+
+/* =========================
+   GAME BAR
+========================= */
+
+.gamebar{
+    position:fixed;
+
+    top:91px;
+
+    left:4%;
+    right:4%;
+
+    height:125px;
+
+    display:flex;
+    align-items:center;
+
+    gap:11px;
+
+    z-index:50;
+
+    overflow:hidden;
+}
+
+.game-item{
+    flex:0 0 82px;
+
+    width:82px;
+    height:82px;
 
     overflow:hidden;
 
-    background:#0c1420;
+    border-radius:14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    background:#111820;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.45);
+
+    cursor:pointer;
+
+    transition:
+        .35s cubic-bezier(.2,.8,.2,1);
 }
 
-.game img{
+.game-item img{
     width:100%;
     height:100%;
 
@@ -475,102 +276,301 @@ body::before{
 
     object-fit:cover;
 
-    transition:.45s;
+    transition:.35s;
 }
 
-.game:hover img{
-    transform:scale(1.06);
+.game-item:hover{
+    transform:
+        translateY(-5px)
+        scale(1.04);
+}
+
+.game-item:hover img{
+    transform:scale(1.08);
+}
+
+.game-item.selected{
+    flex-basis:116px;
+
+    width:116px;
+    height:116px;
+
+    border:
+        2px solid
+        rgba(255,255,255,.40);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.55),
+        0 0 28px
+        rgba(0,130,255,.22);
 }
 
 
-/* BADGE */
+/* =========================
+   MAIN
+========================= */
 
-.badge{
-    position:absolute;
+.content{
+    position:fixed;
 
-    top:12px;
-    right:12px;
+    top:215px;
+    bottom:25px;
 
-    z-index:3;
+    left:4%;
+    right:4%;
 
-    padding:6px 9px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
 
-    border-radius:8px;
+    z-index:20;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.hero-title{
+    margin-bottom:22px;
+
+    text-shadow:
+        0 4px 20px
+        rgba(0,0,0,.75);
+}
+
+.hero-title small{
+    display:block;
+
+    color:#d5e2ee;
+
+    font-size:12px;
+
+    margin-bottom:5px;
+}
+
+.hero-title h1{
+    font-size:35px;
+    font-weight:bold;
+
+    letter-spacing:-1px;
+}
+
+
+/* =========================
+   PANELS
+========================= */
+
+.panels{
+    width:min(1100px,100%);
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1.25fr
+        1fr;
+
+    grid-template-rows:
+        120px
+        120px;
+
+    gap:14px;
+}
+
+.panel{
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:15px;
 
     background:
-        rgba(4,8,14,.80);
+        rgba(5,9,15,.79);
 
     border:
         1px solid
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.09);
 
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(13px);
 
-    color:#dbeafe;
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,.42);
 
-    font-family:"Vazirmatn",Tahoma;
+    color:#fff;
 
-    font-size:9px;
-    font-weight:800;
+    text-decoration:none;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.panel:hover{
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(90,175,255,.40);
+
+    background:
+        rgba(8,16,27,.89);
 }
 
 
-/* INFO */
+/* =========================
+   FEATURE
+========================= */
 
-.info{
-    padding:16px 17px 18px;
+.panel-feature{
+    grid-column:2;
+    grid-row:1 / span 2;
 }
 
-.info h3{
-    font-family:"Vazirmatn",Tahoma;
+.panel-feature img{
+    position:absolute;
+    inset:0;
 
-    font-size:16px;
-    font-weight:800;
+    width:100%;
+    height:100%;
 
+    object-fit:cover;
+
+    opacity:.66;
+
+    transition:.45s;
+}
+
+.panel-feature:hover img{
+    transform:scale(1.06);
+    opacity:.76;
+}
+
+.panel-feature::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            0deg,
+            rgba(3,6,11,.96),
+            rgba(3,6,11,.08)
+        );
+}
+
+.feature-info{
+    position:absolute;
+
+    z-index:5;
+
+    left:18px;
+    right:18px;
+    bottom:16px;
+}
+
+.feature-info h2{
+    font-size:20px;
+    margin-bottom:5px;
+}
+
+.feature-info p{
+    color:#b7c5d4;
+    font-size:10px;
+}
+
+
+/* =========================
+   GAME CARDS
+========================= */
+
+.panel-game{
+    display:flex;
+    align-items:center;
+
+    gap:14px;
+
+    padding:13px;
+}
+
+.panel-game img{
+    width:82px;
+    height:82px;
+
+    flex-shrink:0;
+
+    object-fit:cover;
+
+    border-radius:11px;
+}
+
+.panel-game-info h3{
+    font-size:13px;
     margin-bottom:7px;
 }
 
-.info p{
-    color:#8998aa;
-
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:10px;
-    font-weight:500;
-
-    line-height:2;
-
-    min-height:40px;
-}
-
-
-/* PLAY */
-
-.play{
-    display:inline-flex;
-
-    margin-top:11px;
-
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    background:
-        rgba(14,165,233,.10);
-
-    color:#38bdf8;
-
-    font-family:"Vazirmatn",Tahoma;
+.panel-game-info p{
+    color:#93a1b1;
 
     font-size:9px;
-    font-weight:800;
 
-    transition:.2s;
+    line-height:1.9;
 }
 
-.game:hover .play{
-    background:#0ea5e9;
-    color:#fff;
+
+/* =========================
+   RECORD
+========================= */
+
+.panel-content{
+    padding:15px;
+}
+
+.panel-title{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.stat{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:14px;
+
+    color:#c8d2dc;
+
+    font-size:10px;
+}
+
+.progress{
+    height:5px;
+
+    margin-top:13px;
+
+    overflow:hidden;
+
+    border-radius:10px;
+
+    background:#29313a;
+}
+
+.progress span{
+    display:block;
+
+    width:73%;
+    height:100%;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #198aff,
+            #72c4ff
+        );
 }
 
 
@@ -578,44 +578,75 @@ body::before{
    FOOTER
 ========================= */
 
-.footer{
-    text-align:center;
+.bottom-text{
+    position:fixed;
 
-    padding:28px 15px;
+    left:4%;
+    bottom:8px;
 
-    border-top:
-        1px solid
-        rgba(255,255,255,.06);
+    color:
+        rgba(255,255,255,.50);
 
-    color:#526174;
+    font-size:9px;
 
-    font-family:"Vazirmatn",Tahoma;
-
-    font-size:10px;
-
-    line-height:2;
-}
-
-.footer span{
-    color:#38bdf8;
-    font-weight:800;
+    z-index:30;
 }
 
 
 /* =========================
-   TABLET
+   ENGLISH MODE
 ========================= */
 
-@media(max-width:900px){
+body.en{
+    direction:ltr;
+}
 
-    .games{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
+body.en .top{
+    direction:ltr;
+}
 
-    .hero-content{
-        width:70%;
-    }
+body.en .top-left{
+    direction:ltr;
+}
+
+body.en .tabs{
+    direction:ltr;
+}
+
+body.en .gamebar{
+    direction:ltr;
+}
+
+body.en .content{
+    direction:ltr;
+}
+
+body.en .hero-title{
+    text-align:left;
+}
+
+body.en .panels{
+    direction:ltr;
+}
+
+body.en .panel-game{
+    direction:ltr;
+    text-align:left;
+}
+
+body.en .panel-content{
+    text-align:left;
+}
+
+body.en .feature-info{
+    left:18px;
+    right:auto;
+    text-align:left;
+}
+
+body.en .bottom-text{
+    left:auto;
+    right:4%;
 }
 
 
@@ -623,434 +654,891 @@ body::before{
    MOBILE
 ========================= */
 
-@media(max-width:600px){
+@media(max-width:850px){
 
-    .header{
+    body{
+        overflow:auto;
+    }
+
+    .top{
+        position:relative;
+
         height:auto;
 
-        padding:15px 18px;
+        padding:15px 4%;
 
-        flex-direction:column;
-
-        gap:12px;
+        flex-wrap:wrap;
     }
 
-    .logo{
-        font-size:22px;
-    }
-
-    .nav{
-        justify-content:center;
-    }
-
-    .container{
-        width:92%;
-
-        margin-top:22px;
-    }
-
-    .hero{
-        min-height:420px;
-    }
-
-    .hero::after{
-        background:
-            linear-gradient(
-                0deg,
-                rgba(3,7,13,.98),
-                rgba(3,7,13,.55),
-                rgba(3,7,13,.1)
-            );
-    }
-
-    .hero-content{
+    .top-left{
         width:100%;
 
-        min-height:420px;
-
-        padding:25px;
-
-        justify-content:flex-end;
+        justify-content:space-between;
     }
 
-    .hero h1{
-        font-size:37px;
-        letter-spacing:-1.5px;
+    .top-right{
+        position:absolute;
+
+        top:14px;
+        right:4%;
     }
 
-    .hero p{
-        font-size:11px;
+    body.en .top-right{
+        left:4%;
+        right:auto;
     }
 
-    .section-head{
-        flex-direction:column;
+    .gamebar{
+        position:relative;
 
-        align-items:flex-start;
+        top:auto;
+        left:auto;
+        right:auto;
 
-        gap:10px;
+        margin:12px 4% 0;
 
-        margin-top:35px;
+        overflow-x:auto;
     }
 
-    .games{
-        grid-template-columns:1fr;
+    .content{
+        position:relative;
 
-        gap:17px;
+        top:auto;
+        bottom:auto;
+
+        left:auto;
+        right:auto;
+
+        margin:20px 4% 40px;
     }
 
-    .image-box{
-        height:215px;
+    .panels{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:auto;
+    }
+
+    .panel-feature{
+        grid-column:1 / -1;
+        grid-row:auto;
+
+        min-height:220px;
     }
 }
 
+@media(max-width:560px){
 
-/* =========================
-   SMALL MOBILE
-========================= */
-
-@media(max-width:380px){
-
-    .hero h1{
-        font-size:32px;
+    .brand{
+        font-size:21px;
     }
 
-    .image-box{
-        height:195px;
+    .tabs{
+        gap:15px;
+    }
+
+    .tabs button{
+        font-size:13px;
+    }
+
+    .clock{
+        display:none;
+    }
+
+    .gamebar{
+        height:105px;
+    }
+
+    .game-item{
+        flex-basis:65px;
+
+        width:65px;
+        height:65px;
+    }
+
+    .game-item.selected{
+        flex-basis:95px;
+
+        width:95px;
+        height:95px;
+    }
+
+    .hero-title h1{
+        font-size:27px;
+    }
+
+    .panels{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .panel{
+        min-height:110px;
+    }
+
+    .panel-feature{
+        min-height:220px;
     }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- HEADER -->
+<!-- =========================
+     BACKGROUND
+========================= -->
 
-<header class="header">
+<div class="background"></div>
 
-    <a
-        href="index.html"
-        class="logo"
-    >
 
-        <div class="logo-icon">
-            🎮
+<!-- =========================
+     SOUND
+     
+     لینک صدا را اینجا بگذار
+========================= -->
+
+<audio
+    id="uiSound"
+    preload="auto"
+    src="">
+</audio>
+
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<header class="top">
+
+    <div class="top-left">
+
+        <div class="brand">
+
+            <span>انقزی</span>
+
+            <span class="blue">
+                Games
+            </span>
+
         </div>
 
-        <div>
-            انقزی <span>Games</span>
+
+        <div class="tabs">
+
+            <button
+                id="gamesTab"
+                class="active"
+            >
+                بازی‌ها
+            </button>
+
+            <button id="mediaTab">
+                رسانه
+            </button>
+
         </div>
 
-    </a>
+    </div>
 
 
-    <nav class="nav">
+    <div class="top-right">
 
-        <a href="https://anghezi.blogfa.com/">
-            🏠 انقزی
-        </a>
+        <button
+            class="icon-btn"
+            title="Search"
+        >
+            ⌕
+        </button>
 
-        <a href="#games">
-            🎮 بازی‌ها
-        </a>
+        <button
+            class="icon-btn"
+            title="Settings"
+        >
+            ⚙
+        </button>
 
-    </nav>
+        <button
+            class="lang-btn"
+            id="languageButton"
+        >
+            EN
+        </button>
+
+        <div
+            class="clock"
+            id="clock"
+        >
+            00:00
+        </div>
+
+    </div>
 
 </header>
 
 
+<!-- =========================
+     GAMES
+========================= -->
 
-<main class="container">
+<div class="gamebar">
 
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="hero-label">
-            ⭐ جدید در انقزی Games
-        </div>
-
-        <h1>
-            Football Breakout
-        </h1>
-
-        <p>
-            توپ فوتبال را کنترل کن،
-            بلوک‌ها را بشکن و رکورد خودت
-            را ثبت کن.
-        </p>
-
-        <a
-            href="breakout.html"
-            class="hero-button"
-        >
-            ▶ شروع بازی
-        </a>
-
+    <div
+        class="game-item selected"
+        data-game="breakout"
+    >
+        <img src="breakout.png">
     </div>
 
-</section>
 
-
-
-<!-- TITLE -->
-
-<div
-    class="section-head"
-    id="games"
->
-
-    <div>
-
-        <h2 class="section-title">
-            🎮 بازی‌های انقزی
-        </h2>
-
-        <p class="section-desc">
-            بازی مورد علاقه‌ات را انتخاب کن
-        </p>
-
+    <div
+        class="game-item"
+        data-game="flappy"
+    >
+        <img src="flappy.png">
     </div>
 
-    <div class="count">
-        ۵ بازی
+
+    <div
+        class="game-item"
+        data-game="playerquiz"
+    >
+        <img src="playerquiz.png">
+    </div>
+
+
+    <div
+        class="game-item"
+        data-game="penalty"
+    >
+        <img src="penalty.png">
+    </div>
+
+
+    <div
+        class="game-item"
+        data-game="freekick"
+    >
+        <img src="freekick.png">
     </div>
 
 </div>
 
 
+<!-- =========================
+     CONTENT
+========================= -->
 
-<!-- GAMES -->
+<main class="content">
 
-<section class="games">
+    <div class="hero-title">
+
+        <small id="heroSmall">
+            بازی‌های انقزی
+        </small>
+
+        <h1 id="heroTitle">
+            Football Breakout
+        </h1>
+
+    </div>
 
 
-<!-- FLAPPY -->
+    <section class="panels">
 
-<a
-    href="flappy.html"
-    class="game"
->
 
-    <div class="image-box">
+        <!-- FLAPPY -->
 
-        <span class="badge">
-            🪽 سرگرمی
-        </span>
-
-        <img
-            src="flappy.png"
-            alt="Flappy انقزی"
+        <a
+            href="flappy.html"
+            class="panel panel-game"
         >
 
-    </div>
+            <img src="flappy.png">
 
-    <div class="info">
+            <div class="panel-game-info">
 
-        <h3>
-            🪽 Flappy انقزی
-        </h3>
+                <h3 id="flappyTitle">
+                    🪽 Flappy انقزی
+                </h3>
 
-        <p>
-            با کلیک پرنده را زنده نگه دار
-            و از موانع عبور کن.
-        </p>
+                <p id="flappyText">
+                    با کلیک پرنده را زنده نگه دار
+                    و از موانع عبور کن.
+                </p>
 
-        <span class="play">
-            ▶ بازی کردن
-        </span>
+            </div>
 
-    </div>
-
-</a>
+        </a>
 
 
+        <!-- BREAKOUT -->
 
-<!-- PLAYER QUIZ -->
-
-<a
-    href="playerquiz.html"
-    class="game"
->
-
-    <div class="image-box">
-
-        <span class="badge">
-            🧠 مسابقه
-        </span>
-
-        <img
-            src="playerquiz.png"
-            alt="حدس بازیکن"
+        <a
+            href="breakout.html"
+            class="panel panel-feature"
         >
 
-    </div>
+            <img src="breakout.png">
 
-    <div class="info">
+            <div class="feature-info">
 
-        <h3>
-            🧠 حدس بازیکن
-        </h3>
+                <h2 id="breakoutTitle">
+                    ⚽ Football Breakout
+                </h2>
 
-        <p>
-            بازیکن فوتبال را از بین
-            گزینه‌ها درست حدس بزن.
-        </p>
+                <p id="breakoutText">
+                    توپ را کنترل کن و بلوک‌ها را بشکن.
+                </p>
 
-        <span class="play">
-            ▶ بازی کردن
-        </span>
+            </div>
 
-    </div>
-
-</a>
+        </a>
 
 
+        <!-- PLAYER QUIZ -->
 
-<!-- PENALTY -->
-
-<a
-    href="penalty.html"
-    class="game"
->
-
-    <div class="image-box">
-
-        <span class="badge">
-            🥅 فوتبال
-        </span>
-
-        <img
-            src="penalty.png"
-            alt="پنالتی انقزی"
+        <a
+            href="playerquiz.html"
+            class="panel panel-game"
         >
 
-    </div>
+            <img src="playerquiz.png">
 
-    <div class="info">
+            <div class="panel-game-info">
 
-        <h3>
-            🥅 پنالتی انقزی
-        </h3>
+                <h3 id="quizTitle">
+                    🧠 حدس بازیکن
+                </h3>
 
-        <p>
-            توپ را شوت کن و
-            دروازه‌بان را شکست بده.
-        </p>
+                <p id="quizText">
+                    بازیکن درست را پیدا کن.
+                </p>
 
-        <span class="play">
-            ▶ بازی کردن
-        </span>
+            </div>
 
-    </div>
-
-</a>
+        </a>
 
 
+        <!-- PENALTY -->
 
-<!-- FREE KICK -->
-
-<a
-    href="freekick.html"
-    class="game"
->
-
-    <div class="image-box">
-
-        <span class="badge">
-            🎯 مهارت
-        </span>
-
-        <img
-            src="freekick.png"
-            alt="ضربه آزاد انقزی"
+        <a
+            href="penalty.html"
+            class="panel panel-game"
         >
 
-    </div>
+            <img src="penalty.png">
 
-    <div class="info">
+            <div class="panel-game-info">
 
-        <h3>
-            🎯 ضربه آزاد انقزی
-        </h3>
+                <h3 id="penaltyTitle">
+                    🥅 پنالتی انقزی
+                </h3>
 
-        <p>
-            توپ را از روی دیوار دفاعی
-            رد کن و گل بزن.
-        </p>
+                <p id="penaltyText">
+                    شوت کن و گل بزن.
+                </p>
 
-        <span class="play">
-            ▶ بازی کردن
-        </span>
+            </div>
 
-    </div>
-
-</a>
+        </a>
 
 
+        <!-- FREE KICK -->
 
-<!-- BREAKOUT -->
-
-<a
-    href="breakout.html"
-    class="game"
->
-
-    <div class="image-box">
-
-        <span class="badge">
-            ⭐ جدید
-        </span>
-
-        <img
-            src="breakout.png"
-            alt="Football Breakout"
+        <a
+            href="freekick.html"
+            class="panel panel-game"
         >
 
-    </div>
+            <img src="freekick.png">
 
-    <div class="info">
+            <div class="panel-game-info">
 
-        <h3>
-            ⚽ Football Breakout
-        </h3>
+                <h3 id="freeTitle">
+                    🎯 ضربه آزاد
+                </h3>
 
-        <p>
-            با توپ فوتبال بلوک‌ها را
-            بشکن و امتیاز جمع کن.
-        </p>
+                <p id="freeText">
+                    از روی دیوار دفاعی گل بزن.
+                </p>
 
-        <span class="play">
-            ▶ بازی کردن
-        </span>
+            </div>
 
-    </div>
-
-</a>
+        </a>
 
 
-</section>
+        <!-- RECORD -->
+
+        <div class="panel">
+
+            <div class="panel-content">
+
+                <div
+                    class="panel-title"
+                    id="trophyTitle"
+                >
+                    🏆 رکوردهای انقزی
+                </div>
+
+                <div class="stat">
+
+                    <span id="recordText">
+                        رکورد کلی
+                    </span>
+
+                    <strong>
+                        1,250
+                    </strong>
+
+                </div>
+
+                <div class="progress">
+                    <span></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
 
+<div
+    class="bottom-text"
+    id="bottomText"
+>
+    🎮 بازی کن • رکورد بزن • قهرمان شو
+</div>
 
-<footer class="footer">
 
-    🎮 <span>انقزی Games</span>
+<script>
 
-    <br>
+/* =========================
+   LANGUAGE
+========================= */
 
-    بازی کن • رکورد بزن • قهرمان شو 🏆
+const fa = {
 
-</footer>
+    games:"بازی‌ها",
+    media:"رسانه",
 
+    heroSmall:"بازی‌های انقزی",
+    breakout:"Football Breakout",
+
+    flappyTitle:"🪽 Flappy انقزی",
+    flappyText:
+        "با کلیک پرنده را زنده نگه دار و از موانع عبور کن.",
+
+    quizTitle:"🧠 حدس بازیکن",
+    quizText:
+        "بازیکن درست را پیدا کن.",
+
+    penaltyTitle:"🥅 پنالتی انقزی",
+    penaltyText:
+        "شوت کن و گل بزن.",
+
+    freeTitle:"🎯 ضربه آزاد",
+    freeText:
+        "از روی دیوار دفاعی گل بزن.",
+
+    breakoutTitle:"⚽ Football Breakout",
+    breakoutText:
+        "توپ را کنترل کن و بلوک‌ها را بشکن.",
+
+    trophyTitle:"🏆 رکوردهای انقزی",
+    recordText:"رکورد کلی",
+
+    bottom:
+        "🎮 بازی کن • رکورد بزن • قهرمان شو"
+};
+
+
+const en = {
+
+    games:"Games",
+    media:"Media",
+
+    heroSmall:"ANGHEZI GAMES",
+    breakout:"Football Breakout",
+
+    flappyTitle:"🪽 Flappy Anghezi",
+    flappyText:
+        "Click to keep the bird alive and avoid the obstacles.",
+
+    quizTitle:"🧠 Player Quiz",
+    quizText:
+        "Find the correct football player.",
+
+    penaltyTitle:"🥅 Anghezi Penalty",
+    penaltyText:
+        "Shoot and score a goal.",
+
+    freeTitle:"🎯 Free Kick",
+    freeText:
+        "Curve the ball over the defensive wall.",
+
+    breakoutTitle:"⚽ Football Breakout",
+    breakoutText:
+        "Control the ball and destroy the blocks.",
+
+    trophyTitle:"🏆 Anghezi Records",
+    recordText:"Overall Record",
+
+    bottom:
+        "🎮 Play • Break Records • Become a Champion"
+};
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const languageButton =
+    document.getElementById(
+        "languageButton"
+    );
+
+const gamesTab =
+    document.getElementById(
+        "gamesTab"
+    );
+
+const mediaTab =
+    document.getElementById(
+        "mediaTab"
+    );
+
+const heroSmall =
+    document.getElementById(
+        "heroSmall"
+    );
+
+const heroTitle =
+    document.getElementById(
+        "heroTitle"
+    );
+
+const flappyTitle =
+    document.getElementById(
+        "flappyTitle"
+    );
+
+const flappyText =
+    document.getElementById(
+        "flappyText"
+    );
+
+const quizTitle =
+    document.getElementById(
+        "quizTitle"
+    );
+
+const quizText =
+    document.getElementById(
+        "quizText"
+    );
+
+const penaltyTitle =
+    document.getElementById(
+        "penaltyTitle"
+    );
+
+const penaltyText =
+    document.getElementById(
+        "penaltyText"
+    );
+
+const freeTitle =
+    document.getElementById(
+        "freeTitle"
+    );
+
+const freeText =
+    document.getElementById(
+        "freeText"
+    );
+
+const breakoutTitle =
+    document.getElementById(
+        "breakoutTitle"
+    );
+
+const breakoutText =
+    document.getElementById(
+        "breakoutText"
+    );
+
+const trophyTitle =
+    document.getElementById(
+        "trophyTitle"
+    );
+
+const recordText =
+    document.getElementById(
+        "recordText"
+    );
+
+const bottomText =
+    document.getElementById(
+        "bottomText"
+    );
+
+const uiSound =
+    document.getElementById(
+        "uiSound"
+    );
+
+
+/* =========================
+   SOUND
+========================= */
+
+function playSound(){
+
+    if(!uiSound.src){
+        return;
+    }
+
+    uiSound.currentTime = 0;
+
+    uiSound.play().catch(
+        function(){}
+    );
+}
+
+
+/* =========================
+   LANGUAGE SYSTEM
+========================= */
+
+let language =
+    localStorage.getItem(
+        "anghezi-language"
+    ) || "fa";
+
+
+function setLanguage(lang){
+
+    language = lang;
+
+    localStorage.setItem(
+        "anghezi-language",
+        lang
+    );
+
+    const data =
+        lang === "fa"
+        ? fa
+        : en;
+
+
+    document.documentElement.lang =
+        lang;
+
+    document.documentElement.dir =
+        lang === "fa"
+        ? "rtl"
+        : "ltr";
+
+    document.body.classList.toggle(
+        "en",
+        lang === "en"
+    );
+
+
+    gamesTab.textContent =
+        data.games;
+
+    mediaTab.textContent =
+        data.media;
+
+    heroSmall.textContent =
+        data.heroSmall;
+
+    heroTitle.textContent =
+        data.breakout;
+
+    flappyTitle.textContent =
+        data.flappyTitle;
+
+    flappyText.textContent =
+        data.flappyText;
+
+    quizTitle.textContent =
+        data.quizTitle;
+
+    quizText.textContent =
+        data.quizText;
+
+    penaltyTitle.textContent =
+        data.penaltyTitle;
+
+    penaltyText.textContent =
+        data.penaltyText;
+
+    freeTitle.textContent =
+        data.freeTitle;
+
+    freeText.textContent =
+        data.freeText;
+
+    breakoutTitle.textContent =
+        data.breakoutTitle;
+
+    breakoutText.textContent =
+        data.breakoutText;
+
+    trophyTitle.textContent =
+        data.trophyTitle;
+
+    recordText.textContent =
+        data.recordText;
+
+    bottomText.textContent =
+        data.bottom;
+
+    languageButton.textContent =
+        lang === "fa"
+        ? "EN"
+        : "FA";
+}
+
+
+languageButton.addEventListener(
+    "click",
+    function(){
+
+        setLanguage(
+            language === "fa"
+            ? "en"
+            : "fa"
+        );
+
+        playSound();
+
+    }
+);
+
+
+/* =========================
+   GAME SELECTION
+========================= */
+
+const gameNames = {
+
+    breakout:{
+        fa:"Football Breakout",
+        en:"Football Breakout"
+    },
+
+    flappy:{
+        fa:"Flappy انقزی",
+        en:"Flappy Anghezi"
+    },
+
+    playerquiz:{
+        fa:"حدس بازیکن",
+        en:"Player Quiz"
+    },
+
+    penalty:{
+        fa:"پنالتی انقزی",
+        en:"Anghezi Penalty"
+    },
+
+    freekick:{
+        fa:"ضربه آزاد انقزی",
+        en:"Anghezi Free Kick"
+    }
+};
+
+
+document
+    .querySelectorAll(".game-item")
+    .forEach(function(item){
+
+        item.addEventListener(
+            "click",
+            function(){
+
+                document
+                    .querySelectorAll(".game-item")
+                    .forEach(
+                        function(x){
+                            x.classList.remove(
+                                "selected"
+                            );
+                        }
+                    );
+
+                item.classList.add(
+                    "selected"
+                );
+
+
+                const game =
+                    gameNames[
+                        item.dataset.game
+                    ];
+
+
+                heroTitle.textContent =
+                    language === "fa"
+                    ? game.fa
+                    : game.en;
+
+
+                playSound();
+
+            }
+        );
+
+    });
+
+
+/* =========================
+   CLOCK
+========================= */
+
+function updateClock(){
+
+    const now = new Date();
+
+    const hours =
+        String(
+            now.getHours()
+        ).padStart(2,"0");
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(2,"0");
+
+    document.getElementById(
+        "clock"
+    ).textContent =
+        hours + ":" + minutes;
+}
+
+updateClock();
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+/* =========================
+   START
+========================= */
+
+setLanguage(language);
+
+</script>
 
 </body>
 </html>
