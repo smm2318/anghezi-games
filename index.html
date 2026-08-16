@@ -2,12 +2,17 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>انقزی Games</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
     margin:0;
@@ -22,72 +27,95 @@ body{
 }
 
 body{
-    font-family:Tahoma,"Vazirmatn",sans-serif;
+    font-family:Tahoma,"Vazir",sans-serif;
+
     color:#fff;
+
     background:#05070b;
+
     overflow:hidden;
+
+    transition:.3s;
 }
 
 
-/* =========================
+/* =====================================================
    BACKGROUND
-========================= */
+===================================================== */
 
 .background{
     position:fixed;
+
     inset:0;
+
     z-index:-10;
 
     background-image:
         linear-gradient(
             180deg,
-            rgba(0,0,0,.10),
-            rgba(0,0,0,.48)
+            rgba(0,0,0,.12),
+            rgba(0,0,0,.62)
         ),
         url("https://s6.uupload.ir/files/wp6802946-4k-ps5-wallpapers_fbjw.jpg");
 
-    background-position:center;
     background-size:cover;
+
+    background-position:center;
+
     background-repeat:no-repeat;
 
-    transform:scale(1.025);
+    transform:scale(1.03);
 }
 
 .background::after{
+
     content:"";
+
     position:absolute;
+
     inset:0;
 
     background:
         radial-gradient(
-            circle at 50% 25%,
-            rgba(0,130,255,.12),
+            circle at center,
+            rgba(0,130,255,.13),
             transparent 42%
-        ),
-        linear-gradient(
-            90deg,
-            rgba(0,0,0,.20),
-            transparent 45%,
-            rgba(0,0,0,.30)
         );
+
 }
 
 
-/* =========================
-   TOP BAR
-========================= */
+/* =====================================================
+   SOUND
+===================================================== */
+
+#uiSound{
+    display:none;
+}
+
+
+/* =====================================================
+   TOP
+===================================================== */
 
 .top{
+
     position:fixed;
+
     top:0;
+
     left:0;
+
     right:0;
 
     height:82px;
+
     padding:0 4%;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     z-index:100;
@@ -95,73 +123,116 @@ body{
     background:
         linear-gradient(
             180deg,
-            rgba(0,0,0,.26),
+            rgba(0,0,0,.32),
             transparent
         );
+
 }
 
 .top-left{
+
     display:flex;
+
     align-items:center;
+
     gap:42px;
+
 }
 
 .brand{
-    font-family:Tahoma,"Vazirmatn",sans-serif;
+
+    font-family:Tahoma,sans-serif;
 
     font-size:27px;
+
     font-weight:bold;
 
     white-space:nowrap;
 
     text-shadow:
-        0 3px 15px rgba(0,0,0,.7);
+        0 3px 15px
+        rgba(0,0,0,.7);
+
 }
 
-.brand .blue{
+.brand-blue{
+
     color:#55b5ff;
+
 }
+
+
+/* =====================================================
+   NAV
+===================================================== */
 
 .tabs{
+
     display:flex;
+
     gap:30px;
+
 }
 
 .tabs button{
+
     border:0;
+
     outline:none;
+
     background:none;
 
-    color:rgba(255,255,255,.58);
+    color:
+        rgba(255,255,255,.58);
 
-    font-family:Tahoma,"Vazirmatn",sans-serif;
-    font-size:17px;
+    font-family:Tahoma,"Vazir",sans-serif;
+
+    font-size:16px;
 
     cursor:pointer;
 
     transition:.25s;
+
+}
+
+.tabs button:hover{
+
+    color:#fff;
+
 }
 
 .tabs button.active{
+
     color:#fff;
+
     font-weight:bold;
+
 }
 
 
-/* =========================
+/* =====================================================
    TOP RIGHT
-========================= */
+===================================================== */
 
 .top-right{
+
     display:flex;
+
     align-items:center;
-    gap:13px;
+
+    gap:10px;
+
 }
 
-.icon-btn,
-.lang-btn{
+.icon-btn{
+
+    width:38px;
+
+    height:38px;
+
     border:0;
-    outline:none;
+
+    border-radius:50%;
 
     color:#fff;
 
@@ -170,91 +241,118 @@ body{
 
     backdrop-filter:blur(10px);
 
+    font-size:19px;
+
     cursor:pointer;
 
     transition:.25s;
+
 }
 
-.icon-btn{
-    width:38px;
-    height:38px;
+.icon-btn:hover{
 
-    border-radius:50%;
+    background:
+        rgba(25,135,255,.45);
 
-    font-size:20px;
+    transform:translateY(-2px);
+
 }
+
 
 .lang-btn{
+
     height:36px;
-    padding:0 14px;
+
+    padding:0 15px;
 
     border-radius:20px;
 
     border:
         1px solid
-        rgba(255,255,255,.13);
+        rgba(255,255,255,.15);
 
-    font-family:Tahoma,"Vazirmatn",sans-serif;
+    background:
+        rgba(0,0,0,.30);
+
+    color:#fff;
+
+    font-family:Tahoma,sans-serif;
 
     font-size:11px;
+
     font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
 }
 
-.icon-btn:hover,
 .lang-btn:hover{
+
     background:
         rgba(25,135,255,.45);
 
-    transform:translateY(-2px);
 }
 
 .clock{
+
     min-width:58px;
 
     direction:ltr;
 
     font-family:Tahoma,sans-serif;
-    font-size:20px;
+
+    font-size:19px;
+
 }
 
 
-/* =========================
-   GAME BAR
-========================= */
+/* =====================================================
+   GAME STRIP
+===================================================== */
 
 .gamebar{
+
     position:fixed;
 
     top:91px;
 
     left:4%;
+
     right:4%;
 
     height:125px;
 
     display:flex;
+
     align-items:center;
 
-    gap:11px;
+    gap:12px;
 
     z-index:50;
 
     overflow:hidden;
+
 }
 
 .game-item{
+
     flex:0 0 82px;
 
     width:82px;
-    height:82px;
 
-    overflow:hidden;
+    height:82px;
 
     border-radius:14px;
 
+    overflow:hidden;
+
+    cursor:pointer;
+
     border:
         1px solid
-        rgba(255,255,255,.10);
+        rgba(255,255,255,.12);
 
     background:#111820;
 
@@ -262,85 +360,105 @@ body{
         0 8px 25px
         rgba(0,0,0,.45);
 
-    cursor:pointer;
-
     transition:
         .35s cubic-bezier(.2,.8,.2,1);
+
 }
 
 .game-item img{
-    width:100%;
-    height:100%;
 
-    display:block;
+    width:100%;
+
+    height:100%;
 
     object-fit:cover;
 
+    display:block;
+
     transition:.35s;
+
 }
 
 .game-item:hover{
+
     transform:
         translateY(-5px)
         scale(1.04);
+
 }
 
 .game-item:hover img{
+
     transform:scale(1.08);
+
 }
 
 .game-item.selected{
+
     flex-basis:116px;
 
     width:116px;
+
     height:116px;
 
     border:
         2px solid
-        rgba(255,255,255,.40);
+        rgba(255,255,255,.48);
 
     box-shadow:
+
         0 15px 40px
         rgba(0,0,0,.55),
-        0 0 28px
-        rgba(0,130,255,.22);
+
+        0 0 30px
+        rgba(0,130,255,.28);
+
 }
 
 
-/* =========================
+/* =====================================================
    MAIN
-========================= */
+===================================================== */
 
 .content{
+
     position:fixed;
 
     top:215px;
+
     bottom:25px;
 
     left:4%;
+
     right:4%;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:flex-end;
 
     z-index:20;
+
 }
 
 
-/* =========================
-   TITLE
-========================= */
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero-title{
-    margin-bottom:22px;
+
+    margin-bottom:21px;
 
     text-shadow:
         0 4px 20px
         rgba(0,0,0,.75);
+
 }
 
 .hero-title small{
+
     display:block;
 
     color:#d5e2ee;
@@ -348,21 +466,95 @@ body{
     font-size:12px;
 
     margin-bottom:5px;
+
 }
 
 .hero-title h1{
+
     font-size:35px;
+
     font-weight:bold;
 
     letter-spacing:-1px;
+
 }
 
 
-/* =========================
+/* =====================================================
+   PLAY BUTTON
+===================================================== */
+
+.start-game{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+    min-width:155px;
+
+    height:45px;
+
+    margin-top:15px;
+
+    padding:0 23px;
+
+    border-radius:25px;
+
+    background:#fff;
+
+    color:#111;
+
+    text-decoration:none;
+
+    font-family:Tahoma,"Vazir",sans-serif;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 9px 30px
+        rgba(0,0,0,.42);
+
+    transition:.25s;
+
+}
+
+.start-game span{
+
+    font-size:14px;
+
+}
+
+.start-game:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.035);
+
+    box-shadow:
+        0 13px 35px
+        rgba(0,0,0,.55);
+
+}
+
+.start-game:active{
+
+    transform:scale(.96);
+
+}
+
+
+/* =====================================================
    PANELS
-========================= */
+===================================================== */
 
 .panels{
+
     width:min(1100px,100%);
 
     display:grid;
@@ -377,9 +569,11 @@ body{
         120px;
 
     gap:14px;
+
 }
 
 .panel{
+
     position:relative;
 
     overflow:hidden;
@@ -406,33 +600,42 @@ body{
     cursor:pointer;
 
     transition:.25s;
+
 }
 
 .panel:hover{
+
     transform:translateY(-3px);
 
     border-color:
         rgba(90,175,255,.40);
 
     background:
-        rgba(8,16,27,.89);
+        rgba(8,16,27,.90);
+
 }
 
 
-/* =========================
+/* =====================================================
    FEATURE
-========================= */
+===================================================== */
 
 .panel-feature{
+
     grid-column:2;
+
     grid-row:1 / span 2;
+
 }
 
 .panel-feature img{
+
     position:absolute;
+
     inset:0;
 
     width:100%;
+
     height:100%;
 
     object-fit:cover;
@@ -440,17 +643,23 @@ body{
     opacity:.66;
 
     transition:.45s;
+
 }
 
 .panel-feature:hover img{
+
     transform:scale(1.06);
-    opacity:.76;
+
+    opacity:.78;
+
 }
 
 .panel-feature::after{
+
     content:"";
 
     position:absolute;
+
     inset:0;
 
     background:
@@ -459,44 +668,60 @@ body{
             rgba(3,6,11,.96),
             rgba(3,6,11,.08)
         );
+
 }
 
 .feature-info{
+
     position:absolute;
 
     z-index:5;
 
     left:18px;
+
     right:18px;
+
     bottom:16px;
+
 }
 
 .feature-info h2{
+
     font-size:20px;
+
     margin-bottom:5px;
+
 }
 
 .feature-info p{
+
     color:#b7c5d4;
+
     font-size:10px;
+
 }
 
 
-/* =========================
+/* =====================================================
    GAME CARDS
-========================= */
+===================================================== */
 
 .panel-game{
+
     display:flex;
+
     align-items:center;
 
     gap:14px;
 
     padding:13px;
+
 }
 
 .panel-game img{
+
     width:82px;
+
     height:82px;
 
     flex-shrink:0;
@@ -504,36 +729,48 @@ body{
     object-fit:cover;
 
     border-radius:11px;
+
 }
 
 .panel-game-info h3{
+
     font-size:13px;
+
     margin-bottom:7px;
+
 }
 
 .panel-game-info p{
+
     color:#93a1b1;
 
     font-size:9px;
 
     line-height:1.9;
+
 }
 
 
-/* =========================
+/* =====================================================
    RECORD
-========================= */
+===================================================== */
 
 .panel-content{
+
     padding:15px;
+
 }
 
 .panel-title{
+
     font-size:13px;
+
     font-weight:bold;
+
 }
 
 .stat{
+
     display:flex;
 
     justify-content:space-between;
@@ -543,9 +780,11 @@ body{
     color:#c8d2dc;
 
     font-size:10px;
+
 }
 
 .progress{
+
     height:5px;
 
     margin-top:13px;
@@ -555,12 +794,15 @@ body{
     border-radius:10px;
 
     background:#29313a;
+
 }
 
 .progress span{
+
     display:block;
 
     width:73%;
+
     height:100%;
 
     border-radius:10px;
@@ -571,17 +813,20 @@ body{
             #198aff,
             #72c4ff
         );
+
 }
 
 
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 .bottom-text{
+
     position:fixed;
 
     left:4%;
+
     bottom:8px;
 
     color:
@@ -590,77 +835,109 @@ body{
     font-size:9px;
 
     z-index:30;
+
 }
 
 
-/* =========================
-   ENGLISH MODE
-========================= */
+/* =====================================================
+   ENGLISH / LTR
+===================================================== */
 
 body.en{
+
     direction:ltr;
+
 }
 
 body.en .top{
+
     direction:ltr;
+
 }
 
 body.en .top-left{
+
     direction:ltr;
+
 }
 
 body.en .tabs{
+
     direction:ltr;
+
 }
 
 body.en .gamebar{
+
     direction:ltr;
+
 }
 
 body.en .content{
+
     direction:ltr;
+
 }
 
 body.en .hero-title{
+
     text-align:left;
+
 }
 
 body.en .panels{
+
     direction:ltr;
+
 }
 
 body.en .panel-game{
+
     direction:ltr;
+
     text-align:left;
+
 }
 
 body.en .panel-content{
+
     text-align:left;
+
 }
 
 body.en .feature-info{
+
     left:18px;
+
     right:auto;
+
     text-align:left;
+
 }
 
 body.en .bottom-text{
+
     left:auto;
+
     right:4%;
+
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:850px){
 
     body{
+
         overflow:auto;
+
     }
 
     .top{
+
         position:relative;
 
         height:auto;
@@ -668,136 +945,188 @@ body.en .bottom-text{
         padding:15px 4%;
 
         flex-wrap:wrap;
+
     }
 
     .top-left{
+
         width:100%;
 
         justify-content:space-between;
+
     }
 
     .top-right{
+
         position:absolute;
 
         top:14px;
+
         right:4%;
+
     }
 
     body.en .top-right{
+
         left:4%;
+
         right:auto;
+
     }
 
     .gamebar{
+
         position:relative;
 
         top:auto;
+
         left:auto;
+
         right:auto;
 
         margin:12px 4% 0;
 
         overflow-x:auto;
+
     }
 
     .content{
+
         position:relative;
 
         top:auto;
+
         bottom:auto;
 
         left:auto;
+
         right:auto;
 
         margin:20px 4% 40px;
+
     }
 
     .panels{
+
         grid-template-columns:1fr 1fr;
+
         grid-template-rows:auto;
+
     }
 
     .panel-feature{
+
         grid-column:1 / -1;
+
         grid-row:auto;
 
         min-height:220px;
+
     }
+
 }
+
 
 @media(max-width:560px){
 
     .brand{
+
         font-size:21px;
+
     }
 
     .tabs{
+
         gap:15px;
+
     }
 
     .tabs button{
+
         font-size:13px;
+
     }
 
     .clock{
+
         display:none;
+
     }
 
     .gamebar{
+
         height:105px;
+
     }
 
     .game-item{
+
         flex-basis:65px;
 
         width:65px;
+
         height:65px;
+
     }
 
     .game-item.selected{
+
         flex-basis:95px;
 
         width:95px;
+
         height:95px;
+
     }
 
     .hero-title h1{
+
         font-size:27px;
+
     }
 
     .panels{
+
         display:flex;
+
         flex-direction:column;
+
     }
 
     .panel{
+
         min-height:110px;
+
     }
 
     .panel-feature{
+
         min-height:220px;
+
     }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      BACKGROUND
-========================= -->
+===================================================== -->
 
 <div class="background"></div>
 
 
-<!-- =========================
+<!-- =====================================================
      SOUND
      
-     لینک صدا را اینجا بگذار
-========================= -->
+     لینک صدای خودت را بین "" قرار بده
+===================================================== -->
 
 <audio
     id="uiSound"
@@ -806,9 +1135,9 @@ body.en .bottom-text{
 </audio>
 
 
-<!-- =========================
+<!-- =====================================================
      TOP BAR
-========================= -->
+===================================================== -->
 
 <header class="top">
 
@@ -818,7 +1147,7 @@ body.en .bottom-text{
 
             <span>انقزی</span>
 
-            <span class="blue">
+            <span class="brand-blue">
                 Games
             </span>
 
@@ -878,17 +1207,20 @@ body.en .bottom-text{
 </header>
 
 
-<!-- =========================
-     GAMES
-========================= -->
+<!-- =====================================================
+     GAME BAR
+===================================================== -->
 
 <div class="gamebar">
+
 
     <div
         class="game-item selected"
         data-game="breakout"
     >
+
         <img src="breakout.png">
+
     </div>
 
 
@@ -896,7 +1228,9 @@ body.en .bottom-text{
         class="game-item"
         data-game="flappy"
     >
+
         <img src="flappy.png">
+
     </div>
 
 
@@ -904,7 +1238,9 @@ body.en .bottom-text{
         class="game-item"
         data-game="playerquiz"
     >
+
         <img src="playerquiz.png">
+
     </div>
 
 
@@ -912,7 +1248,9 @@ body.en .bottom-text{
         class="game-item"
         data-game="penalty"
     >
+
         <img src="penalty.png">
+
     </div>
 
 
@@ -920,17 +1258,21 @@ body.en .bottom-text{
         class="game-item"
         data-game="freekick"
     >
+
         <img src="freekick.png">
+
     </div>
+
 
 </div>
 
 
-<!-- =========================
-     CONTENT
-========================= -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main class="content">
+
 
     <div class="hero-title">
 
@@ -941,6 +1283,23 @@ body.en .bottom-text{
         <h1 id="heroTitle">
             Football Breakout
         </h1>
+
+
+        <!-- PLAY BUTTON -->
+
+        <a
+            href="breakout.html"
+            id="startGame"
+            class="start-game"
+        >
+
+            <span>▶</span>
+
+            <span id="playText">
+                شروع بازی
+            </span>
+
+        </a>
 
     </div>
 
@@ -1057,7 +1416,7 @@ body.en .bottom-text{
             <div class="panel-game-info">
 
                 <h3 id="freeTitle">
-                    🎯 ضربه آزاد
+                    🎯 ضربه آزاد انقزی
                 </h3>
 
                 <p id="freeText">
@@ -1095,17 +1454,24 @@ body.en .bottom-text{
                 </div>
 
                 <div class="progress">
+
                     <span></span>
+
                 </div>
 
             </div>
 
         </div>
 
+
     </section>
 
 </main>
 
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <div
     class="bottom-text"
@@ -1117,85 +1483,107 @@ body.en .bottom-text{
 
 <script>
 
-/* =========================
-   LANGUAGE
-========================= */
+/* =====================================================
+   LANGUAGE DATA
+===================================================== */
 
 const fa = {
 
     games:"بازی‌ها",
+
     media:"رسانه",
 
     heroSmall:"بازی‌های انقزی",
+
     breakout:"Football Breakout",
 
+    play:"شروع بازی",
+
     flappyTitle:"🪽 Flappy انقزی",
+
     flappyText:
         "با کلیک پرنده را زنده نگه دار و از موانع عبور کن.",
 
     quizTitle:"🧠 حدس بازیکن",
+
     quizText:
         "بازیکن درست را پیدا کن.",
 
     penaltyTitle:"🥅 پنالتی انقزی",
+
     penaltyText:
         "شوت کن و گل بزن.",
 
-    freeTitle:"🎯 ضربه آزاد",
+    freeTitle:"🎯 ضربه آزاد انقزی",
+
     freeText:
         "از روی دیوار دفاعی گل بزن.",
 
     breakoutTitle:"⚽ Football Breakout",
+
     breakoutText:
         "توپ را کنترل کن و بلوک‌ها را بشکن.",
 
     trophyTitle:"🏆 رکوردهای انقزی",
+
     recordText:"رکورد کلی",
 
     bottom:
         "🎮 بازی کن • رکورد بزن • قهرمان شو"
+
 };
 
 
 const en = {
 
     games:"Games",
+
     media:"Media",
 
     heroSmall:"ANGHEZI GAMES",
+
     breakout:"Football Breakout",
 
+    play:"PLAY GAME",
+
     flappyTitle:"🪽 Flappy Anghezi",
+
     flappyText:
         "Click to keep the bird alive and avoid the obstacles.",
 
     quizTitle:"🧠 Player Quiz",
+
     quizText:
         "Find the correct football player.",
 
     penaltyTitle:"🥅 Anghezi Penalty",
+
     penaltyText:
         "Shoot and score a goal.",
 
-    freeTitle:"🎯 Free Kick",
+    freeTitle:"🎯 Anghezi Free Kick",
+
     freeText:
         "Curve the ball over the defensive wall.",
 
     breakoutTitle:"⚽ Football Breakout",
+
     breakoutText:
         "Control the ball and destroy the blocks.",
 
     trophyTitle:"🏆 Anghezi Records",
+
     recordText:"Overall Record",
 
     bottom:
         "🎮 Play • Break Records • Become a Champion"
+
 };
 
 
-/* =========================
+/* =====================================================
    ELEMENTS
-========================= */
+===================================================== */
 
 const languageButton =
     document.getElementById(
@@ -1220,6 +1608,16 @@ const heroSmall =
 const heroTitle =
     document.getElementById(
         "heroTitle"
+    );
+
+const playText =
+    document.getElementById(
+        "playText"
+    );
+
+const startGame =
+    document.getElementById(
+        "startGame"
     );
 
 const flappyTitle =
@@ -1293,14 +1691,69 @@ const uiSound =
     );
 
 
-/* =========================
+/* =====================================================
+   GAME LINKS
+===================================================== */
+
+const gameLinks = {
+
+    breakout:"breakout.html",
+
+    flappy:"flappy.html",
+
+    playerquiz:"playerquiz.html",
+
+    penalty:"penalty.html",
+
+    freekick:"freekick.html"
+
+};
+
+
+/* =====================================================
+   GAME NAMES
+===================================================== */
+
+const gameNames = {
+
+    breakout:{
+        fa:"Football Breakout",
+        en:"Football Breakout"
+    },
+
+    flappy:{
+        fa:"Flappy انقزی",
+        en:"Flappy Anghezi"
+    },
+
+    playerquiz:{
+        fa:"حدس بازیکن",
+        en:"Player Quiz"
+    },
+
+    penalty:{
+        fa:"پنالتی انقزی",
+        en:"Anghezi Penalty"
+    },
+
+    freekick:{
+        fa:"ضربه آزاد انقزی",
+        en:"Anghezi Free Kick"
+    }
+
+};
+
+
+/* =====================================================
    SOUND
-========================= */
+===================================================== */
 
 function playSound(){
 
     if(!uiSound.src){
+
         return;
+
     }
 
     uiSound.currentTime = 0;
@@ -1308,12 +1761,13 @@ function playSound(){
     uiSound.play().catch(
         function(){}
     );
+
 }
 
 
-/* =========================
-   LANGUAGE SYSTEM
-========================= */
+/* =====================================================
+   LANGUAGE
+===================================================== */
 
 let language =
     localStorage.getItem(
@@ -1330,11 +1784,14 @@ function setLanguage(lang){
         lang
     );
 
+
     const data =
         lang === "fa"
         ? fa
         : en;
 
+
+    /* DIRECTION */
 
     document.documentElement.lang =
         lang;
@@ -1350,6 +1807,8 @@ function setLanguage(lang){
     );
 
 
+    /* TEXT */
+
     gamesTab.textContent =
         data.games;
 
@@ -1359,8 +1818,8 @@ function setLanguage(lang){
     heroSmall.textContent =
         data.heroSmall;
 
-    heroTitle.textContent =
-        data.breakout;
+    playText.textContent =
+        data.play;
 
     flappyTitle.textContent =
         data.flappyTitle;
@@ -1401,12 +1860,40 @@ function setLanguage(lang){
     bottomText.textContent =
         data.bottom;
 
+
     languageButton.textContent =
         lang === "fa"
         ? "EN"
         : "FA";
+
+
+    /* Update selected game */
+
+    const selected =
+        document.querySelector(
+            ".game-item.selected"
+        );
+
+    if(selected){
+
+        const game =
+            gameNames[
+                selected.dataset.game
+            ];
+
+        heroTitle.textContent =
+            lang === "fa"
+            ? game.fa
+            : game.en;
+
+    }
+
 }
 
+
+/* =====================================================
+   LANGUAGE BUTTON
+===================================================== */
 
 languageButton.addEventListener(
     "click",
@@ -1424,107 +1911,110 @@ languageButton.addEventListener(
 );
 
 
-/* =========================
-   GAME SELECTION
-========================= */
-
-const gameNames = {
-
-    breakout:{
-        fa:"Football Breakout",
-        en:"Football Breakout"
-    },
-
-    flappy:{
-        fa:"Flappy انقزی",
-        en:"Flappy Anghezi"
-    },
-
-    playerquiz:{
-        fa:"حدس بازیکن",
-        en:"Player Quiz"
-    },
-
-    penalty:{
-        fa:"پنالتی انقزی",
-        en:"Anghezi Penalty"
-    },
-
-    freekick:{
-        fa:"ضربه آزاد انقزی",
-        en:"Anghezi Free Kick"
-    }
-};
-
+/* =====================================================
+   GAME SELECT
+===================================================== */
 
 document
-    .querySelectorAll(".game-item")
-    .forEach(function(item){
+.querySelectorAll(".game-item")
+.forEach(function(item){
 
-        item.addEventListener(
-            "click",
-            function(){
+    item.addEventListener(
+        "click",
+        function(){
 
-                document
-                    .querySelectorAll(".game-item")
-                    .forEach(
-                        function(x){
-                            x.classList.remove(
-                                "selected"
-                            );
-                        }
-                    );
+            /* Remove old selection */
 
-                item.classList.add(
+            document
+            .querySelectorAll(
+                ".game-item"
+            )
+            .forEach(function(game){
+
+                game.classList.remove(
                     "selected"
                 );
 
-
-                const game =
-                    gameNames[
-                        item.dataset.game
-                    ];
+            });
 
 
-                heroTitle.textContent =
-                    language === "fa"
-                    ? game.fa
-                    : game.en;
+            /* Select new game */
+
+            item.classList.add(
+                "selected"
+            );
 
 
-                playSound();
-
-            }
-        );
-
-    });
+            const game =
+                gameNames[
+                    item.dataset.game
+                ];
 
 
-/* =========================
+            /* Change title */
+
+            heroTitle.textContent =
+                language === "fa"
+                ? game.fa
+                : game.en;
+
+
+            /* Change PLAY link */
+
+            startGame.href =
+                gameLinks[
+                    item.dataset.game
+                ];
+
+
+            /* Play sound */
+
+            playSound();
+
+        }
+    );
+
+});
+
+
+/* =====================================================
    CLOCK
-========================= */
+===================================================== */
 
 function updateClock(){
 
-    const now = new Date();
+    const now =
+        new Date();
+
 
     const hours =
         String(
             now.getHours()
-        ).padStart(2,"0");
+        ).padStart(
+            2,
+            "0"
+        );
+
 
     const minutes =
         String(
             now.getMinutes()
-        ).padStart(2,"0");
+        ).padStart(
+            2,
+            "0"
+        );
+
 
     document.getElementById(
         "clock"
     ).textContent =
         hours + ":" + minutes;
+
 }
 
+
 updateClock();
+
 
 setInterval(
     updateClock,
@@ -1532,13 +2022,16 @@ setInterval(
 );
 
 
-/* =========================
+/* =====================================================
    START
-========================= */
+===================================================== */
 
-setLanguage(language);
+setLanguage(
+    language
+);
 
 </script>
 
 </body>
+
 </html>
