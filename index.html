@@ -2,7 +2,6 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,114 +9,87 @@
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
     width:100%;
     min-height:100%;
 }
 
 body{
     font-family:Tahoma,"Vazir",sans-serif;
-
     color:#fff;
-
     background:#05070b;
-
     overflow:hidden;
-
-    transition:.3s;
 }
 
 
-/* =====================================================
+/* =========================
    BACKGROUND
-===================================================== */
+========================= */
 
 .background{
     position:fixed;
-
     inset:0;
-
     z-index:-10;
 
-    background-image:
+    background:
         linear-gradient(
             180deg,
-            rgba(0,0,0,.12),
-            rgba(0,0,0,.62)
+            rgba(0,0,0,.10),
+            rgba(0,0,0,.65)
         ),
-        url("https://s6.uupload.ir/files/wp6802946-4k-ps5-wallpapers_fbjw.jpg");
-
-    background-size:cover;
-
-    background-position:center;
-
-    background-repeat:no-repeat;
+        url("https://s6.uupload.ir/files/wp6802946-4k-ps5-wallpapers_fbjw.jpg")
+        center/cover no-repeat;
 
     transform:scale(1.03);
 }
 
 .background::after{
-
     content:"";
-
     position:absolute;
-
     inset:0;
 
     background:
         radial-gradient(
-            circle at center,
-            rgba(0,130,255,.13),
-            transparent 42%
+            circle at 50% 45%,
+            rgba(0,125,255,.13),
+            transparent 45%
         );
-
 }
 
 
-/* =====================================================
+/* =========================
    SOUND
-===================================================== */
+========================= */
 
-<audio
-    id="uiSound"
-    preload="auto"
-    src="https://jetta.vgmtreasurechest.com/soundtracks/playstation-5-system-software-sounds-effects-ps5-gamerip-2020/krdprovj/11.%20Enter%20Psfx%20Enter.mp3">
-</audio>
+#uiSound{
+    display:none;
+}
 
 
-/* =====================================================
+/* =========================
    TOP
-===================================================== */
+========================= */
 
 .top{
 
     position:fixed;
 
-    top:0;
-
+    top:35px;
     left:0;
-
     right:0;
 
-    height:82px;
+    height:70px;
 
     padding:0 4%;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
     z-index:100;
@@ -125,176 +97,136 @@ body{
     background:
         linear-gradient(
             180deg,
-            rgba(0,0,0,.32),
+            rgba(0,0,0,.35),
             transparent
         );
-
 }
+
+
+/* LOGO */
 
 .top-left{
 
     display:flex;
-
     align-items:center;
 
-    gap:42px;
-
+    gap:38px;
 }
 
 .brand{
 
     font-family:Tahoma,sans-serif;
 
-    font-size:27px;
-
+    font-size:26px;
     font-weight:bold;
 
     white-space:nowrap;
 
     text-shadow:
-        0 3px 15px
-        rgba(0,0,0,.7);
-
+        0 3px 18px
+        rgba(0,0,0,.8);
 }
 
 .brand-blue{
-
     color:#55b5ff;
-
 }
 
 
-/* =====================================================
-   NAV
-===================================================== */
+/* NAV */
 
 .tabs{
 
     display:flex;
-
-    gap:30px;
-
+    gap:28px;
 }
 
 .tabs button{
 
     border:0;
-
     outline:none;
 
     background:none;
 
-    color:
-        rgba(255,255,255,.58);
+    color:rgba(255,255,255,.58);
 
     font-family:Tahoma,"Vazir",sans-serif;
 
-    font-size:16px;
+    font-size:15px;
 
     cursor:pointer;
 
     transition:.25s;
-
 }
 
-.tabs button:hover{
-
-    color:#fff;
-
-}
-
+.tabs button:hover,
 .tabs button.active{
-
     color:#fff;
-
-    font-weight:bold;
-
 }
 
 
-/* =====================================================
-   TOP RIGHT
-===================================================== */
+/* RIGHT */
 
 .top-right{
 
     display:flex;
-
     align-items:center;
 
     gap:10px;
-
 }
 
 .icon-btn{
 
-    width:38px;
-
-    height:38px;
+    width:37px;
+    height:37px;
 
     border:0;
-
     border-radius:50%;
+
+    background:rgba(0,0,0,.30);
 
     color:#fff;
 
-    background:
-        rgba(0,0,0,.30);
-
-    backdrop-filter:blur(10px);
-
-    font-size:19px;
+    font-size:18px;
 
     cursor:pointer;
 
     transition:.25s;
-
 }
 
 .icon-btn:hover{
 
-    background:
-        rgba(25,135,255,.45);
+    background:rgba(20,130,255,.45);
 
     transform:translateY(-2px);
-
 }
-
 
 .lang-btn{
 
-    height:36px;
+    height:35px;
 
-    padding:0 15px;
+    padding:0 14px;
 
     border-radius:20px;
 
-    border:
-        1px solid
-        rgba(255,255,255,.15);
+    border:1px solid
+    rgba(255,255,255,.14);
 
-    background:
-        rgba(0,0,0,.30);
+    background:rgba(0,0,0,.30);
 
     color:#fff;
 
     font-family:Tahoma,sans-serif;
 
     font-size:11px;
-
     font-weight:bold;
 
     cursor:pointer;
 
     transition:.25s;
-
 }
 
 .lang-btn:hover{
-
-    background:
-        rgba(25,135,255,.45);
-
+    background:rgba(20,130,255,.45);
 }
 
 .clock{
@@ -305,29 +237,26 @@ body{
 
     font-family:Tahoma,sans-serif;
 
-    font-size:19px;
-
+    font-size:18px;
 }
 
 
-/* =====================================================
-   GAME STRIP
-===================================================== */
+/* =========================
+   GAME ICONS
+========================= */
 
 .gamebar{
 
     position:fixed;
 
-    top:91px;
+    top:135px;
 
     left:4%;
-
     right:4%;
 
-    height:125px;
+    height:120px;
 
     display:flex;
-
     align-items:center;
 
     gap:12px;
@@ -335,103 +264,84 @@ body{
     z-index:50;
 
     overflow:hidden;
-
 }
 
 .game-item{
 
-    flex:0 0 82px;
+    flex:0 0 80px;
 
-    width:82px;
-
-    height:82px;
+    width:80px;
+    height:80px;
 
     border-radius:14px;
 
     overflow:hidden;
 
-    cursor:pointer;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
     background:#111820;
+
+    border:1px solid
+    rgba(255,255,255,.11);
 
     box-shadow:
         0 8px 25px
         rgba(0,0,0,.45);
 
+    cursor:pointer;
+
     transition:
         .35s cubic-bezier(.2,.8,.2,1);
-
 }
 
 .game-item img{
 
     width:100%;
-
     height:100%;
-
-    object-fit:cover;
 
     display:block;
 
-    transition:.35s;
+    object-fit:cover;
 
+    transition:.35s;
 }
 
 .game-item:hover{
 
     transform:
-        translateY(-5px)
+        translateY(-4px)
         scale(1.04);
-
-}
-
-.game-item:hover img{
-
-    transform:scale(1.08);
-
 }
 
 .game-item.selected{
 
-    flex-basis:116px;
+    flex-basis:112px;
 
-    width:116px;
+    width:112px;
+    height:112px;
 
-    height:116px;
-
-    border:
-        2px solid
-        rgba(255,255,255,.48);
+    border:2px solid
+    rgba(255,255,255,.45);
 
     box-shadow:
-
         0 15px 40px
         rgba(0,0,0,.55),
-
-        0 0 30px
-        rgba(0,130,255,.28);
-
+        0 0 28px
+        rgba(0,130,255,.25);
 }
 
 
-/* =====================================================
+/* =========================
    MAIN
-===================================================== */
+========================= */
 
 .content{
 
     position:fixed;
 
-    top:215px;
+    top:275px;
 
     bottom:25px;
 
     left:4%;
-
     right:4%;
 
     display:flex;
@@ -441,22 +351,20 @@ body{
     justify-content:flex-end;
 
     z-index:20;
-
 }
 
 
-/* =====================================================
-   HERO
-===================================================== */
+/* =========================
+   TITLE
+========================= */
 
 .hero-title{
 
-    margin-bottom:21px;
+    margin-bottom:18px;
 
     text-shadow:
         0 4px 20px
-        rgba(0,0,0,.75);
-
+        rgba(0,0,0,.8);
 }
 
 .hero-title small{
@@ -467,44 +375,38 @@ body{
 
     font-size:12px;
 
-    margin-bottom:5px;
-
+    margin-bottom:6px;
 }
 
 .hero-title h1{
 
-    font-size:35px;
+    font-size:34px;
 
     font-weight:bold;
-
-    letter-spacing:-1px;
-
 }
 
 
-/* =====================================================
-   PLAY BUTTON
-===================================================== */
+/* =========================
+   PLAY
+========================= */
 
 .start-game{
 
     display:inline-flex;
 
     align-items:center;
-
     justify-content:center;
 
     gap:9px;
 
     min-width:155px;
+    height:44px;
 
-    height:45px;
+    margin-top:13px;
 
-    margin-top:15px;
+    padding:0 22px;
 
-    padding:0 23px;
-
-    border-radius:25px;
+    border-radius:24px;
 
     background:#fff;
 
@@ -520,40 +422,26 @@ body{
 
     box-shadow:
         0 9px 30px
-        rgba(0,0,0,.42);
+        rgba(0,0,0,.45);
 
     transition:.25s;
-
-}
-
-.start-game span{
-
-    font-size:14px;
-
 }
 
 .start-game:hover{
 
     transform:
         translateY(-3px)
-        scale(1.035);
+        scale(1.03);
 
     box-shadow:
-        0 13px 35px
+        0 14px 35px
         rgba(0,0,0,.55);
-
-}
-
-.start-game:active{
-
-    transform:scale(.96);
-
 }
 
 
-/* =====================================================
+/* =========================
    PANELS
-===================================================== */
+========================= */
 
 .panels{
 
@@ -567,11 +455,10 @@ body{
         1fr;
 
     grid-template-rows:
-        120px
-        120px;
+        115px
+        115px;
 
-    gap:14px;
-
+    gap:13px;
 }
 
 .panel{
@@ -583,7 +470,7 @@ body{
     border-radius:15px;
 
     background:
-        rgba(5,9,15,.79);
+        rgba(5,9,15,.80);
 
     border:
         1px solid
@@ -593,16 +480,15 @@ body{
 
     box-shadow:
         0 10px 35px
-        rgba(0,0,0,.42);
+        rgba(0,0,0,.43);
 
     color:#fff;
 
     text-decoration:none;
 
-    cursor:pointer;
-
     transition:.25s;
 
+    cursor:pointer;
 }
 
 .panel:hover{
@@ -611,23 +497,16 @@ body{
 
     border-color:
         rgba(90,175,255,.40);
-
-    background:
-        rgba(8,16,27,.90);
-
 }
 
 
-/* =====================================================
-   FEATURE
-===================================================== */
+/* FEATURE */
 
 .panel-feature{
 
     grid-column:2;
 
     grid-row:1 / span 2;
-
 }
 
 .panel-feature img{
@@ -637,7 +516,6 @@ body{
     inset:0;
 
     width:100%;
-
     height:100%;
 
     object-fit:cover;
@@ -645,7 +523,6 @@ body{
     opacity:.66;
 
     transition:.45s;
-
 }
 
 .panel-feature:hover img{
@@ -653,7 +530,6 @@ body{
     transform:scale(1.06);
 
     opacity:.78;
-
 }
 
 .panel-feature::after{
@@ -670,29 +546,24 @@ body{
             rgba(3,6,11,.96),
             rgba(3,6,11,.08)
         );
-
 }
 
 .feature-info{
 
     position:absolute;
 
-    z-index:5;
-
     left:18px;
-
     right:18px;
-
     bottom:16px;
 
+    z-index:5;
 }
 
 .feature-info h2{
 
-    font-size:20px;
+    font-size:19px;
 
     margin-bottom:5px;
-
 }
 
 .feature-info p{
@@ -700,13 +571,10 @@ body{
     color:#b7c5d4;
 
     font-size:10px;
-
 }
 
 
-/* =====================================================
-   GAME CARDS
-===================================================== */
+/* GAME CARD */
 
 .panel-game{
 
@@ -714,32 +582,28 @@ body{
 
     align-items:center;
 
-    gap:14px;
+    gap:13px;
 
-    padding:13px;
-
+    padding:12px;
 }
 
 .panel-game img{
 
-    width:82px;
-
-    height:82px;
+    width:80px;
+    height:80px;
 
     flex-shrink:0;
 
     object-fit:cover;
 
     border-radius:11px;
-
 }
 
 .panel-game-info h3{
 
     font-size:13px;
 
-    margin-bottom:7px;
-
+    margin-bottom:6px;
 }
 
 .panel-game-info p{
@@ -748,19 +612,15 @@ body{
 
     font-size:9px;
 
-    line-height:1.9;
-
+    line-height:1.8;
 }
 
 
-/* =====================================================
-   RECORD
-===================================================== */
+/* RECORD */
 
 .panel-content{
 
     padding:15px;
-
 }
 
 .panel-title{
@@ -768,7 +628,6 @@ body{
     font-size:13px;
 
     font-weight:bold;
-
 }
 
 .stat{
@@ -782,7 +641,6 @@ body{
     color:#c8d2dc;
 
     font-size:10px;
-
 }
 
 .progress{
@@ -791,12 +649,11 @@ body{
 
     margin-top:13px;
 
-    overflow:hidden;
-
     border-radius:10px;
 
-    background:#29313a;
+    overflow:hidden;
 
+    background:#29313a;
 }
 
 .progress span{
@@ -807,21 +664,18 @@ body{
 
     height:100%;
 
-    border-radius:10px;
-
     background:
         linear-gradient(
             90deg,
             #198aff,
             #72c4ff
         );
-
 }
 
 
-/* =====================================================
+/* =========================
    FOOTER
-===================================================== */
+========================= */
 
 .bottom-text{
 
@@ -831,123 +685,72 @@ body{
 
     bottom:8px;
 
-    color:
-        rgba(255,255,255,.50);
+    color:rgba(255,255,255,.50);
 
     font-size:9px;
 
     z-index:30;
-
 }
 
 
-/* =====================================================
-   ENGLISH / LTR
-===================================================== */
+/* =========================
+   ENGLISH
+========================= */
 
 body.en{
-
     direction:ltr;
-
 }
 
-body.en .top{
-
-    direction:ltr;
-
-}
-
-body.en .top-left{
-
-    direction:ltr;
-
-}
-
-body.en .tabs{
-
-    direction:ltr;
-
-}
-
-body.en .gamebar{
-
-    direction:ltr;
-
-}
-
+body.en .top,
+body.en .top-left,
+body.en .tabs,
+body.en .gamebar,
 body.en .content{
-
     direction:ltr;
-
 }
 
 body.en .hero-title{
-
     text-align:left;
-
-}
-
-body.en .panels{
-
-    direction:ltr;
-
 }
 
 body.en .panel-game{
-
     direction:ltr;
-
     text-align:left;
-
-}
-
-body.en .panel-content{
-
-    text-align:left;
-
 }
 
 body.en .feature-info{
-
     left:18px;
-
     right:auto;
-
     text-align:left;
-
 }
 
 body.en .bottom-text{
-
     left:auto;
-
     right:4%;
-
 }
 
 
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
 @media(max-width:850px){
 
     body{
-
         overflow:auto;
-
     }
 
     .top{
 
         position:relative;
 
+        top:0;
+
         height:auto;
 
-        padding:15px 4%;
+        padding:20px 4%;
 
         flex-wrap:wrap;
-
     }
 
     .top-left{
@@ -955,25 +758,14 @@ body.en .bottom-text{
         width:100%;
 
         justify-content:space-between;
-
     }
 
     .top-right{
 
         position:absolute;
 
-        top:14px;
-
+        top:18px;
         right:4%;
-
-    }
-
-    body.en .top-right{
-
-        left:4%;
-
-        right:auto;
-
     }
 
     .gamebar{
@@ -983,13 +775,11 @@ body.en .bottom-text{
         top:auto;
 
         left:auto;
-
         right:auto;
 
-        margin:12px 4% 0;
+        margin:15px 4% 0;
 
         overflow-x:auto;
-
     }
 
     .content{
@@ -998,14 +788,11 @@ body.en .bottom-text{
 
         top:auto;
 
+        left:auto;
+        right:auto;
         bottom:auto;
 
-        left:auto;
-
-        right:auto;
-
         margin:20px 4% 40px;
-
     }
 
     .panels{
@@ -1013,7 +800,6 @@ body.en .bottom-text{
         grid-template-columns:1fr 1fr;
 
         grid-template-rows:auto;
-
     }
 
     .panel-feature{
@@ -1023,123 +809,83 @@ body.en .bottom-text{
         grid-row:auto;
 
         min-height:220px;
-
     }
-
 }
-
 
 @media(max-width:560px){
 
     .brand{
-
         font-size:21px;
-
     }
 
     .tabs{
-
         gap:15px;
-
     }
 
     .tabs button{
-
         font-size:13px;
-
     }
 
     .clock{
-
         display:none;
-
     }
 
     .gamebar{
-
         height:105px;
-
     }
 
     .game-item{
-
         flex-basis:65px;
-
         width:65px;
-
         height:65px;
-
     }
 
     .game-item.selected{
-
-        flex-basis:95px;
-
-        width:95px;
-
-        height:95px;
-
+        flex-basis:94px;
+        width:94px;
+        height:94px;
     }
 
     .hero-title h1{
-
         font-size:27px;
-
     }
 
     .panels{
-
         display:flex;
-
         flex-direction:column;
-
     }
 
     .panel{
-
         min-height:110px;
-
     }
 
     .panel-feature{
-
         min-height:220px;
-
     }
-
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
-
-<div class="background"></div>
-
-
-<!-- =====================================================
-     SOUND
-     
-     لینک صدای خودت را بین "" قرار بده
-===================================================== -->
-
+<!-- صدا -->
 <audio
     id="uiSound"
     preload="auto"
-    src="">
+    src="ps5.mp3">
 </audio>
 
 
-<!-- =====================================================
-     TOP BAR
-===================================================== -->
+<!-- پس زمینه -->
+<div class="background"></div>
+
+
+<!-- =========================
+     TOP
+========================= -->
 
 <header class="top">
 
@@ -1147,8 +893,7 @@ body.en .bottom-text{
 
         <div class="brand">
 
-            <span>انقزی</span>
-
+            انقزی
             <span class="brand-blue">
                 Games
             </span>
@@ -1160,8 +905,7 @@ body.en .bottom-text{
 
             <button
                 id="gamesTab"
-                class="active"
-            >
+                class="active">
                 بازی‌ها
             </button>
 
@@ -1176,31 +920,23 @@ body.en .bottom-text{
 
     <div class="top-right">
 
-        <button
-            class="icon-btn"
-            title="Search"
-        >
+        <button class="icon-btn">
             ⌕
         </button>
 
-        <button
-            class="icon-btn"
-            title="Settings"
-        >
+        <button class="icon-btn">
             ⚙
         </button>
 
         <button
             class="lang-btn"
-            id="languageButton"
-        >
+            id="languageButton">
             EN
         </button>
 
         <div
             class="clock"
-            id="clock"
-        >
+            id="clock">
             00:00
         </div>
 
@@ -1209,17 +945,15 @@ body.en .bottom-text{
 </header>
 
 
-<!-- =====================================================
-     GAME BAR
-===================================================== -->
+<!-- =========================
+     GAME ICONS
+========================= -->
 
 <div class="gamebar">
 
-
     <div
         class="game-item selected"
-        data-game="breakout"
-    >
+        data-game="breakout">
 
         <img src="breakout.png">
 
@@ -1228,8 +962,7 @@ body.en .bottom-text{
 
     <div
         class="game-item"
-        data-game="flappy"
-    >
+        data-game="flappy">
 
         <img src="flappy.png">
 
@@ -1238,8 +971,7 @@ body.en .bottom-text{
 
     <div
         class="game-item"
-        data-game="playerquiz"
-    >
+        data-game="playerquiz">
 
         <img src="playerquiz.png">
 
@@ -1248,8 +980,7 @@ body.en .bottom-text{
 
     <div
         class="game-item"
-        data-game="penalty"
-    >
+        data-game="penalty">
 
         <img src="penalty.png">
 
@@ -1258,20 +989,18 @@ body.en .bottom-text{
 
     <div
         class="game-item"
-        data-game="freekick"
-    >
+        data-game="freekick">
 
         <img src="freekick.png">
 
     </div>
 
-
 </div>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<!-- =========================
+     CONTENT
+========================= -->
 
 <main class="content">
 
@@ -1287,13 +1016,10 @@ body.en .bottom-text{
         </h1>
 
 
-        <!-- PLAY BUTTON -->
-
         <a
             href="breakout.html"
             id="startGame"
-            class="start-game"
-        >
+            class="start-game">
 
             <span>▶</span>
 
@@ -1313,8 +1039,7 @@ body.en .bottom-text{
 
         <a
             href="flappy.html"
-            class="panel panel-game"
-        >
+            class="panel panel-game">
 
             <img src="flappy.png">
 
@@ -1338,8 +1063,7 @@ body.en .bottom-text{
 
         <a
             href="breakout.html"
-            class="panel panel-feature"
-        >
+            class="panel panel-feature">
 
             <img src="breakout.png">
 
@@ -1362,8 +1086,7 @@ body.en .bottom-text{
 
         <a
             href="playerquiz.html"
-            class="panel panel-game"
-        >
+            class="panel panel-game">
 
             <img src="playerquiz.png">
 
@@ -1386,8 +1109,7 @@ body.en .bottom-text{
 
         <a
             href="penalty.html"
-            class="panel panel-game"
-        >
+            class="panel panel-game">
 
             <img src="penalty.png">
 
@@ -1410,8 +1132,7 @@ body.en .bottom-text{
 
         <a
             href="freekick.html"
-            class="panel panel-game"
-        >
+            class="panel panel-game">
 
             <img src="freekick.png">
 
@@ -1438,10 +1159,12 @@ body.en .bottom-text{
 
                 <div
                     class="panel-title"
-                    id="trophyTitle"
-                >
+                    id="trophyTitle">
+
                     🏆 رکوردهای انقزی
+
                 </div>
+
 
                 <div class="stat">
 
@@ -1455,49 +1178,41 @@ body.en .bottom-text{
 
                 </div>
 
+
                 <div class="progress">
-
                     <span></span>
-
                 </div>
 
             </div>
 
         </div>
 
-
     </section>
 
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
 <div
     class="bottom-text"
-    id="bottomText"
->
+    id="bottomText">
+
     🎮 بازی کن • رکورد بزن • قهرمان شو
+
 </div>
 
 
 <script>
 
-/* =====================================================
-   LANGUAGE DATA
-===================================================== */
+/* =========================
+   LANGUAGE
+========================= */
 
 const fa = {
 
     games:"بازی‌ها",
-
     media:"رسانه",
 
     heroSmall:"بازی‌های انقزی",
-
-    breakout:"Football Breakout",
 
     play:"شروع بازی",
 
@@ -1539,12 +1254,9 @@ const fa = {
 const en = {
 
     games:"Games",
-
     media:"Media",
 
     heroSmall:"ANGHEZI GAMES",
-
-    breakout:"Football Breakout",
 
     play:"PLAY GAME",
 
@@ -1583,119 +1295,29 @@ const en = {
 };
 
 
-/* =====================================================
+/* =========================
    ELEMENTS
-===================================================== */
-
-const languageButton =
-    document.getElementById(
-        "languageButton"
-    );
-
-const gamesTab =
-    document.getElementById(
-        "gamesTab"
-    );
-
-const mediaTab =
-    document.getElementById(
-        "mediaTab"
-    );
-
-const heroSmall =
-    document.getElementById(
-        "heroSmall"
-    );
-
-const heroTitle =
-    document.getElementById(
-        "heroTitle"
-    );
-
-const playText =
-    document.getElementById(
-        "playText"
-    );
-
-const startGame =
-    document.getElementById(
-        "startGame"
-    );
-
-const flappyTitle =
-    document.getElementById(
-        "flappyTitle"
-    );
-
-const flappyText =
-    document.getElementById(
-        "flappyText"
-    );
-
-const quizTitle =
-    document.getElementById(
-        "quizTitle"
-    );
-
-const quizText =
-    document.getElementById(
-        "quizText"
-    );
-
-const penaltyTitle =
-    document.getElementById(
-        "penaltyTitle"
-    );
-
-const penaltyText =
-    document.getElementById(
-        "penaltyText"
-    );
-
-const freeTitle =
-    document.getElementById(
-        "freeTitle"
-    );
-
-const freeText =
-    document.getElementById(
-        "freeText"
-    );
-
-const breakoutTitle =
-    document.getElementById(
-        "breakoutTitle"
-    );
-
-const breakoutText =
-    document.getElementById(
-        "breakoutText"
-    );
-
-const trophyTitle =
-    document.getElementById(
-        "trophyTitle"
-    );
-
-const recordText =
-    document.getElementById(
-        "recordText"
-    );
-
-const bottomText =
-    document.getElementById(
-        "bottomText"
-    );
+========================= */
 
 const uiSound =
-    document.getElementById(
-        "uiSound"
-    );
+    document.getElementById("uiSound");
+
+const languageButton =
+    document.getElementById("languageButton");
+
+const startGame =
+    document.getElementById("startGame");
+
+const playText =
+    document.getElementById("playText");
+
+const heroTitle =
+    document.getElementById("heroTitle");
 
 
-/* =====================================================
+/* =========================
    GAME LINKS
-===================================================== */
+========================= */
 
 const gameLinks = {
 
@@ -1711,10 +1333,6 @@ const gameLinks = {
 
 };
 
-
-/* =====================================================
-   GAME NAMES
-===================================================== */
 
 const gameNames = {
 
@@ -1746,30 +1364,26 @@ const gameNames = {
 };
 
 
-/* =====================================================
+/* =========================
    SOUND
-===================================================== */
+========================= */
 
 function playSound(){
 
-    if(!uiSound.src){
-
+    if(!uiSound.src)
         return;
-
-    }
 
     uiSound.currentTime = 0;
 
     uiSound.play().catch(
         function(){}
     );
-
 }
 
 
-/* =====================================================
+/* =========================
    LANGUAGE
-===================================================== */
+========================= */
 
 let language =
     localStorage.getItem(
@@ -1793,8 +1407,6 @@ function setLanguage(lang){
         : en;
 
 
-    /* DIRECTION */
-
     document.documentElement.lang =
         lang;
 
@@ -1809,57 +1421,103 @@ function setLanguage(lang){
     );
 
 
-    /* TEXT */
-
-    gamesTab.textContent =
+    document.getElementById(
+        "gamesTab"
+    ).textContent =
         data.games;
 
-    mediaTab.textContent =
+
+    document.getElementById(
+        "mediaTab"
+    ).textContent =
         data.media;
 
-    heroSmall.textContent =
+
+    document.getElementById(
+        "heroSmall"
+    ).textContent =
         data.heroSmall;
+
 
     playText.textContent =
         data.play;
 
-    flappyTitle.textContent =
+
+    document.getElementById(
+        "flappyTitle"
+    ).textContent =
         data.flappyTitle;
 
-    flappyText.textContent =
+
+    document.getElementById(
+        "flappyText"
+    ).textContent =
         data.flappyText;
 
-    quizTitle.textContent =
+
+    document.getElementById(
+        "quizTitle"
+    ).textContent =
         data.quizTitle;
 
-    quizText.textContent =
+
+    document.getElementById(
+        "quizText"
+    ).textContent =
         data.quizText;
 
-    penaltyTitle.textContent =
+
+    document.getElementById(
+        "penaltyTitle"
+    ).textContent =
         data.penaltyTitle;
 
-    penaltyText.textContent =
+
+    document.getElementById(
+        "penaltyText"
+    ).textContent =
         data.penaltyText;
 
-    freeTitle.textContent =
+
+    document.getElementById(
+        "freeTitle"
+    ).textContent =
         data.freeTitle;
 
-    freeText.textContent =
+
+    document.getElementById(
+        "freeText"
+    ).textContent =
         data.freeText;
 
-    breakoutTitle.textContent =
+
+    document.getElementById(
+        "breakoutTitle"
+    ).textContent =
         data.breakoutTitle;
 
-    breakoutText.textContent =
+
+    document.getElementById(
+        "breakoutText"
+    ).textContent =
         data.breakoutText;
 
-    trophyTitle.textContent =
+
+    document.getElementById(
+        "trophyTitle"
+    ).textContent =
         data.trophyTitle;
 
-    recordText.textContent =
+
+    document.getElementById(
+        "recordText"
+    ).textContent =
         data.recordText;
 
-    bottomText.textContent =
+
+    document.getElementById(
+        "bottomText"
+    ).textContent =
         data.bottom;
 
 
@@ -1869,12 +1527,11 @@ function setLanguage(lang){
         : "FA";
 
 
-    /* Update selected game */
-
     const selected =
         document.querySelector(
             ".game-item.selected"
         );
+
 
     if(selected){
 
@@ -1887,15 +1544,14 @@ function setLanguage(lang){
             lang === "fa"
             ? game.fa
             : game.en;
-
     }
 
 }
 
 
-/* =====================================================
+/* =========================
    LANGUAGE BUTTON
-===================================================== */
+========================= */
 
 languageButton.addEventListener(
     "click",
@@ -1908,14 +1564,13 @@ languageButton.addEventListener(
         );
 
         playSound();
-
     }
 );
 
 
-/* =====================================================
+/* =========================
    GAME SELECT
-===================================================== */
+========================= */
 
 document
 .querySelectorAll(".game-item")
@@ -1925,22 +1580,18 @@ document
         "click",
         function(){
 
-            /* Remove old selection */
-
             document
             .querySelectorAll(
                 ".game-item"
             )
-            .forEach(function(game){
+            .forEach(function(x){
 
-                game.classList.remove(
+                x.classList.remove(
                     "selected"
                 );
 
             });
 
-
-            /* Select new game */
 
             item.classList.add(
                 "selected"
@@ -1953,23 +1604,17 @@ document
                 ];
 
 
-            /* Change title */
-
             heroTitle.textContent =
                 language === "fa"
                 ? game.fa
                 : game.en;
 
 
-            /* Change PLAY link */
-
             startGame.href =
                 gameLinks[
                     item.dataset.game
                 ];
 
-
-            /* Play sound */
 
             playSound();
 
@@ -1979,44 +1624,32 @@ document
 });
 
 
-/* =====================================================
+/* =========================
    CLOCK
-===================================================== */
+========================= */
 
 function updateClock(){
 
-    const now =
-        new Date();
-
+    const now = new Date();
 
     const hours =
         String(
             now.getHours()
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2,"0");
 
     const minutes =
         String(
             now.getMinutes()
-        ).padStart(
-            2,
-            "0"
-        );
+        ).padStart(2,"0");
 
 
     document.getElementById(
         "clock"
     ).textContent =
         hours + ":" + minutes;
-
 }
 
-
 updateClock();
-
 
 setInterval(
     updateClock,
@@ -2024,16 +1657,13 @@ setInterval(
 );
 
 
-/* =====================================================
+/* =========================
    START
-===================================================== */
+========================= */
 
-setLanguage(
-    language
-);
+setLanguage(language);
 
 </script>
 
 </body>
-
 </html>
